@@ -60,19 +60,39 @@
 					"result_schema": {}
 			},
 			{
-				"id": "QUER ALTERAR INGREDIENTES?",
+				"id": "ENVIAR O PEDIDO PARA PIZZARIA",
 				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "one_lane_id",
+				"type": "SystemTask",
+				"category": "http",
+				"parameters":  {
+				  "input": {},
+				  "request": {
+					"url": "url",
+					"verb": "GET,POST,PUT,PATCH,DELETE",
+					"headers": {}
+				  }
+					},
+					"result_schema": {}
+			},
+			{
+				"id": "QUER ALTERAR INGREDIENTES?",
+				"name": "Alterar algum ingrediente?",
 				"next": {
-				  "string": "other_node_id",
-				  "default": "other_node_id"
+				  "default": "QUER COMENTAR?",
+				  "true": "QUER COMENTAR?",
+				  "false": "EDITAR INGREDIENTES?"
 				},
 				"type": "flow",
-				"lane_id": "any_lane_id",
+				"lane_id": "user",
 				"parameters": {
 				  "input": {
-					"key": "string"
+					"key": {
+						"$ref": "bag.pizza.ingredientes"
 					  }
 					}
+				}
 			},
 			{
 				"id": "EDITAR INGREDIENTES",
@@ -91,18 +111,21 @@
 			},
 			{
 				"id": "QUER COMENTAR?",
-				"name": "any string",
+				"name": "Quer fazer algum comentário?",
 				"next": {
-				  "string": "other_node_id",
-				  "default": "other_node_id"
-				},
+					"default": "ESCOLHER LOCAL DE ENTREGA",
+					"true": "ESCOLHER LOCAL DE ENTREGA",
+					"false": "FAZER COMENTÁRIO"
+				  },
 				"type": "flow",
-				"lane_id": "any_lane_id",
+				"lane_id": "user",
 				"parameters": {
 				  "input": {
-					"key": "string"
+					"key": {
+						"$ref": "bag.pizza.comentario"
 					  }
 					}
+				}
 			},
 			{
 				"id": "FAZER COMENTÁRIO",
@@ -166,31 +189,37 @@
 			},
 			{
 				"id": "QUER EDITAR O PEDIDO?",
-				"name": "any string",
+				"name": "Quer alterar o pedido?",
 				"next": {
-				  "string": "other_node_id",
-				  "default": "other_node_id"
-				},
+					"default": "PAGAMENTO VAI SER FEITO PELO APP?",
+					"true": "PAGAMENTO VAI SER FEITO PELO APP?",
+					"false": "ESCOLHER PIZZA"
+					  },
 				"type": "flow",
-				"lane_id": "any_lane_id",
+				"lane_id": "user",
 				"parameters": {
 				  "input": {
-					"key": "string"
+			        "key": {
+						"$ref": "bag.pizza"
+					  }
 					  }
 					}
 			},
 			{
 				"id": "PAGAMENTO VAI SER FEITO PELO APP?",
-				"name": "any string",
+				"name": "Vai pagar pelo aplicativo?",
 				"next": {
-				  "string": "other_node_id",
-				  "default": "other_node_id"
-				},
+					"default": "PAGAR PELO APP",
+					"true": "PAGAR PELO APP",
+					"false": "ENVIAR O PEDIDO PARA PIZZARIA"
+					  },
 				"type": "flow",
-				"lane_id": "any_lane_id",
+				"lane_id": "user",
 				"parameters": {
 				  "input": {
-					"key": "string"
+					"key": {
+						"$ref": "bag.pizza.pagamento"
+					  }
 					  }
 					}
 			},
@@ -243,31 +272,37 @@
 			},
 			{
 				"id": "QUER CANCELAR?",
-				"name": "any string",
+				"name": "Quer cancelar o pedido?",
 				"next": {
-				  "string": "other_node_id",
-				  "default": "other_node_id"
-				},
+					"default": "ENTREGADOR CHEGOU?",
+					"true": "ENTREGADOR CHEGOU?",
+					"false": "PEDIDO JÁ FOI ACEITO?"
+					  },
 				"type": "flow",
-				"lane_id": "any_lane_id",
+				"lane_id": "user",
 				"parameters": {
 				  "input": {
-					"key": "string"
+					"key": {
+						"$ref": "bag.pizza.status"
+					  }
 					  }
 					}
 			},
 			{
 				"id": "PEDIDO JÁ FOI ACEITO?",
-				"name": "any string",
+				"name": "Pedido aceito ou não?",
 				"next": {
-				  "string": "other_node_id",
-				  "default": "other_node_id"
-				},
+					"default": "NÃO É POSSÍVEL CANCELAR",
+					"true": "NÃO É POSSÍVEL CANCELAR",
+					"false": "JÁ FOI PAGO? - cliente"
+					  },
 				"type": "flow",
-				"lane_id": "any_lane_id",
+				"lane_id": "pizzaria",
 				"parameters": {
 				  "input": {
-					"key": "string"
+					"key": {
+						"$ref": "bag.pizza.status"
+					  }
 					  }
 					}
 			},
@@ -275,15 +310,18 @@
 				"id": "JÁ FOI PAGO? - cliente",
 				"name": "any string",
 				"next": {
-				  "string": "other_node_id",
-				  "default": "other_node_id"
-				},
+					"default": "FINISH - Cliente cancelou sem reembolso",
+					"true": "FINISH - Cliente cancelou sem reembolso",
+					"false": "REEMBOLSO - cliente cancelou"
+					  },
 				"type": "flow",
-				"lane_id": "any_lane_id",
+				"lane_id": "pizzaria",
 				"parameters": {
 				  "input": {
-					"key": "string"
-					  }
+					"key": {
+					"$ref": "bag.pizza.pagamento"
+				}
+				  }
 					}
 			},
 			{
@@ -306,26 +344,16 @@
 			{
 				"id": "FINISH - Cliente cancelou com reembolso",
 				"type": "Finish",
-				"name": "Término Hello",
-				"lane_id": "1",
-				"next": null,
-				"parameters": {
-					"input": {
-						"field": { "$ref": "bag.someField" }
-						}
-					}
+				"name": "Finish - Cliente cancelou. Com reembolso",
+				"lane_id": "pizzaria",
+				"next": null
 			},
 			{
 				"id": "FINISH - Cliente cancelou sem reembolso",
 				"type": "Finish",
-				"name": "Término Hello",
-				"lane_id": "1",
-				"next": null,
-				"parameters": {
-					"input": {
-						"field": { "$ref": "bag.someField" }
-						}
-					}
+				"name": "Finish - Cliente cancelou. Sem reembolso",
+				"lane_id": "pizzaria",
+				"next": null
 			},
 			{
 				"id": "NÃO É POSSÍVEL CANCELAR",
@@ -346,16 +374,19 @@
 			},
 			{
 				"id": "ENTREGADOR CHEGOU?",
-				"name": "any string",
+				"name": "Entregador chegou ao local de entrega?",
 				"next": {
-				  "string": "other_node_id",
-				  "default": "other_node_id"
-				},
+					"default": "PEDIDO ESTÁ CORRETO?",
+					"true": "PEDIDO ESTÁ CORRETO?",
+					"false": "ESPERAR ENTREGADOR POR 10 MIN"
+					  },
 				"type": "flow",
-				"lane_id": "any_lane_id",
+				"lane_id": "user",
 				"parameters": {
 				  "input": {
-					"key": "string"
+					"key": {
+						"$ref": "bag.pizza.entrega"
+					  }
 					  }
 					}
 			},
@@ -410,31 +441,37 @@
 			},
 			{
 				"id": "ACEITAR O PEDIDO?",
-				"name": "any string",
+				"name": "Pizzaria aceita o pedido?",
 				"next": {
-				  "string": "other_node_id",
-				  "default": "other_node_id"
-				},
+					"default": "PREPARA O PEDIDO",
+					"true": "PREPARA O PEDIDO",
+					"false": "JÁ FOI PAGO? - pizzaria"
+					  },
 				"type": "flow",
-				"lane_id": "any_lane_id",
+				"lane_id": "pizzaria",
 				"parameters": {
 				  "input": {
-					"key": "string"
+					"key": {
+						"$ref": "bag.pizza.aceite"
+					  }
 					  }
 					}
 			},
 			{
 				"id": "JÁ. FOI PAGO? - pizzaria",
-				"name": "any string",
+				"name": "Pizzaria Cancelou. Pizza já estava paga?",
 				"next": {
-				  "string": "other_node_id",
-				  "default": "other_node_id"
-				},
+					"default": "FINISH - pizzaria cancela sem reembolso",
+					"true": "FINISH - pizzaria cancela sem reembolso",
+					"false": "REEMBOLSO - pizzaria não fez a pizza"
+						  },
 				"type": "flow",
-				"lane_id": "any_lane_id",
+				"lane_id": "pizzaria",
 				"parameters": {
 				  "input": {
-					"key": "string"
+					"key": {
+						"$ref": "bag.pizza.pagamento"
+					  }
 					  }
 					}
 			},
@@ -458,26 +495,16 @@
 			{
 				"id": "FINISH - pizzaria cancela com reembolso",
 				"type": "Finish",
-				"name": "Término Hello",
-				"lane_id": "1",
-				"next": null,
-				"parameters": {
-					"input": {
-						"field": { "$ref": "bag.someField" }
-						}
-					}
+				"name": "Finish - Pizzaria cancelou. Com reembolso",
+				"lane_id": "pizzaria",
+				"next": null
 			},
 			{
 				"id": "FINISH - pizzaria cancela sem reembolso",
 				"type": "Finish",
-				"name": "Término Hello",
-				"lane_id": "1",
-				"next": null,
-				"parameters": {
-					"input": {
-						"field": { "$ref": "bag.someField" }
-						}
-					}
+				"name": "Finish - Pizzaria Cancelou. Sem reembolso",
+				"lane_id": "pizzaria",
+				"next": null
 			},
 			{
 				"id": "PREPARA O PEDIDO",
@@ -495,17 +522,37 @@
 					"result_schema": {}
 			},
 			{
-				"id": "IMPOSSÍVEL FINALIZAR PREPRAÇÃO?",
+				"id": "MONITORAMENTO DA PIZZARIA",
 				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "one_lane_id",
+				"type": "SystemTask",
+				"category": "http",
+				"parameters":  {
+				  "input": {},
+				  "request": {
+					"url": "url",
+					"verb": "GET,POST,PUT,PATCH,DELETE",
+					"headers": {}
+				  }
+					},
+					"result_schema": {}
+			},
+			{
+				"id": "IMPOSSÍVEL FINALIZAR PREPRAÇÃO?",
+				"name": "Algum problema que impossibilite a finalização do pedido?",
 				"next": {
-				  "string": "other_node_id",
-				  "default": "other_node_id"
-				},
+					"default": "FINALIZAR PREPARAÇÃO",
+					"true": "FINALIZAR PREPARAÇÃO",
+					"false": "JÁ. FOI PAGO? - pizzaria"
+						  },
 				"type": "flow",
-				"lane_id": "any_lane_id",
+				"lane_id": "pizzaria",
 				"parameters": {
 				  "input": {
-					"key": "string"
+					"key": {
+						"$ref": "bag.pizzaria.monitoramento"
+					  }
 					  }
 					}
 			},
@@ -588,31 +635,37 @@
 			},
 			{
 				"id": "PEDIDO ESTÁ CORRETO?",
-				"name": "any string",
+				"name": "Conferencia do pedido com o Cliente",
 				"next": {
-				  "string": "other_node_id",
-				  "default": "other_node_id"
-				},
+					"default": "JÁ FOI PAGO? - verificação na entrega",
+					"true": "JÁ FOI PAGO? - verificação na entrega",
+					"false": "JÁ FOI PAGO? - erro da pizzaria"
+						  },
 				"type": "flow",
-				"lane_id": "any_lane_id",
+				"lane_id": "user",
 				"parameters": {
 				  "input": {
-					"key": "string"
+					"key": {
+						"$ref": "bag.pizza"
+					  }
 					  }
 					}
 			},
 			{
 				"id": "JÁ FOI PAGO? - erro da pizzaria",
-				"name": "any string",
+				"name": "Verificar se houve pagamento - Erro da pizzaria",
 				"next": {
-				  "string": "other_node_id",
-				  "default": "other_node_id"
-				},
+					"default": "FINISH - entregador não reembolsa",
+					"true": "FINISH - entregador não reembolsa",
+					"false": "REEMBOLSO - erro da pizzaria"
+						  },
 				"type": "flow",
-				"lane_id": "any_lane_id",
+				"lane_id": "pizzaria",
 				"parameters": {
 				  "input": {
-					"key": "string"
+					"key": {
+						"$ref": "bag.pizza.pagamento"
+					  }
 					  }
 					}
 			},
@@ -636,39 +689,32 @@
 			{
 				"id": "FINISH - entregador reembolsa",
 				"type": "Finish",
-				"name": "Término Hello",
-				"lane_id": "1",
-				"next": null,
-				"parameters": {
-					"input": {
-						"field": { "$ref": "bag.someField" }
-						}
-					}
+				"name": "Finish - Falha ao entrega. Pizzaria Errou. Com reembolso",
+				"lane_id": "pizzaria",
+				"next": null
 			},
 			{
 				"id": "FINISH - entregador não reembolsa",
 				"type": "Finish",
-				"name": "Término Hello",
-				"lane_id": "1",
-				"next": null,
-				"parameters": {
-					"input": {
-						"field": { "$ref": "bag.someField" }
-						}
-					}
+				"name": "Finish - Falha ao entrega. Pizzaria Errou. Sem reembolso",
+				"lane_id": "pizzaria",
+				"next": null
 			},
 			{
 				"id": "JÁ FOI PAGO? - verificação na entrega",
-				"name": "any string",
+				"name": "Ao entregar a pizza, verificar se já foi pago",
 				"next": {
-				  "string": "other_node_id",
-				  "default": "other_node_id"
-				},
+					"default": "CLIENTE RECEBE A PIZZA",
+					"true": "CLIENTE RECEBE A PIZZA",
+					"false": "PAGAR - ao entregador"
+						  },
 				"type": "flow",
-				"lane_id": "any_lane_id",
+				"lane_id": "user",
 				"parameters": {
 				  "input": {
-					"key": "string"
+					"key": {
+						"$ref": "bag.pizza.pagamento"
+					  }
 					  }
 					}
 			},
@@ -723,28 +769,26 @@
 				"id": "ULTRAPASSOU O TEMPO ESPERADO?",
 				"name": "any string",
 				"next": {
-				  "string": "other_node_id",
-				  "default": "other_node_id"
-				},
+					"default": "FINISH - entregue no prazo",
+					"true": "FINISH - entregue no prazo",
+					"false": "CUPOM DE DESCONTO/REGISTRA O ATRASO"
+					  },
 				"type": "flow",
-				"lane_id": "any_lane_id",
+				"lane_id": "pizzaria",
 				"parameters": {
 				  "input": {
-					"key": "string"
+					"key": {
+						"$ref": "bag.pizza.tempo"
+					  }
 					  }
 					}
 			},
 			{
 				"id": "FINISH - entregue no prazo",
 				"type": "Finish",
-				"name": "Término Hello",
-				"lane_id": "1",
-				"next": null,
-				"parameters": {
-					"input": {
-						"field": { "$ref": "bag.someField" }
-						}
-					}
+				"name": "Finish - Sucesso na entrega. Sucesso no prazo.",
+				"lane_id": "pizzaria",
+				"next": null
 			},
 			{
 				"id": "CUPOM DE DESCONTO/REGISTRA O ATRASO",
@@ -766,14 +810,9 @@
 			{
 				"id": "FINISH - entregue fora do prazo",
 				"type": "Finish",
-				"name": "Término Hello",
-				"lane_id": "1",
-				"next": null,
-				"parameters": {
-					"input": {
-						"field": { "$ref": "bag.someField" }
-						}
-					}
+				"name": "Finish - Sucesso na entrega. Falha no prazo. Cupom.",
+				"lane_id": "pizzaria",
+				"next": null
 			}
 		]
 	}
