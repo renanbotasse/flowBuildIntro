@@ -1,0 +1,780 @@
+{
+	"name": "renanb-pizza",
+	"description": "Desafio do pedido de Pizza - Renan B",
+	"blueprint_spec": {
+		"requirements": ["core"],
+		"prepare": [],
+		"environment": {},
+		"lanes": [
+			{
+				"id": "user",
+				"name": "para todos os usuários",
+				"rules": []
+			},
+			{
+				"id": "pizzaria",
+				"name": "para a pizzaria",
+				"rules": []	
+			}
+		],
+		"nodes": [
+			{
+				"id": "Start",
+				"name": "Start renanb-pizza",
+				"next": "ACESSAR APP DA PIZZARIA",
+				"type": "start",
+				"lane_id": "user",
+				"parameters": {
+						"input_schema": {},
+						"timeout": 100
+						}
+			},
+			{
+				"id": "ACESSAR APP DA PIZZARIA",
+				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "any_lane_id",
+				"type": "UserTask",
+				"parameters": {
+					"action": "ANY_STRING_HERE",
+					"input": {},
+					"activity_manager": "commit or notify",
+					"activity_schema": {"$ref": "activity_schema"},
+					"timeout": 60
+					},
+					"result_schema": {}
+			},
+			{
+				"id": "ESCOLHER PIZZA",
+				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "any_lane_id",
+				"type": "UserTask",
+				"parameters": {
+					"action": "ANY_STRING_HERE",
+					"input": {},
+					"activity_manager": "commit or notify",
+					"activity_schema": {"$ref": "activity_schema"},
+					"timeout": 60
+					},
+					"result_schema": {}
+			},
+			{
+				"id": "QUER ALTERAR INGREDIENTES?",
+				"name": "any string",
+				"next": {
+				  "string": "other_node_id",
+				  "default": "other_node_id"
+				},
+				"type": "flow",
+				"lane_id": "any_lane_id",
+				"parameters": {
+				  "input": {
+					"key": "string"
+					  }
+					}
+			},
+			{
+				"id": "EDITAR INGREDIENTES",
+				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "any_lane_id",
+				"type": "UserTask",
+				"parameters": {
+					"action": "ANY_STRING_HERE",
+					"input": {},
+					"activity_manager": "commit or notify",
+					"activity_schema": {"$ref": "activity_schema"},
+					"timeout": 60
+					},
+					"result_schema": {}
+			},
+			{
+				"id": "QUER COMENTAR?",
+				"name": "any string",
+				"next": {
+				  "string": "other_node_id",
+				  "default": "other_node_id"
+				},
+				"type": "flow",
+				"lane_id": "any_lane_id",
+				"parameters": {
+				  "input": {
+					"key": "string"
+					  }
+					}
+			},
+			{
+				"id": "FAZER COMENTÁRIO",
+				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "any_lane_id",
+				"type": "UserTask",
+				"parameters": {
+					"action": "ANY_STRING_HERE",
+					"input": {},
+					"activity_manager": "commit or notify",
+					"activity_schema": {"$ref": "activity_schema"},
+					"timeout": 60
+					},
+					"result_schema": {}
+			},
+			{
+				"id": "ESCOLHER LOCAL DE ENTREGA",
+				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "any_lane_id",
+				"type": "UserTask",
+				"parameters": {
+					"action": "ANY_STRING_HERE",
+					"input": {},
+					"activity_manager": "commit or notify",
+					"activity_schema": {"$ref": "activity_schema"},
+					"timeout": 60
+					},
+					"result_schema": {}
+			},
+			{
+				"id": "ESCOLHER FORMA DE PAGAMENTO/TROCO",
+				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "any_lane_id",
+				"type": "UserTask",
+				"parameters": {
+					"action": "ANY_STRING_HERE",
+					"input": {},
+					"activity_manager": "commit or notify",
+					"activity_schema": {"$ref": "activity_schema"},
+					"timeout": 60
+					},
+					"result_schema": {}
+			},
+			{
+				"id": "REVISAR PEDIDO E CONFIRMAR",
+				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "any_lane_id",
+				"type": "UserTask",
+				"parameters": {
+					"action": "ANY_STRING_HERE",
+					"input": {},
+					"activity_manager": "commit or notify",
+					"activity_schema": {"$ref": "activity_schema"},
+					"timeout": 60
+					},
+					"result_schema": {}
+			},
+			{
+				"id": "QUER EDITAR O PEDIDO?",
+				"name": "any string",
+				"next": {
+				  "string": "other_node_id",
+				  "default": "other_node_id"
+				},
+				"type": "flow",
+				"lane_id": "any_lane_id",
+				"parameters": {
+				  "input": {
+					"key": "string"
+					  }
+					}
+			},
+			{
+				"id": "PAGAMENTO VAI SER FEITO PELO APP?",
+				"name": "any string",
+				"next": {
+				  "string": "other_node_id",
+				  "default": "other_node_id"
+				},
+				"type": "flow",
+				"lane_id": "any_lane_id",
+				"parameters": {
+				  "input": {
+					"key": "string"
+					  }
+					}
+			},
+			{
+				"id": "PAGAR PELO APP",
+				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "any_lane_id",
+				"type": "UserTask",
+				"parameters": {
+					"action": "ANY_STRING_HERE",
+					"input": {},
+					"activity_manager": "commit or notify",
+					"activity_schema": {"$ref": "activity_schema"},
+					"timeout": 60
+					},
+					"result_schema": {}
+			},
+			{
+				"id": "ENVIAR O PEDIDO PARA PIZZARIA",
+				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "one_lane_id",
+				"type": "SystemTask",
+				"category": "http",
+				"parameters":  {
+				  "input": {},
+				  "request": {
+					"url": "url",
+					"verb": "GET,POST,PUT,PATCH,DELETE",
+					"headers": {}
+				  }
+					},
+					"result_schema": {}
+			},
+			{
+				"id": "CHECK STATUS",
+				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "any_lane_id",
+				"type": "UserTask",
+				"parameters": {
+					"action": "ANY_STRING_HERE",
+					"input": {},
+					"activity_manager": "commit or notify",
+					"activity_schema": {"$ref": "activity_schema"},
+					"timeout": 60
+					},
+					"result_schema": {}
+			},
+			{
+				"id": "QUER CANCELAR?",
+				"name": "any string",
+				"next": {
+				  "string": "other_node_id",
+				  "default": "other_node_id"
+				},
+				"type": "flow",
+				"lane_id": "any_lane_id",
+				"parameters": {
+				  "input": {
+					"key": "string"
+					  }
+					}
+			},
+			{
+				"id": "PEDIDO JÁ FOI ACEITO?",
+				"name": "any string",
+				"next": {
+				  "string": "other_node_id",
+				  "default": "other_node_id"
+				},
+				"type": "flow",
+				"lane_id": "any_lane_id",
+				"parameters": {
+				  "input": {
+					"key": "string"
+					  }
+					}
+			},
+			{
+				"id": "JÁ FOI PAGO? - cliente",
+				"name": "any string",
+				"next": {
+				  "string": "other_node_id",
+				  "default": "other_node_id"
+				},
+				"type": "flow",
+				"lane_id": "any_lane_id",
+				"parameters": {
+				  "input": {
+					"key": "string"
+					  }
+					}
+			},
+			{
+				"id": "REEMBOLSO - cliente cancelou",
+				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "one_lane_id",
+				"type": "SystemTask",
+				"category": "http",
+				"parameters":  {
+				  "input": {},
+				  "request": {
+					"url": "url",
+					"verb": "GET,POST,PUT,PATCH,DELETE",
+					"headers": {}
+				  }
+					},
+					"result_schema": {}
+			},			
+			{
+				"id": "FINISH - Cliente cancelou com reembolso",
+				"type": "Finish",
+				"name": "Término Hello",
+				"lane_id": "1",
+				"next": null,
+				"parameters": {
+					"input": {
+						"field": { "$ref": "bag.someField" }
+						}
+					}
+			},
+			{
+				"id": "FINISH - Cliente cancelou sem reembolso",
+				"type": "Finish",
+				"name": "Término Hello",
+				"lane_id": "1",
+				"next": null,
+				"parameters": {
+					"input": {
+						"field": { "$ref": "bag.someField" }
+						}
+					}
+			},
+			{
+				"id": "NÃO É POSSÍVEL CANCELAR",
+				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "one_lane_id",
+				"type": "SystemTask",
+				"category": "http",
+				"parameters":  {
+				  "input": {},
+				  "request": {
+					"url": "url",
+					"verb": "GET,POST,PUT,PATCH,DELETE",
+					"headers": {}
+				  }
+					},
+					"result_schema": {}
+			},
+			{
+				"id": "ENTREGADOR CHEGOU?",
+				"name": "any string",
+				"next": {
+				  "string": "other_node_id",
+				  "default": "other_node_id"
+				},
+				"type": "flow",
+				"lane_id": "any_lane_id",
+				"parameters": {
+				  "input": {
+					"key": "string"
+					  }
+					}
+			},
+			{
+				"id": "ESPERAR ENTREGADOR POR 10 MIN",
+				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "any_lane_id",
+				"type": "UserTask",
+				"parameters": {
+					"action": "ANY_STRING_HERE",
+					"input": {},
+					"activity_manager": "commit or notify",
+					"activity_schema": {"$ref": "activity_schema"},
+					"timeout": 60
+					},
+					"result_schema": {}
+			},
+			{
+				"id": "TEMPO MÉDIO PARA ENTREGA",
+				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "one_lane_id",
+				"type": "SystemTask",
+				"category": "http",
+				"parameters":  {
+				  "input": {},
+				  "request": {
+					"url": "url",
+					"verb": "GET,POST,PUT,PATCH,DELETE",
+					"headers": {}
+				  }
+					},
+					"result_schema": {}
+			},
+			{
+				"id": "RESTAURANTE RECEBE O PEDIDO",
+				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "one_lane_id",
+				"type": "SystemTask",
+				"category": "http",
+				"parameters":  {
+				  "input": {},
+				  "request": {
+					"url": "url",
+					"verb": "GET,POST,PUT,PATCH,DELETE",
+					"headers": {}
+				  }
+					},
+					"result_schema": {}
+			},
+			{
+				"id": "ACEITAR O PEDIDO?",
+				"name": "any string",
+				"next": {
+				  "string": "other_node_id",
+				  "default": "other_node_id"
+				},
+				"type": "flow",
+				"lane_id": "any_lane_id",
+				"parameters": {
+				  "input": {
+					"key": "string"
+					  }
+					}
+			},
+			{
+				"id": "JÁ. FOI PAGO? - pizzaria",
+				"name": "any string",
+				"next": {
+				  "string": "other_node_id",
+				  "default": "other_node_id"
+				},
+				"type": "flow",
+				"lane_id": "any_lane_id",
+				"parameters": {
+				  "input": {
+					"key": "string"
+					  }
+					}
+			},
+			{
+				"id": "REEMBOLSO - pizzaria não fez a pizza",
+				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "one_lane_id",
+				"type": "SystemTask",
+				"category": "http",
+				"parameters":  {
+				  "input": {},
+				  "request": {
+					"url": "url",
+					"verb": "GET,POST,PUT,PATCH,DELETE",
+					"headers": {}
+				  }
+					},
+					"result_schema": {}
+			},
+			{
+				"id": "FINISH - pizzaria cancela com reembolso",
+				"type": "Finish",
+				"name": "Término Hello",
+				"lane_id": "1",
+				"next": null,
+				"parameters": {
+					"input": {
+						"field": { "$ref": "bag.someField" }
+						}
+					}
+			},
+			{
+				"id": "FINISH - pizzaria cancela sem reembolso",
+				"type": "Finish",
+				"name": "Término Hello",
+				"lane_id": "1",
+				"next": null,
+				"parameters": {
+					"input": {
+						"field": { "$ref": "bag.someField" }
+						}
+					}
+			},
+			{
+				"id": "PREPARA O PEDIDO",
+				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "any_lane_id",
+				"type": "UserTask",
+				"parameters": {
+					"action": "ANY_STRING_HERE",
+					"input": {},
+					"activity_manager": "commit or notify",
+					"activity_schema": {"$ref": "activity_schema"},
+					"timeout": 60
+					},
+					"result_schema": {}
+			},
+			{
+				"id": "IMPOSSÍVEL FINALIZAR PREPRAÇÃO?",
+				"name": "any string",
+				"next": {
+				  "string": "other_node_id",
+				  "default": "other_node_id"
+				},
+				"type": "flow",
+				"lane_id": "any_lane_id",
+				"parameters": {
+				  "input": {
+					"key": "string"
+					  }
+					}
+			},
+			{
+				"id": "FINALIZAR PREPARAÇÃO",
+				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "any_lane_id",
+				"type": "UserTask",
+				"parameters": {
+					"action": "ANY_STRING_HERE",
+					"input": {},
+					"activity_manager": "commit or notify",
+					"activity_schema": {"$ref": "activity_schema"},
+					"timeout": 60
+					},
+					"result_schema": {}
+			},
+			{
+				"id": "LIBERAR PARA ENTRAGA",
+				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "any_lane_id",
+				"type": "UserTask",
+				"parameters": {
+					"action": "ANY_STRING_HERE",
+					"input": {},
+					"activity_manager": "commit or notify",
+					"activity_schema": {"$ref": "activity_schema"},
+					"timeout": 60
+					},
+					"result_schema": {}
+			},
+			{
+				"id": "ORGANIZA PARA ENTREGA (OTIMIZADOR DE ROTAS)",
+				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "one_lane_id",
+				"type": "SystemTask",
+				"category": "http",
+				"parameters":  {
+				  "input": {},
+				  "request": {
+					"url": "url",
+					"verb": "GET,POST,PUT,PATCH,DELETE",
+					"headers": {}
+				  }
+					},
+					"result_schema": {}
+			},
+			{
+				"id": "ENTREGADOR RECOLHE PIZZA",
+				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "any_lane_id",
+				"type": "UserTask",
+				"parameters": {
+					"action": "ANY_STRING_HERE",
+					"input": {},
+					"activity_manager": "commit or notify",
+					"activity_schema": {"$ref": "activity_schema"},
+					"timeout": 60
+					},
+					"result_schema": {}
+			},
+			{
+				"id": "ENTREGADOR CHEGA AO LOCAL DA ENTREGA",
+				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "any_lane_id",
+				"type": "UserTask",
+				"parameters": {
+					"action": "ANY_STRING_HERE",
+					"input": {},
+					"activity_manager": "commit or notify",
+					"activity_schema": {"$ref": "activity_schema"},
+					"timeout": 60
+					},
+					"result_schema": {}
+			},
+			{
+				"id": "PEDIDO ESTÁ CORRETO?",
+				"name": "any string",
+				"next": {
+				  "string": "other_node_id",
+				  "default": "other_node_id"
+				},
+				"type": "flow",
+				"lane_id": "any_lane_id",
+				"parameters": {
+				  "input": {
+					"key": "string"
+					  }
+					}
+			},
+			{
+				"id": "JÁ FOI PAGO? - erro da pizzaria",
+				"name": "any string",
+				"next": {
+				  "string": "other_node_id",
+				  "default": "other_node_id"
+				},
+				"type": "flow",
+				"lane_id": "any_lane_id",
+				"parameters": {
+				  "input": {
+					"key": "string"
+					  }
+					}
+			},
+			{
+				"id": "REEMBOLSO - erro da pizzaria",
+				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "one_lane_id",
+				"type": "SystemTask",
+				"category": "http",
+				"parameters":  {
+				  "input": {},
+				  "request": {
+					"url": "url",
+					"verb": "GET,POST,PUT,PATCH,DELETE",
+					"headers": {}
+				  }
+					},
+					"result_schema": {}
+			},
+			{
+				"id": "FINISH - entregador reembolsa",
+				"type": "Finish",
+				"name": "Término Hello",
+				"lane_id": "1",
+				"next": null,
+				"parameters": {
+					"input": {
+						"field": { "$ref": "bag.someField" }
+						}
+					}
+			},
+			{
+				"id": "FINISH - entregador não reembolsa",
+				"type": "Finish",
+				"name": "Término Hello",
+				"lane_id": "1",
+				"next": null,
+				"parameters": {
+					"input": {
+						"field": { "$ref": "bag.someField" }
+						}
+					}
+			},
+			{
+				"id": "JÁ FOI PAGO? - verificação na entrega",
+				"name": "any string",
+				"next": {
+				  "string": "other_node_id",
+				  "default": "other_node_id"
+				},
+				"type": "flow",
+				"lane_id": "any_lane_id",
+				"parameters": {
+				  "input": {
+					"key": "string"
+					  }
+					}
+			},
+			{
+				"id": "PAGAR - ao entregador",
+				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "any_lane_id",
+				"type": "UserTask",
+				"parameters": {
+					"action": "ANY_STRING_HERE",
+					"input": {},
+					"activity_manager": "commit or notify",
+					"activity_schema": {"$ref": "activity_schema"},
+					"timeout": 60
+					},
+					"result_schema": {}
+			},
+			{
+				"id": "CLIENTE RECEBE A PIZZA",
+				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "any_lane_id",
+				"type": "UserTask",
+				"parameters": {
+					"action": "ANY_STRING_HERE",
+					"input": {},
+					"activity_manager": "commit or notify",
+					"activity_schema": {"$ref": "activity_schema"},
+					"timeout": 60
+					},
+					"result_schema": {}
+			},
+			{
+				"id": "VERIFICA O TEMPO DE ENTREGA",
+				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "one_lane_id",
+				"type": "SystemTask",
+				"category": "http",
+				"parameters":  {
+				  "input": {},
+				  "request": {
+					"url": "url",
+					"verb": "GET,POST,PUT,PATCH,DELETE",
+					"headers": {}
+				  }
+					},
+					"result_schema": {}
+			},
+			{
+				"id": "ULTRAPASSOU O TEMPO ESPERADO?",
+				"name": "any string",
+				"next": {
+				  "string": "other_node_id",
+				  "default": "other_node_id"
+				},
+				"type": "flow",
+				"lane_id": "any_lane_id",
+				"parameters": {
+				  "input": {
+					"key": "string"
+					  }
+					}
+			},
+			{
+				"id": "FINISH - entregue no prazo",
+				"type": "Finish",
+				"name": "Término Hello",
+				"lane_id": "1",
+				"next": null,
+				"parameters": {
+					"input": {
+						"field": { "$ref": "bag.someField" }
+						}
+					}
+			},
+			{
+				"id": "CUPOM DE DESCONTO/REGISTRA O ATRASO",
+				"name": "any string",
+				"next": "other_node_id",
+				"lane_id": "one_lane_id",
+				"type": "SystemTask",
+				"category": "http",
+				"parameters":  {
+				  "input": {},
+				  "request": {
+					"url": "url",
+					"verb": "GET,POST,PUT,PATCH,DELETE",
+					"headers": {}
+				  }
+					},
+					"result_schema": {}			  
+			},
+			{
+				"id": "FINISH - entregue fora do prazo",
+				"type": "Finish",
+				"name": "Término Hello",
+				"lane_id": "1",
+				"next": null,
+				"parameters": {
+					"input": {
+						"field": { "$ref": "bag.someField" }
+						}
+					}
+			}
+		]
+	}
+}
