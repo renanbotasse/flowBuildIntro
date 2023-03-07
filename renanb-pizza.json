@@ -9,12 +9,12 @@
 			{
 				"id": "user",
 				"name": "para todos os usuários",
-				"rules": []
+				"rule": []
 			},
 			{
 				"id": "pizzaria",
 				"name": "para a pizzaria",
-				"rules": []	
+				"rule": []	
 			}
 		],
 		"nodes": [
@@ -31,36 +31,30 @@
 			},
 			{
 				"id": "ACESSAR APP DA PIZZARIA",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "any_lane_id",
+				"name": "Abrir o APP",
+				"next": "ESCOLHER PIZZA",
+				"lane_id": "user",
 				"type": "UserTask",
 				"parameters": {
-					"action": "ANY_STRING_HERE",
-					"input": {},
-					"activity_manager": "commit or notify",
-					"activity_schema": {"$ref": "activity_schema"},
-					"timeout": 60
-					},
-					"result_schema": {}
+					"action": "ACESSAR_APP",
+					"input": {}
+					}
 			},
 			{
 				"id": "ESCOLHER PIZZA",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "any_lane_id",
+				"name": "Selecionar pizza",
+				"next": "GUARDAR O PEDIDO",
+				"lane_id": "user",
 				"type": "UserTask",
 				"parameters": {
-					"action": "ANY_STRING_HERE",
-					"input": {},
-					"activity_manager": "commit or notify",
-					"activity_schema": {"$ref": "activity_schema"},
-					"timeout": 60
-					},
-					"result_schema": {}
+					"action": "escolher_pizza",
+					"input": {
+						"menu": { "$ref": "bag.menu" }
+					}
+					}
 			},
 			{
-				"id": "ENVIAR O PEDIDO PARA PIZZARIA",
+				"id": "GUARDAR O PEDIDO",
 				"name": "any string",
 				"next": "other_node_id",
 				"lane_id": "one_lane_id",
@@ -96,18 +90,15 @@
 			},
 			{
 				"id": "EDITAR INGREDIENTES",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "any_lane_id",
+				"name": "Editar ingredientes?",
+				"next": "QUER COMENTAR?",
+				"lane_id": "user",
 				"type": "UserTask",
 				"parameters": {
-					"action": "ANY_STRING_HERE",
-					"input": {},
-					"activity_manager": "commit or notify",
-					"activity_schema": {"$ref": "activity_schema"},
-					"timeout": 60
-					},
-					"result_schema": {}
+					"action": "editar_ingredientes",
+					"input": {
+						"ingredientes_pizza": {"$ref": "bag.pizza.ingredientes"}					}
+					}
 			},
 			{
 				"id": "QUER COMENTAR?",
@@ -129,63 +120,52 @@
 			},
 			{
 				"id": "FAZER COMENTÁRIO",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "any_lane_id",
+				"name": "Adicionar comentário",
+				"next": "ESCOLHER LOCAL DE ENTREGA",
+				"lane_id": "user",
 				"type": "UserTask",
 				"parameters": {
-					"action": "ANY_STRING_HERE",
-					"input": {},
-					"activity_manager": "commit or notify",
-					"activity_schema": {"$ref": "activity_schema"},
-					"timeout": 60
-					},
-					"result_schema": {}
+					"action": "add_comentario",
+					"input": {
+						"comentarios_pizza": {"$ref": "bag.pizza.comentario"}					}
+					}
 			},
 			{
 				"id": "ESCOLHER LOCAL DE ENTREGA",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "any_lane_id",
+				"name": "Definir local de entrega",
+				"next": "ESCOLHER FORMA DE PAGAMENTO/TROCO",
+				"lane_id": "user",
 				"type": "UserTask",
 				"parameters": {
-					"action": "ANY_STRING_HERE",
-					"input": {},
-					"activity_manager": "commit or notify",
-					"activity_schema": {"$ref": "activity_schema"},
-					"timeout": 60
-					},
-					"result_schema": {}
+					"action": "selecionar_entrega",
+					"input": {
+						"endereco_pizza": {"$ref": "bag.pizza.endereco"}					}
+					}
 			},
 			{
 				"id": "ESCOLHER FORMA DE PAGAMENTO/TROCO",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "any_lane_id",
+				"name": "Escolher forma de pagamento",
+				"next": "REVISAR PEDIDO E CONFIRMAR",
+				"lane_id": "user",
 				"type": "UserTask",
 				"parameters": {
-					"action": "ANY_STRING_HERE",
-					"input": {},
-					"activity_manager": "commit or notify",
-					"activity_schema": {"$ref": "activity_schema"},
-					"timeout": 60
-					},
-					"result_schema": {}
+					"action": "definir_formato_pagamento",
+					"input": {
+						"formadepagamento_pizza": {"$ref": "bag.pizza.pagamento"}					}
+					}
 			},
 			{
 				"id": "REVISAR PEDIDO E CONFIRMAR",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "any_lane_id",
+				"name": "Revisão do pedido",
+				"next": "QUER EDITAR O PEDIDO?",
+				"lane_id": "user",
 				"type": "UserTask",
 				"parameters": {
-					"action": "ANY_STRING_HERE",
-					"input": {},
-					"activity_manager": "commit or notify",
-					"activity_schema": {"$ref": "activity_schema"},
-					"timeout": 60
-					},
-					"result_schema": {}
+					"action": "revisar_pedido",
+					"input": {
+						"pedido_pizza": {"$ref": "bag.pizza"}					
+					}
+					}
 			},
 			{
 				"id": "QUER EDITAR O PEDIDO?",
@@ -225,18 +205,15 @@
 			},
 			{
 				"id": "PAGAR PELO APP",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "any_lane_id",
+				"name": "Pagar pelo APP",
+				"next": "ENVIAR O PEDIDO PARA PIZZARIA",
+				"lane_id": "user",
 				"type": "UserTask",
 				"parameters": {
-					"action": "ANY_STRING_HERE",
-					"input": {},
-					"activity_manager": "commit or notify",
-					"activity_schema": {"$ref": "activity_schema"},
-					"timeout": 60
-					},
-					"result_schema": {}
+					"action": "pagar",
+					"input": {
+						"pagamento_pizza": {"$ref": "bag.pizza.pagamento"}					}
+					}
 			},
 			{
 				"id": "ENVIAR O PEDIDO PARA PIZZARIA",
@@ -257,18 +234,15 @@
 			},
 			{
 				"id": "CHECK STATUS",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "any_lane_id",
+				"name": "Verificar posição do pedido",
+				"next": "QUER CANCELAR?",
+				"lane_id": "user",
 				"type": "UserTask",
 				"parameters": {
-					"action": "ANY_STRING_HERE",
-					"input": {},
-					"activity_manager": "commit or notify",
-					"activity_schema": {"$ref": "activity_schema"},
-					"timeout": 60
-					},
-					"result_schema": {}
+					"action": "check_status",
+					"input": {
+						"status_pizza": {"$ref": "bag.pizza.status"}					}
+					}
 			},
 			{
 				"id": "QUER CANCELAR?",
@@ -392,18 +366,15 @@
 			},
 			{
 				"id": "ESPERAR ENTREGADOR POR 10 MIN",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "any_lane_id",
+				"name": "Aguardar 10 min",
+				"next": "CHECK STATUS",
+				"lane_id": "user",
 				"type": "UserTask",
 				"parameters": {
-					"action": "ANY_STRING_HERE",
-					"input": {},
-					"activity_manager": "commit or notify",
-					"activity_schema": {"$ref": "activity_schema"},
-					"timeout": 60
-					},
-					"result_schema": {}
+					"action": "aguardar_pedido",
+					"input": {
+						"status_pizza": {"$ref": "bag.pizza.status"}					}
+					}
 			},
 			{
 				"id": "TEMPO MÉDIO PARA ENTREGA",
@@ -508,18 +479,16 @@
 			},
 			{
 				"id": "PREPARA O PEDIDO",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "any_lane_id",
+				"name": "Preparar pizza",
+				"next": "MONITORAMENTO DA PIZZARIA",
+				"lane_id": "pizzaria",
 				"type": "UserTask",
 				"parameters": {
-					"action": "ANY_STRING_HERE",
-					"input": {},
-					"activity_manager": "commit or notify",
-					"activity_schema": {"$ref": "activity_schema"},
-					"timeout": 60
-					},
-					"result_schema": {}
+					"action": "preparar_pizza",
+					"input": {
+						"pedido_pizza": {"$ref": "bag.pizza"}	
+					}
+					}
 			},
 			{
 				"id": "MONITORAMENTO DA PIZZARIA",
@@ -558,18 +527,16 @@
 			},
 			{
 				"id": "FINALIZAR PREPARAÇÃO",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "any_lane_id",
+				"name": "Finalizar preparação",
+				"next": "LIBERAR PARA ENTRAGA",
+				"lane_id": "pizzaria",
 				"type": "UserTask",
 				"parameters": {
-					"action": "ANY_STRING_HERE",
-					"input": {},
-					"activity_manager": "commit or notify",
-					"activity_schema": {"$ref": "activity_schema"},
-					"timeout": 60
-					},
-					"result_schema": {}
+					"action": "revisar_pedido",
+					"input": {
+						"pedido_pizza": {"$ref": "bag.pizza"}					
+					}
+					}
 			},
 			{
 				"id": "LIBERAR PARA ENTRAGA",
@@ -579,12 +546,8 @@
 				"type": "UserTask",
 				"parameters": {
 					"action": "ANY_STRING_HERE",
-					"input": {},
-					"activity_manager": "commit or notify",
-					"activity_schema": {"$ref": "activity_schema"},
-					"timeout": 60
-					},
-					"result_schema": {}
+					"input": {}
+					}
 			},
 			{
 				"id": "ORGANIZA PARA ENTREGA (OTIMIZADOR DE ROTAS)",
@@ -611,12 +574,8 @@
 				"type": "UserTask",
 				"parameters": {
 					"action": "ANY_STRING_HERE",
-					"input": {},
-					"activity_manager": "commit or notify",
-					"activity_schema": {"$ref": "activity_schema"},
-					"timeout": 60
-					},
-					"result_schema": {}
+					"input": {}
+					}
 			},
 			{
 				"id": "ENTREGADOR CHEGA AO LOCAL DA ENTREGA",
@@ -626,12 +585,8 @@
 				"type": "UserTask",
 				"parameters": {
 					"action": "ANY_STRING_HERE",
-					"input": {},
-					"activity_manager": "commit or notify",
-					"activity_schema": {"$ref": "activity_schema"},
-					"timeout": 60
-					},
-					"result_schema": {}
+					"input": {}
+					}
 			},
 			{
 				"id": "PEDIDO ESTÁ CORRETO?",
@@ -720,33 +675,29 @@
 			},
 			{
 				"id": "PAGAR - ao entregador",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "any_lane_id",
+				"name": "Cliente paga ao entregador",
+				"next": "CLIENTE RECEBE A PIZZA",
+				"lane_id": "user",
 				"type": "UserTask",
 				"parameters": {
-					"action": "ANY_STRING_HERE",
-					"input": {},
-					"activity_manager": "commit or notify",
-					"activity_schema": {"$ref": "activity_schema"},
-					"timeout": 60
-					},
-					"result_schema": {}
+					"action": "pagar_pizza",
+					"input": {
+						"pagamento_pizza": {"$ref": "bag.pizza.pagamento"}					
+					}
+					}
 			},
 			{
 				"id": "CLIENTE RECEBE A PIZZA",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "any_lane_id",
+				"name": "Pizza entregue",
+				"next": "VERIFICA O TEMPO DE ENTREGA",
+				"lane_id": "user",
 				"type": "UserTask",
 				"parameters": {
-					"action": "ANY_STRING_HERE",
-					"input": {},
-					"activity_manager": "commit or notify",
-					"activity_schema": {"$ref": "activity_schema"},
-					"timeout": 60
-					},
-					"result_schema": {}
+					"action": "pizza_recebida",
+					"input": {
+						"pedido_pizza": {"$ref": "bag.pizza"}					
+					}
+					}
 			},
 			{
 				"id": "VERIFICA O TEMPO DE ENTREGA",
