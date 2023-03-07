@@ -62,19 +62,29 @@ Por ser composto por elemento visuais e texto (Diagrama), além de código em si
 
 ### REPRESENTAÇÃO GRÁFICA NO FLOWBUILD (CINCO TIPOS DE NÓS)
 
-- START: Inicio do processo.
+- 1 - START: Inicio do processo.
 
-- USERTASK: Tarefas que precisam de interação com o usuário. Lembrar que o input são como os parametros que devem ser recebidos pelo usuário para poder realizar.
+![Screenshot 2023-03-07 at 12 23 21](https://user-images.githubusercontent.com/101360239/223421037-b4e3efd3-f90b-4c64-b5c8-f3e956bef515.png)
 
-- SYSTEMTASK: São as tarefas do sistema, não precisa do usuário para ser realizada. Não há problema em ser um pouco mais verboso no name (!id). As tarefas do sistema podem ter várias categorias, as mais utilizadas são o HTTP (API: GET, POST, e etc). 
+- 2 - USERTASK: Tarefas que precisam de interação com o usuário. Lembrar que o input são como os parametros que devem ser recebidos pelo usuário para poder realizar.
 
-- GATE: Envia o processo para outra etapa. Precisa de ter mais de um NEXT (OK e NOT OK), qual o DEFAULT também. 
+![Screenshot 2023-03-07 at 12 23 52](https://user-images.githubusercontent.com/101360239/223421151-3cfdca2b-1801-4aba-b716-d7ac727ea81e.png)
 
-- END: O processo foi encerrado. Informar em qual momento houve o encerramento.
+- 3 - SYSTEMTASK: São as tarefas do sistema, não precisa do usuário para ser realizada. Não há problema em ser um pouco mais verboso no name (!id). As tarefas do sistema podem ter várias categorias, as mais utilizadas são o HTTP (API: GET, POST, e etc). 
+
+![Screenshot 2023-03-07 at 12 24 18](https://user-images.githubusercontent.com/101360239/223421247-c081953b-2275-4095-9ace-15825acdd4ae.png)
+
+- 4 - GATE: Envia o processo para outra etapa. Precisa de ter mais de um NEXT (OK e NOT OK), qual o DEFAULT também. 
+
+![Screenshot 2023-03-07 at 12 25 33](https://user-images.githubusercontent.com/101360239/223421547-ae1350e8-c50d-4f43-ae83-e56c9c59b158.png)
+
+- 5 - END: O processo foi encerrado. Informar em qual momento houve o encerramento.
+
+ ![Screenshot 2023-03-07 at 12 25 53](https://user-images.githubusercontent.com/101360239/223421599-fce7575d-fe31-408e-96c6-759467cfc1dd.png)
+
+ - A - SWIMLANE: Dividir as linhas de interação entre as pessoas que tem acesso ao sistema, até onde o usuário-cliente pode interagir ou onde cliente-pizzaria pode agir. Esse é um dos principais pontos, vez que se pessoas não autorizadas terem acesso a funcionalidades que não são de seu grupo, pode comprometer o projeto.
  
-     - SWIMLANE: Dividir as linhas de interação entre as pessoas que tem acesso ao sistema, até onde o usuário-cliente pode interagir ou onde cliente-pizzaria pode agir. Esse é um dos principais pontos, vez que se pessoas não autorizadas terem acesso a funcionalidades que não são de seu grupo, pode comprometer o projeto.
-
-     - ATORES: É importante deixar claro quem é que vai realizar cada tarefa, se será o usuário (no nosso caso: cliente da pizzaria ou a própria pizzaria) ou o próprio sistema. 
+ - B - ATORES: É importante deixar claro quem é que vai realizar cada tarefa, se será o usuário (no nosso caso: cliente da pizzaria ou a própria pizzaria) ou o próprio sistema. 
 
 ## RESOLUÇÃO
 
