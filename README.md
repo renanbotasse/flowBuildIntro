@@ -79,38 +79,55 @@ Por ser composto por elemento visuais e texto (Diagrama), além de código em si
  * ATORES: É importante deixar claro quem é que vai realizar cada tarefa, se será o usuário (no nosso caso: cliente da pizzaria ou a própria pizzaria) ou o próprio sistema. 
 
 
-# JSON
-Blueprint é o artefato que descreve o processo de negócio para o Flowbuild interpretar, ou seja, é um arquivo do tipo JSON passível de interpretação pelo FlowBuild.
-Para armazenar uma blueprint, o FlowBuild necessita de 3 informações:
+## JSON
+Blueprint é um item que descreve o processo para a interpretação do Flowbuild. É um JSON passível de interpretação pelo FlowBuild.
 
-name: O nome da blueprint. Apesar de estruturalmente o FlowBuild aceita qualquer texto, é recomendável evitar o uso de espaços e caracteres especiais.
-description: Uma descrição da blueprint. Esse campo não influencia a execução do processo, mas é importante para identificar o que a blueprint representa.
-blueprint_spec: o esquema de execução que será utilizado pelo FlowBuild.
+Para armazenar uma blueprint são necessárias três informações:
 
-Blueprint Spec#
-Uma blueprint é definida por um objeto com 6 atributos:
+* name: Nome da blueprint (evitar o uso de espaços e caracteres especiais).
 
-prepare: lista de funções que devem ser executadas antes da inicialização do processo
-requirements: lista de packages que devem ser importados pelo FlowBuild para execução do processo.
-enviroment: trazer para a blueprint as variáveis de ambiente da aplicação (Atribui o valor da env API_KEY com o nome X-API-KEY)
-parameters: Trata-se um objeto onde são definidos constantes aplicadas para aquela determinada blueprint.
+* description: Descrição da blueprint.
+
+* blueprint_spec: Esquema de execução que será utilizado pelo FlowBuild.
+
+### A blueprint é definida por um Objeto com 6 atributos:
+
+* prepare: Lista de funções que devem ser executadas antes da inicialização do processo.
+
+* requirements: Lista de packages que devem ser importados.
+
+* enviroment: Deve trazer para a blueprint as variáveis de ambiente da aplicação (EX: Atribui o valor da env API_KEY com o nome X-API-KEY).
+
+* parameters: Um Objeto onde são definidas as constantes aplicadas naquela determinada blueprint.
+
+* lanes: É o controle de acesso a um conjunto de nós. Define quais regras devem ser atendidas para que um usuário tenha acesso a um determinado nó.
+
+* nodes: Um nó é a menor unidade do processo, é uma tarefa que deve ser executada.
+
+### NODES
+
+O que é necessário para a existência dos nodes:
+
+* id: Definido como uma string, é o identificador do nó e deve ser único no contexto da blueprint;
+
+* name: Nome do nó, tem uma função descritiva para o usuário que lê a blueprint. Não afeta a execução do processo, porém detém muito valor para análise futura e rastreamento;
+
+* lane_id: Uma string que faz referência ao id de umas das lanes da blueprint. Uma falha na referência impede a blueprint de ser publicada.
+
+* next: Indica qual o próximo nó será executado após a execução do nó atual. Deve fazer referência a um nó da própria blueprint. A inexistência de referência impede a blueprint de ser publicada.
+
+* type: Define o tipo de tarefa que deverá ser realizada. Veja a seção de nodeTypes para mais detalhes.
+
+* category: Atributo exclusivo para systemTaskNodes.
+
+* parameters: É definido por um objeto com os parâmetros de execução do nó e dados de input (quando aplicável).
 
 
-lanes: Uma lane é a expressão do controle de acesso a um conjunto de nós. Uma lane define quais regras devem ser atendidas para que um usuário tenha acesso a um determinado nó. quem tem acesso aos nós daquela determinada lane.
+### startNode
 
-nodes: Um nó é a menor unidade do processo, é uma tarefa que deve ser executada.
-id: definido como uma string, é o identificador do nó e deve ser único no contexto da blueprint;
-name: nome do nó, tem uma função descritiva para o usuário que lê a blueprint. Não afeta a execução do processo, porém detém muito valor para análise futura e rastreamento;
-lane_id: Uma string que faz referência ao id de umas das lanes da blueprint. Uma falha na referência impede a blueprint de ser publicada.
-next: indica qual o próximo nó será executado após a execução do nó atual. Deve fazer referência a um nó da própria blueprint. A inexistência de referência impede a blueprint de ser publicada.
-type: define o tipo de tarefa que deverá ser realizada. Veja a seção de nodeTypes para mais detalhes.
-category: atributo exclusivo para systemTaskNodes.
-parameters: é definido por um objeto com os parâmetros de execução do nó e dados de input (quando aplicável).
+* input_schema: Um objeto representando o JSON Schema do payload de inicio do processo.
+* timeout: Um número inteiro que representa o prazo (em segundos) para expiração do processo. 
 
-
-startNode
-input_schema Um objeto representando o JSON Schema do payload de inicio do processo.
-timeout Um número inteiro que representa o prazo (em segundos) para expiração do processo. 
 ```
 {
     "id":"0",
@@ -124,14 +141,17 @@ timeout Um número inteiro que representa o prazo (em segundos) para expiração
     }
 }
 ```
-finishNode
-Diferente dos demais nós, o valor do atributo next do FinishNode deve ser igual a null.
-O nó de término pode receber parâmetros opcionais.
 
-Os parâmetros do finishNode transferem os dados para o campo result no estado final do processo.
+### finishNode
+
+* next: deve ser null. Também pode receber parâmetros opcionais.
+
+* parâmetros do finishNode transferem os dados para o campo result no final do processo.
 
 Caso o processo seja evocado como um subProcesso, os result do finishNode será transmitido para o processo-pai.
-````{
+
+```
+{
     "id": "12",
     "type": "Finish",
     "name": "Término Hello",
@@ -143,22 +163,23 @@ Caso o processo seja evocado como um subProcesso, os result do finishNode será 
         }
     }
 }
-````
+```
 
-flowNode
-O flowNode espera em seus parâmentros um único atributo que representa o valor que será utilizado para direcionamento do processo.
+### flowNode
+
+Em seus parâmentros um único atributo será utilizado para direcionar o processo.
 
 O valor atribuído será convertido em texto e comparado com as opções descritas no objeto next descrito no especificação do nó.
 
 Caso o atributo especificado nos parameters não esteja definido, o flowNode gerará o texto undefined para comparação.
-
 
 Diferente dos demais nós do flowBuild, o atributo next de um flowNode é representado por um objeto e não por uma string.
 
 Este objeto deve ser um conjunto de atributos que serão avaliados contra o valor do parâmetro especificado.
 
 É obrigatório que um dos atributos do objeto next do flowNode seja default, que será utilizado caso nenhum resultado seja identificado.
-````
+
+```
 {
    "id":"9",
    "type":"Flow",
@@ -178,24 +199,28 @@ Este objeto deve ser um conjunto de atributos que serão avaliados contra o valo
    }
 }
 ```
-userTaskNode
-Nó de usuário.
 
-Este tipo de nó descreve uma interação com um canal, que normalmente é uma interface com um humano.
+### userTaskNode
+
+Este tipo de nó descreve uma interação, normalmente com um humano.
 
 O processo ao atingir um nó de userTask, realiza uma pré-execução, que avaliará os parâmetros de entrada da tarefa e enviará tais parâmetros para o gerenciador de atividades (Activity Manager).
 
 Diferente das tarefas de sistema, um userTask gera uma interrupção do processo, que entra em um estado de espera WAITING até que receba uma confirmação do Activity Manager de que a tarefa foi concluída. Dessa forma, assim como o startNode, uma userTask gera 2 estados no processo.
 
-
 Uma userTask pode receber até 6 parâmetros:
 
-action (obrigatório)
-input (obrigatório)
-timeout
-activity_schema
-activity_manager
-result_schema
+* action (obrigatório)
+
+* input (obrigatório)
+
+* timeout
+
+* activity_schema
+
+* activity_manager
+
+* result_schema
 
 ```
 {
@@ -224,20 +249,25 @@ result_schema
    }
 }
 ```
-systemTaskNode
+
+### systemTaskNode
 O systemTaskNode espera um atributo adicional que descreve a categoria da tarefa a ser realizada, entre elas:
 
-HTTP
-SetToBag
-Timer
+* HTTP
+* SetToBag
+* Timer
 
-subprocessNode
+### subprocessNode
 Este nó pode receber 4 parâmetros:
 
-workflow_name (obrigatório)
-actor_data (obrigatório)
-input
-valid_response
+* workflow_name (obrigatório)
+
+* actor_data (obrigatório)
+
+* input
+
+* valid_response
+
 ```
 {
     "id": "3-X",
@@ -266,7 +296,5 @@ valid_response
 ### IMPORTANTES
 
 ### RETIREI
-
-
 
 ## FIM FETAURES QUE PODERIAM TER (NÃO IMPLEMENTEI PQ IRIA FICAR GRANDE DEMAIS E NÃO SERIA TÃO ÚTIL QUANTO AS OTURAS QUE JÁ ADICIONEI)
