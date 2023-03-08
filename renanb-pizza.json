@@ -1,5 +1,5 @@
 {
-	"name": "renanb-pizza",
+	"name": "rb-pizzaria",
 	"description": "Desafio do pedido de Pizza - Renan B",
 	"blueprint_spec": {
 		"requirements": ["core"],
@@ -8,725 +8,688 @@
 		"lanes": [
 			{
 				"id": "user",
-				"name": "para todos os usuários",
+				"name": "usuarios",
 				"rule": []
 			},
 			{
 				"id": "pizzaria",
-				"name": "para a pizzaria",
+				"name": "pizzaria",
 				"rule": []	
 			}
 		],
 		"nodes": [
 			{
-				"id": "Start",
-				"name": "Start renanb-pizza",
-				"next": "ACESSAR APP DA PIZZARIA",
+				"id": "START",
+				"name": "START rb-pizzaria",
+				"next": "ABRIR APP DA PIZZARIA",
 				"type": "start",
 				"lane_id": "user",
 				"parameters": {
-						"input_schema": {}
-						}
-			},
-			{
-				"id": "ACESSAR APP DA PIZZARIA",
-				"name": "Abrir o APP",
-				"next": "ESCOLHER PIZZA",
-				"lane_id": "user",
-				"type": "UserTask",
-				"parameters": {
-					"action": "ACESSAR_APP",
-					"input": {}
-					}
+					"input_schema": {}
+				}
 			},
 			{
 				"id": "ESCOLHER PIZZA",
-				"name": "Selecionar pizza",
-				"next": "GUARDAR O PEDIDO",
+				"name": "User escolhe sua pizza",
+				"next": "SALVAR BASE PARA O PEDIDO",
 				"lane_id": "user",
 				"type": "UserTask",
 				"parameters": {
-					"action": "escolher_pizza",
-					"input": {
-						"menu": { "$ref": "bag.menu" }
-					}
-					}
+				  "action": "ESCOLHER_PIZZA",
+				  "input": {
+					"menu": { "$ref": "bag.pizzaria.menu"},
+					"pedido": { "$ref": "bag.pedido" },
+					"custo": { "$ref": "bag.pagamento.custo" }
+				}
+			 }
 			},
 			{
-				"id": "GUARDAR O PEDIDO",
-				"name": "Guardar o pedido",
-				"next": "QUER ALTERAR INGREDIENTES?",
+				"id": "SALVAR BASE PARA O PEDIDO",
+				"name": "Guardar Rascunho do Pedido",
+				"next": "ALTERAR INGREDIENTES?",
 				"lane_id": "user",
 				"type": "SystemTask",
 				"category": "setToBag",
 				"parameters": {
 				  "input": {
-					"$ref": "bag.pizza"
+					"menu": { "$ref": "bag.pizzaria.menu"},
+					"pedido": { "$ref": "bag.pedido"}
 				  }
 				}
-			},
-			{
-				"id": "QUER ALTERAR INGREDIENTES?",
-				"name": "Alterar algum ingrediente?",
-				"next": {
-				  "default": "QUER COMENTAR?",
-				  "true": "QUER COMENTAR?",
-				  "false": "EDITAR INGREDIENTES?"
+			  },
+			  {
+				"id":"ALTERAR INGREDIENTES?",
+				"type":"Flow",
+				"name":"Modificar os ingredientes?",
+				"lane_id":"user",
+				"next":{
+				   "default":"FAZER COMENTÁRIO?",
+				   "true":"FAZER COMENTÁRIO?",
+				   "false":"ALTERAR"
 				},
-				"type": "flow",
-				"lane_id": "user",
-				"parameters": {
-				  "input": {
-					"key": {
-						"$ref": "bag.pizza.ingredientes"
-					  }
-					}
+				"parameters":{
+				   "input":{
+					"$ref": "bag.pedido.pizza.ingredientes"
+				   }
 				}
-			},
-			{
-				"id": "EDITAR INGREDIENTES?",
-				"name": "Editar ingredientes?",
-				"next": "QUER COMENTAR?",
+			 },
+			 {
+				"id": "ALTERAR",
+				"name": "Fazer a alteração dos ingredientes",
+				"next": "FAZER COMENTÁRIO?",
 				"lane_id": "user",
 				"type": "UserTask",
 				"parameters": {
-					"action": "editar_ingredientes",
-					"input": {
-						"ingredientes_pizza": {"$ref": "bag.pizza.ingredientes"}					}
-					}
+				  "action": "ALTERAR_INGREDIENTES",
+				  "input": {
+					"ingredientes": { "$ref": "bag.pedido.pizza.ingredientes" }
+						}
+			 }
 			},
 			{
-				"id": "QUER COMENTAR?",
-				"name": "Quer fazer algum comentário?",
-				"next": {
-					"default": "ESCOLHER LOCAL DE ENTREGA",
-					"true": "ESCOLHER LOCAL DE ENTREGA",
-					"false": "FAZER COMENTÁRIO"
-				  },
-				"type": "flow",
-				"lane_id": "user",
-				"parameters": {
-				  "input": {
-					"key": {
-						"$ref": "bag.pizza.comentario"
-					  }
-					}
+				"id":"FAZER COMENTÁRIO?",
+				"type":"Flow",
+				"name":"Adicionar comentário?",
+				"lane_id":"user",
+				"next":{
+				   "default":"DEFINIR LOCAL DE ENTREGA E CONTATO",
+				   "true":"DEFINIR LOCAL DE ENTREGA E CONTATO",
+				   "false":"COMENTAR"
+				},
+				"parameters":{
+				   "input":{
+					"$ref": "bag.pedido.pizza.comentario"
+				   }
 				}
-			},
-			{
-				"id": "FAZER COMENTÁRIO",
-				"name": "Adicionar comentário",
-				"next": "ESCOLHER LOCAL DE ENTREGA",
+			 },
+			 {
+				"id": "COMENTAR",
+				"name": "Fazer comentário",
+				"next": "DEFINIR LOCAL DE ENTREGA E CONTATO?",
 				"lane_id": "user",
 				"type": "UserTask",
 				"parameters": {
-					"action": "add_comentario",
-					"input": {
-						"comentarios_pizza": {"$ref": "bag.pizza.comentario"}					}
-					}
+				  "action": "COMENTAR",
+				  "input": {
+					"comentar": { "$ref": "bag.pedido.pizza.comentario" }
+						}
+			 }
 			},
 			{
-				"id": "ESCOLHER LOCAL DE ENTREGA",
-				"name": "Definir local de entrega",
-				"next": "ESCOLHER FORMA DE PAGAMENTO/TROCO",
+				"id": "DEFINIR LOCAL DE ENTREGA E CONTATO",
+				"name": "Informações do Usuário - Local e Contato",
+				"next": "ESTIPULAR TEMPO DE ENTREGA DILATADO",
 				"lane_id": "user",
 				"type": "UserTask",
 				"parameters": {
-					"action": "selecionar_entrega",
-					"input": {
-						"endereco_pizza": {"$ref": "bag.pizza.endereco"}					}
-					}
+				  "action": "ADICIONAR_INFO_PESSOAL",
+				  "input": {
+					"nome": { "$ref": "bag.user.name" },
+					"local": { "$ref": "bag.user.end" },
+					"contato": { "$ref": "bag.user.contato" }
+						}
+			 }
 			},
 			{
-				"id": "ESCOLHER FORMA DE PAGAMENTO/TROCO",
-				"name": "Escolher forma de pagamento",
-				"next": "REVISAR PEDIDO E CONFIRMAR",
+				"id": "ESTIPULAR TEMPO DE ENTREGA DILATADO",
+				"name": "Tempo de Entrega Dilatado",
+				"next": "REVISAR PEDIDO",
 				"lane_id": "user",
-				"type": "UserTask",
-				"parameters": {
-					"action": "definir_formato_pagamento",
-					"input": {
-						"formadepagamento_pizza": {"$ref": "bag.pizza.pagamento"}					}
-					}
-			},
-			{
-				"id": "REVISAR PEDIDO E CONFIRMAR",
-				"name": "Revisão do pedido",
-				"next": "QUER EDITAR O PEDIDO?",
-				"lane_id": "user",
-				"type": "UserTask",
-				"parameters": {
-					"action": "revisar_pedido",
-					"input": {
-						"pedido_pizza": {"$ref": "bag.pizza"}					
-					}
-					}
-			},
-			{
-				"id": "QUER EDITAR O PEDIDO?",
-				"name": "Quer alterar o pedido?",
-				"next": {
-					"default": "PAGAMENTO VAI SER FEITO PELO APP?",
-					"true": "PAGAMENTO VAI SER FEITO PELO APP?",
-					"false": "ESCOLHER PIZZA"
-					  },
-				"type": "flow",
-				"lane_id": "user",
+				"type": "SystemTask",
+				"category": "setToBag",
 				"parameters": {
 				  "input": {
-			        "key": {
-						"$ref": "bag.pizza"
-					  }
-					  }
-					}
+					"entregadilatada": { "$ref": "bag.entrega.prazodilatado" }
+				  }
+				}
+			  },
+			  {
+				"id": "REVISAR PEDIDO",
+				"name": "Revisão do pedido para concluir",
+				"next": "MUDAR PEDIDO?",
+				"lane_id": "user",
+				"type": "UserTask",
+				"parameters": {
+				  "action": "REVISAO_PEDIDO",
+				  "input": {
+					"cliente": { "$ref": "bag.user" },
+					"pedido": { "$ref": "bag.pedido" },
+					"contato": { "$ref": "bag.user.contato" },
+					"tempo": { "$ref": "bag.entrega.prazodilatado" },
+					"custo": { "$ref": "bag.pagamento.custo" }
+						}
+			 }
 			},
 			{
-				"id": "PAGAMENTO VAI SER FEITO PELO APP?",
-				"name": "Vai pagar pelo aplicativo?",
-				"next": {
-					"default": "PAGAR PELO APP",
-					"true": "PAGAR PELO APP",
-					"false": "ENVIAR O PEDIDO PARA PIZZARIA"
-					  },
-				"type": "flow",
+				"id":"MUDAR PEDIDO?",
+				"type":"Flow",
+				"name":"refazer o pedido?",
+				"lane_id":"user",
+				"next":{
+				   "default":"SE TIVER CUPOM - ADICIONAR",
+				   "true":"SE TIVER CUPOM - ADICIONAR",
+				   "false":"ESCOLHER PIZZA"
+				},
+				"parameters":{
+				   "input":{
+					"pedido": { "$ref": "bag.pedido" }
+				   }
+				}
+			 },
+			 {
+				"id": "SE TIVER CUPOM - ADICIONAR",
+				"name": "Caso tenha Cupom, adicione",
+				"next": "PAGAR PELO APP",
 				"lane_id": "user",
+				"type": "UserTask",
 				"parameters": {
+				  "action": "ADICIONAR_CUPOM",
 				  "input": {
-					"key": {
-						"$ref": "bag.pizza.pagamento"
-					  }
-					  }
-					}
+					"cupom": { "$ref": "bag.pagamento.cupom" }
+						}
+			 }
 			},
 			{
 				"id": "PAGAR PELO APP",
-				"name": "Pagar pelo APP",
+				"name": "User faz o pagamento",
+				"next": "GRAVAR PEDIDO E EMITIR COMPROVANTE",
+				"lane_id": "user",
+				"type": "UserTask",
+				"parameters": {
+				  "action": "PAGAR",
+				  "input": {
+					"pagar": { "$ref": "bag.pagamento" }
+						}
+			 }
+			},
+			{
+				"id": "GRAVAR PEDIDO E EMITIR COMPROVANTE",
+				"name": "Gravar pedido no Sistema e Emitir Comprovante",
+				"next": "DEFINE TEMPO MÉDIO PARA ENTREGA",
+				"lane_id": "pizzaria",
+				"type": "SystemTask",
+				"category": "setToBag",
+				"parameters": {
+				  "input": {
+					"user": { "$ref": "bag.user"},
+					"pedido": { "$ref": "bag.pedido"},
+					"pagamento": { "$ref": "bag.pagamento"},
+					"entrega": { "$ref": "bag.entrega"},
+					"cupom": { "$ref": "bag.pizzaria.cupom"}
+				  }
+				}
+			},
+			{
+				"id": "DEFINE TEMPO MÉDIO PARA ENTREGA",
+				"name": "Define o tempo limite real para a entrega",
 				"next": "ENVIAR O PEDIDO PARA PIZZARIA",
-				"lane_id": "user",
-				"type": "UserTask",
-				"parameters": {
-					"action": "pagar",
-					"input": {
-						"pagamento_pizza": {"$ref": "bag.pizza.pagamento"}					}
-					}
-			},
-			{
-				"id": "ENVIAR O PEDIDO PARA PIZZARIA",
-				"name": "Enviar pedido",
-				"next": {
-					"default": "TEMPO MÉDIO PARA ENTREGA",
-					"true": "TEMPO MÉDIO PARA ENTREGA",
-					"false": "CHECK STATUS"
-					  },
-				"type": "flow",
-				"lane_id": "user",
-				"parameters": {
-				  "input": {
-					"key": {
-						"$ref": "bag.pizza.status"
-					  }
-					  }
-					}
-			},
-			{
-				"id": "CHECK STATUS",
-				"name": "Verificar posição do pedido",
-				"next": "QUER CANCELAR?",
-				"lane_id": "user",
-				"type": "UserTask",
-				"parameters": {
-					"action": "check_status",
-					"input": {
-						"status_pizza": {"$ref": "bag.pizza.status"}					}
-					}
-			},
-			{
-				"id": "QUER CANCELAR?",
-				"name": "Quer cancelar o pedido?",
-				"next": {
-					"default": "ENTREGADOR CHEGOU?",
-					"true": "ENTREGADOR CHEGOU?",
-					"false": "PEDIDO JÁ FOI ACEITO?"
-					  },
-				"type": "flow",
-				"lane_id": "user",
-				"parameters": {
-				  "input": {
-					"key": {
-						"$ref": "bag.pizza.status"
-					  }
-					  }
-					}
-			},
-			{
-				"id": "PEDIDO JÁ FOI ACEITO?",
-				"name": "Pedido aceito ou não?",
-				"next": {
-					"default": "NÃO É POSSÍVEL CANCELAR",
-					"true": "NÃO É POSSÍVEL CANCELAR",
-					"false": "JÁ FOI PAGO? - cliente"
-					  },
-				"type": "flow",
-				"lane_id": "pizzaria",
-				"parameters": {
-				  "input": {
-					"key": {
-						"$ref": "bag.pizza.status"
-					  }
-					  }
-					}
-			},
-			{
-				"id": "JÁ FOI PAGO? - cliente",
-				"name": "any string",
-				"next": {
-					"default": "FINISH - Cliente cancelou sem reembolso",
-					"true": "FINISH - Cliente cancelou sem reembolso",
-					"false": "REEMBOLSO - cliente cancelou"
-					  },
-				"type": "flow",
-				"lane_id": "pizzaria",
-				"parameters": {
-				  "input": {
-					"key": {
-					"$ref": "bag.pizza.pagamento"
-				}
-				  }
-					}
-			},
-			{
-				"id": "REEMBOLSO - cliente cancelou",
-				"name": "Reembolsar (cliente pediu cancelamento)",
-				"next": "FINISH - Cliente cancelou com reembolso",
-				"lane_id": "pizzaria",
-				"type": "SystemTask",
-				"category": "setToBag",
-				"parameters": { 
-				  "input": {
-					"$ref": "bag.pizza.pagamento"
-				  }
-				}
-			},			
-			{
-				"id": "FINISH - Cliente cancelou com reembolso",
-				"type": "Finish",
-				"name": "Finish - Cliente cancelou. Com reembolso",
-				"lane_id": "pizzaria",
-				"next": null
-			},
-			{
-				"id": "FINISH - Cliente cancelou sem reembolso",
-				"type": "Finish",
-				"name": "Finish - Cliente cancelou. Sem reembolso",
-				"lane_id": "pizzaria",
-				"next": null
-			},
-			{
-				"id": "NÃO É POSSÍVEL CANCELAR",
-				"name": "Impossível cancelar - já foi aceito",
-				"next": "ENTREGADOR CHEGOU?",
 				"lane_id": "pizzaria",
 				"type": "SystemTask",
 				"category": "setToBag",
 				"parameters": {
 				  "input": {
-					"$ref": "bag.pizza.status"
+					"prazodilatado": { "$ref": "bag.entrega.prazodilatado"},
+					"prazoreal": { "$ref": "bag.entrega.prazoreal"}
 				  }
 				}
 			},
 			{
-				"id": "ENTREGADOR CHEGOU?",
-				"name": "Entregador chegou ao local de entrega?",
-				"next": {
-					"default": "PEDIDO ESTÁ CORRETO?",
-					"true": "PEDIDO ESTÁ CORRETO?",
-					"false": "ESPERAR ENTREGADOR POR 10 MIN"
-					  },
-				"type": "flow",
-				"lane_id": "user",
-				"parameters": {
-				  "input": {
-					"key": {
-						"$ref": "bag.pizza.entrega"
-					  }
-					  }
-					}
-			},
+                "id": "ENVIAR O PEDIDO PARA PIZZARIA",
+                "name": "Envio de todos os dados para a Pizzaria",
+                "type": "systemTask",
+                "category": "http",
+                "lane_id": "pizzaria",
+                "next": "ACEITAR O PEDIDO?",
+                "parameters": {
+                    "input": {
+						"user": { "$ref": "bag.user"},
+						"pedido": { "$ref": "bag.pedido"},
+						"pagamento": { "$ref": "bag.pagamento"},
+						"entrega": { "$ref": "bag.entrega"},
+						"pizzaria": { "$ref": "bag.pizzaria"}
+                    },
+                    "request": {
+                        "url": "pedidofeito",
+                        "verb": "POST",
+                        "headers": {
+                            "ContentType": "application/json"
+                        }
+                    }
+                }
+            },
 			{
-				"id": "ESPERAR ENTREGADOR POR 10 MIN",
-				"name": "Aguardar 10 min",
-				"next": "CHECK STATUS",
-				"lane_id": "user",
-				"type": "UserTask",
-				"parameters": {
-					"action": "aguardar_pedido",
-					"input": {
-						"status_pizza": {"$ref": "bag.pizza.status"}					}
-					}
-			},
-			{
-				"id": "TEMPO MÉDIO PARA ENTREGA",
-				"name": "Tempo médio para entrega do pedido",
-				"next": "RESTAURANTE RECEBE O PEDIDO",
-				"lane_id": "pizzaria",
-				"type": "SystemTask",
-				"category": "setToBag",
-				"parameters": {
-				  "input": {
-					"$ref": "bag.pizza.tempo"
-				  }
+				"id":"ACEITAR O PEDIDO?",
+				"type":"Flow",
+				"name":"Pizzaria vai aceitar o pedido?",
+				"lane_id":"pizzaria",
+				"next":{
+				   "default":"FAZER A PIZZA",
+				   "true":"FAZER A PIZZA",
+				   "false":"REEMBOLSO - pizzaria cancelou"
+				},
+				"parameters":{
+				   "input":{
+					"$ref": "bag.pedido"
+				   }
 				}
-			},
-			{
-				"id": "RESTAURANTE RECEBE O PEDIDO",
-				"name": "Entrega do Pedido a Pizzaria",
-				"next": "ACEITAR O PEDIDO?",
-				"lane_id": "pizzaria",
-				"type": "SystemTask",
-				"category": "setToBag",
-				"parameters": {
-				  "input": {
-					"$ref": "bag.pizza"
-				  }
-				}
-			},
-			{
-				"id": "ACEITAR O PEDIDO?",
-				"name": "Pizzaria aceita o pedido?",
-				"next": {
-					"default": "PREPARA O PEDIDO",
-					"true": "PREPARA O PEDIDO",
-					"false": "JÁ FOI PAGO? - pizzaria"
-					  },
-				"type": "flow",
-				"lane_id": "pizzaria",
-				"parameters": {
-				  "input": {
-					"key": {
-						"$ref": "bag.pizza.aceite"
-					  }
-					  }
-					}
-			},
-			{
-				"id": "JÁ FOI PAGO? - pizzaria",
-				"name": "Pizzaria Cancelou. Pizza já estava paga?",
-				"next": {
-					"default": "FINISH - pizzaria cancela sem reembolso",
-					"true": "FINISH - pizzaria cancela sem reembolso",
-					"false": "REEMBOLSO - pizzaria não fez a pizza"
-						  },
-				"type": "flow",
-				"lane_id": "pizzaria",
-				"parameters": {
-				  "input": {
-					"key": {
-						"$ref": "bag.pizza.pagamento"
-					  }
-					  }
-					}
-			},
-			{
-				"id": "REEMBOLSO - pizzaria não fez a pizza",
-				"name": "Reembolsar (pizzaria pediu cancelamento)",
-				"next": "FINISH - pizzaria cancela com reembolso",
-				"lane_id": "pizzaria",
-				"type": "SystemTask",
-				"category": "setToBag",
-				"parameters": {
-				  "input": {
-					"$ref": "bag.pizza.pagamento"
-				  }
-				}
-			},
-			{
-				"id": "FINISH - pizzaria cancela com reembolso",
-				"type": "Finish",
-				"name": "Finish - Pizzaria cancelou. Com reembolso",
-				"lane_id": "pizzaria",
-				"next": null
-			},
-			{
-				"id": "FINISH - pizzaria cancela sem reembolso",
-				"type": "Finish",
-				"name": "Finish - Pizzaria Cancelou. Sem reembolso",
-				"lane_id": "pizzaria",
-				"next": null
-			},
-			{
-				"id": "PREPARA O PEDIDO",
-				"name": "Preparar pizza",
+			 },
+			 {
+				"id": "FAZER A PIZZA",
+				"name": "PIZZARIA FAZ A PIZZA",
 				"next": "MONITORAMENTO DA PIZZARIA",
 				"lane_id": "pizzaria",
 				"type": "UserTask",
 				"parameters": {
-					"action": "preparar_pizza",
-					"input": {
-						"pedido_pizza": {"$ref": "bag.pizza"}	
-					}
-					}
+				  "action": "PAGAR",
+				  "input": {
+					"pedido": { "$ref": "bag.pedido" }
+						}
+			 }
 			},
 			{
 				"id": "MONITORAMENTO DA PIZZARIA",
-				"name": "Status da Pizzaria",
-				"next": "IMPOSSÍVEL FINALIZAR PREPRAÇÃO?",
+				"name": "Verifica se tem algum problema, falta de luz, ingrediente, entregador",
+				"next": "CONSEGUE FINALIZAR PIZZA?",
 				"lane_id": "pizzaria",
 				"type": "SystemTask",
 				"category": "setToBag",
 				"parameters": {
 				  "input": {
-					"$ref": "bag.pizzaria.monitoramento"
+					"monitoramento": { "$ref": "bag.pizzaria.monitoramento"}
 				  }
 				}
 			},
 			{
-				"id": "IMPOSSÍVEL FINALIZAR PREPRAÇÃO?",
-				"name": "Algum problema que impossibilite a finalização do pedido?",
-				"next": {
-					"default": "FINALIZAR PREPARAÇÃO",
-					"true": "FINALIZAR PREPARAÇÃO",
-					"false": "JÁ FOI PAGO? - pizzaria"
-						  },
-				"type": "flow",
+				"id":"CONSEGUE FINALIZAR PIZZA?",
+				"type":"Flow",
+				"name":"Pizzaria não consegue finalizar o pedido?",
+				"lane_id":"pizzaria",
+				"next":{
+				   "default":"REVISAR O PEDIDO",
+				   "true":"REVISAR O PEDIDO",
+				   "false":"REEMBOLSO - pizzaria cancelou"
+				},
+				"parameters":{
+				   "input":{
+					"$ref": "bag.pizzaria.monitoramento"
+				   }
+				}
+			 },
+			 {
+				"id": "REEMBOLSO - pizzaria cancelou",
+				"name": "Realizar o reembolso do que foi pago",
+				"next": "COMUNICA AO CLIENTE - REEMBOLSO",
 				"lane_id": "pizzaria",
+				"type": "SystemTask",
+				"category": "setToBag",
 				"parameters": {
 				  "input": {
-					"key": {
-						"$ref": "bag.pizzaria.monitoramento"
-					  }
-					  }
-					}
+					"dadospagamento": { "$ref": "bag.pagamento"},
+					"ressarcimento": { "$ref": "bag.pagamento.ressarcimento"}
+				  }
+				}
 			},
 			{
-				"id": "FINALIZAR PREPARAÇÃO",
-				"name": "Finalizar preparação",
-				"next": "LIBERAR PARA ENTRAGA",
+                "id": "COMUNICA AO CLIENTE - REEMBOLSO",
+                "name": "Avisa o cliente que o pedido foi cancelado",
+                "type": "systemTask",
+                "category": "http",
+                "lane_id": "pizzaria",
+                "next": "FINISH - pizzaria cancelou",
+                "parameters": {
+                    "input": {
+						"user": { "$ref": "bag.user"},
+						"pedidocancelado": { "$ref": "bag.pedido.status"},
+						"reembolso": { "$ref": "bag.pagamento.ressarcimento"},
+						"mensagem": { "$ref": "bag.user.msg"}
+                    },
+                    "request": {
+                        "url": "status",
+                        "verb": "POST",
+                        "headers": {
+                            "ContentType": "application/json"
+                        }
+                    }
+                }
+            },
+			{
+				"id": "FINISH - pizzaria cancelou",
+				"name": "FINISH - pizzaria não fez o pedido",
+				"type": "Finish",
+				"lane_id": "pizzaria",
+				"next": null
+			},
+			{
+				"id": "REVISAR O PEDIDO",
+				"name": "Revisão do pedido",
+				"next": "PIZZARIA ERROU?",
 				"lane_id": "pizzaria",
 				"type": "UserTask",
 				"parameters": {
-					"action": "revisar_pedido",
-					"input": {
-						"pedido_pizza": {"$ref": "bag.pizza"}					
-					}
-					}
+				  "action": "REVISAR",
+				  "input": {
+					"pedido": { "$ref": "bag.pedido" }
+						}
+			 }
 			},
 			{
-				"id": "LIBERAR PARA ENTRAGA",
-				"name": "libera o pedido para o setor de entrega",
-				"next": "ORGANIZA PARA ENTREGA (OTIMIZADOR DE ROTAS)",
-				"lane_id": "pizzaria",
-				"type": "UserTask",
-				"parameters": {
-					"action": "libera_pizza",
-					"input": {
-						"pedido_pizza": {"$ref": "bag.pizza"}					
-					}
-					}
-			},
-			{
-				"id": "ORGANIZA PARA ENTREGA (OTIMIZADOR DE ROTAS)",
-				"name": "Organizar rota",
+				"id":"PIZZARIA ERROU?",
+				"type":"Flow",
+				"name":"Algo deu errado, pizzaria precisa refazer o pedido",
+				"lane_id":"pizzaria",
+				"next":{
+				   "default":"DISPONIBILIZAR PARA ENTREGA",
+				   "true":"DISPONIBILIZAR PARA ENTREGA",
+				   "false":"FAZER A PIZZA"
+				},
+				"parameters":{
+				   "input":{
+					"$ref": "bag.pedido"
+				   }
+				}
+			 },
+			 {
+				"id": "DISPONIBILIZAR PARA ENTREGA",
+				"name": "Deixa a pizza disponível para entrega",
 				"next": "ENTREGADOR RECOLHE PIZZA",
 				"lane_id": "pizzaria",
-				"type": "SystemTask",
-				"category": "setToBag",
+				"type": "UserTask",
 				"parameters": {
+				  "action": "DISPONIBILIZAR",
 				  "input": {
-					"$ref": "bag.pizza.entrega"
-				  }
-				}
+					"pedido": { "$ref": "bag.pedido.pizza" }
+						}
+			 }
 			},
 			{
 				"id": "ENTREGADOR RECOLHE PIZZA",
-				"name": "Entregador recebe a pizza",
+				"name": "Entregador busca a pizza para entrega",
 				"next": "ENTREGADOR CHEGA AO LOCAL DA ENTREGA",
 				"lane_id": "pizzaria",
 				"type": "UserTask",
 				"parameters": {
-					"action": "entregador_recolhe",
-					"input": {
-						"pedido_pizza": {"$ref": "bag.pizza"}					
-					}
-					}
+				  "action": "RECOLHE",
+				  "input": {
+					"pedido": { "$ref": "bag.pedido.pizza" },
+					"user": { "$ref": "bag.user" }
+						}
+			 }
 			},
 			{
 				"id": "ENTREGADOR CHEGA AO LOCAL DA ENTREGA",
-				"name": "Entregador chega ao cliente",
-				"next": "PEDIDO ESTÁ CORRETO?",
+				"name": "Entregar chega ao local de entrega",
+				"next": "REGISTRO CHEGADA AO LOCAL",
 				"lane_id": "pizzaria",
 				"type": "UserTask",
 				"parameters": {
-					"action": "entregador_chega",
-					"input": {
-						"pedido_pizza": {"$ref": "bag.pizza"}					
-					}
-					}
-			},
-			{
-				"id": "PEDIDO ESTÁ CORRETO?",
-				"name": "Conferencia do pedido com o Cliente",
-				"next": {
-					"default": "JÁ FOI PAGO? - verificação na entrega",
-					"true": "JÁ FOI PAGO? - verificação na entrega",
-					"false": "JÁ FOI PAGO? - erro da pizzaria"
-						  },
-				"type": "flow",
-				"lane_id": "user",
-				"parameters": {
+				  "action": "CHEGA",
 				  "input": {
-					"key": {
-						"$ref": "bag.pizza"
-					  }
-					  }
-					}
+					"user": { "$ref": "bag.user.end" }
+						}
+			 }
 			},
 			{
-				"id": "JÁ FOI PAGO? - erro da pizzaria",
-				"name": "Verificar se houve pagamento - Erro da pizzaria",
-				"next": {
-					"default": "FINISH - entregador não reembolsa",
-					"true": "FINISH - entregador não reembolsa",
-					"false": "REEMBOLSO - erro da pizzaria"
-						  },
-				"type": "flow",
-				"lane_id": "pizzaria",
-				"parameters": {
-				  "input": {
-					"key": {
-						"$ref": "bag.pizza.pagamento"
-					  }
-					  }
-					}
-			},
-			{
-				"id": "REEMBOLSO - erro da pizzaria",
-				"name": "Rembolso - erro da pizzaria",
-				"next": "FINISH - entregador reembolsa",
+				"id": "REGISTRO CHEGADA AO LOCAL",
+				"name": "Registro do horário de chegada",
+				"next": "ENTREGADOR ENCONTROU O CLIENTE?",
 				"lane_id": "pizzaria",
 				"type": "SystemTask",
 				"category": "setToBag",
 				"parameters": {
 				  "input": {
-					"$ref": "bag.pizza.pagamento"
+					"chegada": { "$ref": "bag.entrega.chegada"}
 				  }
 				}
 			},
 			{
-				"id": "FINISH - entregador reembolsa",
-				"type": "Finish",
-				"name": "Finish - Falha ao entrega. Pizzaria Errou. Com reembolso",
+				"id":"ENTREGADOR ENCONTROU O CLIENTE?",
+				"type":"Flow",
+				"name":"Entregador encontra com o cliente?",
+				"lane_id":"user",
+				"next":{
+				   "default":"PEDIDO ESTÁ CORRETO?",
+				   "true":"PEDIDO ESTÁ CORRETO?",
+				   "false":"TENTA CONTATO COM CLIENTE"
+				},
+				"parameters":{
+				   "input":{
+					"$ref": "bag.user"
+				   }
+				}
+			 },
+			 {
+				"id": "TENTA CONTATO COM CLIENTE",
+				"name": "Tenta contato com o cliente",
+				"next": "CONSEGUIU? TENTATIVA 1",
 				"lane_id": "pizzaria",
-				"next": null
-			},
-			{
-				"id": "FINISH - entregador não reembolsa",
-				"type": "Finish",
-				"name": "Finish - Falha ao entrega. Pizzaria Errou. Sem reembolso",
-				"lane_id": "pizzaria",
-				"next": null
-			},
-			{
-				"id": "JÁ FOI PAGO? - verificação na entrega",
-				"name": "Ao entregar a pizza, verificar se já foi pago",
-				"next": {
-					"default": "CLIENTE RECEBE A PIZZA",
-					"true": "CLIENTE RECEBE A PIZZA",
-					"false": "PAGAR - ao entregador"
-						  },
-				"type": "flow",
-				"lane_id": "user",
-				"parameters": {
-				  "input": {
-					"key": {
-						"$ref": "bag.pizza.pagamento"
-					  }
-					  }
-					}
-			},
-			{
-				"id": "PAGAR - ao entregador",
-				"name": "Cliente paga ao entregador",
-				"next": "CLIENTE RECEBE A PIZZA",
-				"lane_id": "user",
 				"type": "UserTask",
 				"parameters": {
-					"action": "pagar_pizza",
-					"input": {
-						"pagamento_pizza": {"$ref": "bag.pizza.pagamento"}					
-					}
-					}
+				  "action": "CONTATO",
+				  "input": {
+					"contato": { "$ref": "bag.user.contato" }
+						}
+			 }
+			},
+			{
+				"id":"CONSEGUIU? TENTATIVA 1",
+				"type":"Flow",
+				"name":"Conseguiu entrar em contato?",
+				"lane_id":"pizzaria",
+				"next":{
+				   "default":"PEDIDO ESTÁ CORRETO?",
+				   "true":"PEDIDO ESTÁ CORRETO?",
+				   "false":"AGUARDAR 5 MIN"
+				},
+				"parameters":{
+				   "input":{
+					"$ref": "bag.user.contato"
+				   }
+				}
+			 },
+			 {
+				"id": "AGUARDAR 5 MIN",
+				"name": "Aguardar por 5 min para tentar novo contato",
+				"next": "TENTA NOVO CONTATO COM CLIENTE",
+				"lane_id": "pizzaria",
+				"type": "UserTask",
+				"parameters": {
+				  "action": "CHEGA",
+				  "input": {
+						}
+			 }
+			},
+			{
+				"id": "TENTA NOVO CONTATO COM CLIENTE",
+				"name": "Tenta novo contato com o cliente",
+				"next": "CONSEGUIU? TENTATIVA 2",
+				"lane_id": "pizzaria",
+				"type": "UserTask",
+				"parameters": {
+				  "action": "CONTATO",
+				  "input": {
+					"contato": { "$ref": "bag.user.contato" }
+						}
+			 }
+			},
+			{
+				"id":"CONSEGUIU? TENTATIVA 2",
+				"type":"Flow",
+				"name":"Conseguiu entrar em contato? segunda tentativa",
+				"lane_id":"pizzaria",
+				"next":{
+				   "default":"PEDIDO ESTÁ CORRETO?",
+				   "true":"PEDIDO ESTÁ CORRETO?",
+				   "false":"REGISTRAR TENTATIVAS"
+				},
+				"parameters":{
+				   "input":{
+					"$ref": "bag.user.contato"
+				   }
+				}
+			 },
+			 {
+				"id": "REGISTRAR TENTATIVAS",
+				"name": "Registrar tentativas de contato",
+				"next": "VOLTAR COM A PIZZA",
+				"lane_id": "pizzaria",
+				"type": "SystemTask",
+				"category": "setToBag",
+				"parameters": {
+				  "input": {
+					"registro": { "$ref": "bag.pizzaria.registrodecontatos"}
+				  }
+				}
+			},
+			{
+				"id": "VOLTAR COM A PIZZA",
+				"name": "Voltar com a pizza para pizzaria",
+				"next": "FINISH - Cliente sumiu",
+				"lane_id": "pizzaria",
+				"type": "UserTask",
+				"parameters": {
+				  "action": "VOLTAR",
+				  "input": {
+					"status": { "$ref": "bag.pedido.status"}
+						}
+			 }
+			},
+			{
+				"id": "FINISH - Cliente sumiu",
+				"name": "FINISH - Cliente não apareceu nem respondeu os contatos",
+				"type": "Finish",
+				"lane_id": "pizzaria",
+				"next": null
+			},
+			{
+				"id":"PEDIDO ESTÁ CORRETO?",
+				"type":"Flow",
+				"name":"Pedido está correto para o cliente?",
+				"lane_id":"user",
+				"next":{
+				   "default":"CLIENTE RECEBE A PIZZA",
+				   "true":"CLIENTE RECEBE A PIZZA",
+				   "false":"REEMBOLSO - erro da pizzaria"
+				},
+				"parameters":{
+				   "input":{
+					"pedido": { "$ref": "bag.pedido.pizza"},
+					"user": { "$ref": "bag.user.name"}
+				   }
+				}
+			 },
+			 {
+				"id": "REEMBOLSO - erro da pizzaria",
+				"name": "Reembolsar. Ao realizar a entrega, cliente verificou erro",
+				"next": "FINISH - pizzaria errou",
+				"lane_id": "pizzaria",
+				"type": "SystemTask",
+				"category": "setToBag",
+				"parameters": {
+				  "input": {
+					"dadospagamento": { "$ref": "bag.pagamento"},
+					"ressarcimento": { "$ref": "bag.pagamento.ressarcimento"}
+				  }
+				}
+			},
+			{
+				"id": "FINISH - pizzaria errou",
+				"name": "FINISH - Cliente encontrou erro da pizzaria",
+				"type": "Finish",
+				"lane_id": "pizzaria",
+				"next": null
 			},
 			{
 				"id": "CLIENTE RECEBE A PIZZA",
-				"name": "Pizza entregue",
+				"name": "Cliente recebe a pizza pedida",
 				"next": "VERIFICA O TEMPO DE ENTREGA",
 				"lane_id": "user",
 				"type": "UserTask",
 				"parameters": {
-					"action": "pizza_recebida",
-					"input": {
-						"pedido_pizza": {"$ref": "bag.pizza"}					
-					}
-					}
-			},
-			{
-				"id": "VERIFICA O TEMPO DE ENTREGA",
-				"name": "Verificar o tempo de entrega feito e esperado",
-				"next": "ULTRAPASSOU O TEMPO ESPERADO?",
-				"lane_id": "pizzaria",
-				"type": "SystemTask",
-				"category": "setToBag",
-				"parameters": {
+				  "action": "ENTREGA",
 				  "input": {
-					"$ref": "bag.pizza.tempo"
-				  }
-				}
-			},
-			{
-				"id": "ULTRAPASSOU O TEMPO ESPERADO?",
-				"name": "any string",
-				"next": {
-					"default": "FINISH - entregue no prazo",
-					"true": "FINISH - entregue no prazo",
-					"false": "CUPOM DE DESCONTO/REGISTRA O ATRASO"
-					  },
-				"type": "flow",
-				"lane_id": "pizzaria",
-				"parameters": {
-				  "input": {
-					"key": {
-						"$ref": "bag.pizza.tempo"
-					  }
-					  }
-					}
-			},
-			{
-				"id": "FINISH - entregue no prazo",
-				"type": "Finish",
-				"name": "Finish - Sucesso na entrega. Sucesso no prazo.",
-				"lane_id": "pizzaria",
-				"next": null
-			},
-			{
-				"id": "CUPOM DE DESCONTO/REGISTRA O ATRASO",
-				"name": "Desconto por entregar fora do prazo",
-				"next": "FINISH - entregue fora do prazo",
-				"lane_id": "pizzaria",
-				"type": "SystemTask",
-				"category": "setToBag",
-				"parameters": {
-				  "input": {
-					"$ref": "bag.pizza.cupom"
-				  }
-				}		  
-			},
-			{
-				"id": "FINISH - entregue fora do prazo",
-				"type": "Finish",
-				"name": "Finish - Sucesso na entrega. Falha no prazo. Cupom.",
-				"lane_id": "pizzaria",
-				"next": null
+					"pizza": { "$ref": "bag.pedido.pizza"}
+			 }
 			}
+		},
+		{
+			"id": "VERIFICA O TEMPO DE ENTREGA",
+			"name": "Sistema verifica se o tempo de entrega foi menor que o limite",
+			"next": "ULTRAPASSOU O TEMPO ESPERADO?",
+			"lane_id": "pizzaria",
+			"type": "SystemTask",
+			"category": "setToBag",
+			"parameters": {
+			  "input": {
+				"chegada": { "$ref": "bag.entrega.chegada"},
+				"temporeal": { "$ref": "bag.entrega.prazoreal"},
+				"resultado": { "$ref": "bag.entrega.resultado"}
+			  }
+			}
+		},
+		{
+			"id":"ULTRAPASSOU O TEMPO ESPERADO?",
+			"type":"Flow",
+			"name":"Entrega foi feita dentro do limite de tempo?",
+			"lane_id":"pizzaria",
+			"next":{
+			   "default":"FINISH - entregue no prazo",
+			   "true":"FINISH - entregue no prazo",
+			   "false":"CUPOM DE DESCONTO"
+			},
+			"parameters":{
+			   "input":{
+				"resultado": { "$ref": "bag.entrega.resultado"}
+			   }
+			}
+		 },
+		 {
+			"id": "FINISH - entregue no prazo",
+			"name": "FINISH - Entrega Perfeita",
+			"type": "Finish",
+			"lane_id": "pizzaria",
+			"next": null
+		},
+		{
+			"id": "CUPOM DE DESCONTO",
+			"name": "Gerar um cupom de desconto pelo atraso",
+			"next": "COMUNICA AO CLIENTE - CUPOM",
+			"lane_id": "pizzaria",
+			"type": "SystemTask",
+			"category": "setToBag",
+			"parameters": {
+			  "input": {
+				"cupom": { "$ref": "bag.pizzaria.cupom"}
+			  }
+			}
+		},
+		{
+			"id": "COMUNICA AO CLIENTE - CUPOM",
+			"name": "Avisa o cliente que ganhou um cupom",
+			"type": "systemTask",
+			"category": "http",
+			"lane_id": "pizzaria",
+			"next": "FINISH - entregue fora do prazo",
+			"parameters": {
+				"input": {
+					"user": { "$ref": "bag.user"},
+					"cupom": { "$ref": "bag.pizzaria.cupom"}
+				},
+				"request": {
+					"url": "cupom",
+					"verb": "POST",
+					"headers": {
+						"ContentType": "application/json"
+					}
+				}
+			}
+		},
+		{
+			"id": "FINISH - entregue fora do prazo",
+			"name": "FINISH - Entrega fora do prazo",
+			"type": "Finish",
+			"lane_id": "pizzaria",
+			"next": null
+		}
 		]
 	}
 }
