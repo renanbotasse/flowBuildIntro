@@ -9,12 +9,12 @@
 			{
 				"id": "user",
 				"name": "usuarios",
-				"rule": []
+				"rule": ["fn", ["&", "args"], true]
 			},
 			{
 				"id": "pizzaria",
 				"name": "pizzaria",
-				"rule": []	
+				"rule": ["fn", ["&", "args"], true]
 			}
 		],
 		"nodes": [
@@ -22,11 +22,23 @@
 				"id": "START",
 				"name": "START rb-pizzaria",
 				"next": "ABRIR APP DA PIZZARIA",
-				"type": "start",
+				"type": "Start",
 				"lane_id": "user",
 				"parameters": {
 					"input_schema": {}
 				}
+			},
+			{
+				"id": "ABRIR APP DA PIZZARIA",
+				"name": "Abrir o aplicativo da pizzaria",
+				"next": "ESCOLHER PIZZA",
+				"lane_id": "user",
+				"type": "UserTask",
+				"parameters": {
+				  "action": "ABRIR_APP",
+				  "input": {
+				}
+			 }
 			},
 			{
 				"id": "ESCOLHER PIZZA",
@@ -105,7 +117,7 @@
 			 {
 				"id": "COMENTAR",
 				"name": "Fazer comentário",
-				"next": "DEFINIR LOCAL DE ENTREGA E CONTATO?",
+				"next": "DEFINIR LOCAL DE ENTREGA E CONTATO",
 				"lane_id": "user",
 				"type": "UserTask",
 				"parameters": {
