@@ -25,8 +25,7 @@
 				"type": "start",
 				"lane_id": "user",
 				"parameters": {
-						"input_schema": {},
-						"timeout": 100
+						"input_schema": {}
 						}
 			},
 			{
@@ -55,20 +54,16 @@
 			},
 			{
 				"id": "GUARDAR O PEDIDO",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "one_lane_id",
+				"name": "Guardar o pedido",
+				"next": "QUER ALTERAR INGREDIENTES?",
+				"lane_id": "user",
 				"type": "SystemTask",
-				"category": "http",
-				"parameters":  {
-				  "input": {},
-				  "request": {
-					"url": "url",
-					"verb": "GET,POST,PUT,PATCH,DELETE",
-					"headers": {}
+				"category": "setToBag",
+				"parameters": {
+				  "input": {
+					"$ref": "bag.pizza"
 				  }
-					},
-					"result_schema": {}
+				}
 			},
 			{
 				"id": "QUER ALTERAR INGREDIENTES?",
@@ -89,7 +84,7 @@
 				}
 			},
 			{
-				"id": "EDITAR INGREDIENTES",
+				"id": "EDITAR INGREDIENTES?",
 				"name": "Editar ingredientes?",
 				"next": "QUER COMENTAR?",
 				"lane_id": "user",
@@ -217,20 +212,21 @@
 			},
 			{
 				"id": "ENVIAR O PEDIDO PARA PIZZARIA",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "one_lane_id",
-				"type": "SystemTask",
-				"category": "http",
-				"parameters":  {
-				  "input": {},
-				  "request": {
-					"url": "url",
-					"verb": "GET,POST,PUT,PATCH,DELETE",
-					"headers": {}
-				  }
-					},
-					"result_schema": {}
+				"name": "Enviar pedido",
+				"next": {
+					"default": "TEMPO MÉDIO PARA ENTREGA",
+					"true": "TEMPO MÉDIO PARA ENTREGA",
+					"false": "CHECK STATUS"
+					  },
+				"type": "flow",
+				"lane_id": "user",
+				"parameters": {
+				  "input": {
+					"key": {
+						"$ref": "bag.pizza.status"
+					  }
+					  }
+					}
 			},
 			{
 				"id": "CHECK STATUS",
@@ -300,20 +296,16 @@
 			},
 			{
 				"id": "REEMBOLSO - cliente cancelou",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "one_lane_id",
+				"name": "Reembolsar (cliente pediu cancelamento)",
+				"next": "FINISH - Cliente cancelou com reembolso",
+				"lane_id": "pizzaria",
 				"type": "SystemTask",
-				"category": "http",
-				"parameters":  {
-				  "input": {},
-				  "request": {
-					"url": "url",
-					"verb": "GET,POST,PUT,PATCH,DELETE",
-					"headers": {}
+				"category": "setToBag",
+				"parameters": { 
+				  "input": {
+					"$ref": "bag.pizza.pagamento"
 				  }
-					},
-					"result_schema": {}
+				}
 			},			
 			{
 				"id": "FINISH - Cliente cancelou com reembolso",
@@ -331,20 +323,16 @@
 			},
 			{
 				"id": "NÃO É POSSÍVEL CANCELAR",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "one_lane_id",
+				"name": "Impossível cancelar - já foi aceito",
+				"next": "ENTREGADOR CHEGOU?",
+				"lane_id": "pizzaria",
 				"type": "SystemTask",
-				"category": "http",
-				"parameters":  {
-				  "input": {},
-				  "request": {
-					"url": "url",
-					"verb": "GET,POST,PUT,PATCH,DELETE",
-					"headers": {}
+				"category": "setToBag",
+				"parameters": {
+				  "input": {
+					"$ref": "bag.pizza.status"
 				  }
-					},
-					"result_schema": {}
+				}
 			},
 			{
 				"id": "ENTREGADOR CHEGOU?",
@@ -378,37 +366,29 @@
 			},
 			{
 				"id": "TEMPO MÉDIO PARA ENTREGA",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "one_lane_id",
+				"name": "Tempo médio para entrega do pedido",
+				"next": "RESTAURANTE RECEBE O PEDIDO",
+				"lane_id": "pizzaria",
 				"type": "SystemTask",
-				"category": "http",
-				"parameters":  {
-				  "input": {},
-				  "request": {
-					"url": "url",
-					"verb": "GET,POST,PUT,PATCH,DELETE",
-					"headers": {}
+				"category": "setToBag",
+				"parameters": {
+				  "input": {
+					"$ref": "bag.pizza.tempo"
 				  }
-					},
-					"result_schema": {}
+				}
 			},
 			{
 				"id": "RESTAURANTE RECEBE O PEDIDO",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "one_lane_id",
+				"name": "Entrega do Pedido a Pizzaria",
+				"next": "ACEITAR O PEDIDO?",
+				"lane_id": "pizzaria",
 				"type": "SystemTask",
-				"category": "http",
-				"parameters":  {
-				  "input": {},
-				  "request": {
-					"url": "url",
-					"verb": "GET,POST,PUT,PATCH,DELETE",
-					"headers": {}
+				"category": "setToBag",
+				"parameters": {
+				  "input": {
+					"$ref": "bag.pizza"
 				  }
-					},
-					"result_schema": {}
+				}
 			},
 			{
 				"id": "ACEITAR O PEDIDO?",
@@ -429,7 +409,7 @@
 					}
 			},
 			{
-				"id": "JÁ. FOI PAGO? - pizzaria",
+				"id": "JÁ FOI PAGO? - pizzaria",
 				"name": "Pizzaria Cancelou. Pizza já estava paga?",
 				"next": {
 					"default": "FINISH - pizzaria cancela sem reembolso",
@@ -448,20 +428,16 @@
 			},
 			{
 				"id": "REEMBOLSO - pizzaria não fez a pizza",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "one_lane_id",
+				"name": "Reembolsar (pizzaria pediu cancelamento)",
+				"next": "FINISH - pizzaria cancela com reembolso",
+				"lane_id": "pizzaria",
 				"type": "SystemTask",
-				"category": "http",
-				"parameters":  {
-				  "input": {},
-				  "request": {
-					"url": "url",
-					"verb": "GET,POST,PUT,PATCH,DELETE",
-					"headers": {}
+				"category": "setToBag",
+				"parameters": {
+				  "input": {
+					"$ref": "bag.pizza.pagamento"
 				  }
-					},
-					"result_schema": {}
+				}
 			},
 			{
 				"id": "FINISH - pizzaria cancela com reembolso",
@@ -492,20 +468,16 @@
 			},
 			{
 				"id": "MONITORAMENTO DA PIZZARIA",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "one_lane_id",
+				"name": "Status da Pizzaria",
+				"next": "IMPOSSÍVEL FINALIZAR PREPRAÇÃO?",
+				"lane_id": "pizzaria",
 				"type": "SystemTask",
-				"category": "http",
-				"parameters":  {
-				  "input": {},
-				  "request": {
-					"url": "url",
-					"verb": "GET,POST,PUT,PATCH,DELETE",
-					"headers": {}
+				"category": "setToBag",
+				"parameters": {
+				  "input": {
+					"$ref": "bag.pizzaria.monitoramento"
 				  }
-					},
-					"result_schema": {}
+				}
 			},
 			{
 				"id": "IMPOSSÍVEL FINALIZAR PREPRAÇÃO?",
@@ -513,7 +485,7 @@
 				"next": {
 					"default": "FINALIZAR PREPARAÇÃO",
 					"true": "FINALIZAR PREPARAÇÃO",
-					"false": "JÁ. FOI PAGO? - pizzaria"
+					"false": "JÁ FOI PAGO? - pizzaria"
 						  },
 				"type": "flow",
 				"lane_id": "pizzaria",
@@ -540,52 +512,54 @@
 			},
 			{
 				"id": "LIBERAR PARA ENTRAGA",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "any_lane_id",
+				"name": "libera o pedido para o setor de entrega",
+				"next": "ORGANIZA PARA ENTREGA (OTIMIZADOR DE ROTAS)",
+				"lane_id": "pizzaria",
 				"type": "UserTask",
 				"parameters": {
-					"action": "ANY_STRING_HERE",
-					"input": {}
+					"action": "libera_pizza",
+					"input": {
+						"pedido_pizza": {"$ref": "bag.pizza"}					
+					}
 					}
 			},
 			{
 				"id": "ORGANIZA PARA ENTREGA (OTIMIZADOR DE ROTAS)",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "one_lane_id",
+				"name": "Organizar rota",
+				"next": "ENTREGADOR RECOLHE PIZZA",
+				"lane_id": "pizzaria",
 				"type": "SystemTask",
-				"category": "http",
-				"parameters":  {
-				  "input": {},
-				  "request": {
-					"url": "url",
-					"verb": "GET,POST,PUT,PATCH,DELETE",
-					"headers": {}
+				"category": "setToBag",
+				"parameters": {
+				  "input": {
+					"$ref": "bag.pizza.entrega"
 				  }
-					},
-					"result_schema": {}
+				}
 			},
 			{
 				"id": "ENTREGADOR RECOLHE PIZZA",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "any_lane_id",
+				"name": "Entregador recebe a pizza",
+				"next": "ENTREGADOR CHEGA AO LOCAL DA ENTREGA",
+				"lane_id": "pizzaria",
 				"type": "UserTask",
 				"parameters": {
-					"action": "ANY_STRING_HERE",
-					"input": {}
+					"action": "entregador_recolhe",
+					"input": {
+						"pedido_pizza": {"$ref": "bag.pizza"}					
+					}
 					}
 			},
 			{
 				"id": "ENTREGADOR CHEGA AO LOCAL DA ENTREGA",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "any_lane_id",
+				"name": "Entregador chega ao cliente",
+				"next": "PEDIDO ESTÁ CORRETO?",
+				"lane_id": "pizzaria",
 				"type": "UserTask",
 				"parameters": {
-					"action": "ANY_STRING_HERE",
-					"input": {}
+					"action": "entregador_chega",
+					"input": {
+						"pedido_pizza": {"$ref": "bag.pizza"}					
+					}
 					}
 			},
 			{
@@ -626,20 +600,16 @@
 			},
 			{
 				"id": "REEMBOLSO - erro da pizzaria",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "one_lane_id",
+				"name": "Rembolso - erro da pizzaria",
+				"next": "FINISH - entregador reembolsa",
+				"lane_id": "pizzaria",
 				"type": "SystemTask",
-				"category": "http",
-				"parameters":  {
-				  "input": {},
-				  "request": {
-					"url": "url",
-					"verb": "GET,POST,PUT,PATCH,DELETE",
-					"headers": {}
+				"category": "setToBag",
+				"parameters": {
+				  "input": {
+					"$ref": "bag.pizza.pagamento"
 				  }
-					},
-					"result_schema": {}
+				}
 			},
 			{
 				"id": "FINISH - entregador reembolsa",
@@ -701,20 +671,16 @@
 			},
 			{
 				"id": "VERIFICA O TEMPO DE ENTREGA",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "one_lane_id",
+				"name": "Verificar o tempo de entrega feito e esperado",
+				"next": "ULTRAPASSOU O TEMPO ESPERADO?",
+				"lane_id": "pizzaria",
 				"type": "SystemTask",
-				"category": "http",
-				"parameters":  {
-				  "input": {},
-				  "request": {
-					"url": "url",
-					"verb": "GET,POST,PUT,PATCH,DELETE",
-					"headers": {}
+				"category": "setToBag",
+				"parameters": {
+				  "input": {
+					"$ref": "bag.pizza.tempo"
 				  }
-					},
-					"result_schema": {}
+				}
 			},
 			{
 				"id": "ULTRAPASSOU O TEMPO ESPERADO?",
@@ -743,20 +709,16 @@
 			},
 			{
 				"id": "CUPOM DE DESCONTO/REGISTRA O ATRASO",
-				"name": "any string",
-				"next": "other_node_id",
-				"lane_id": "one_lane_id",
+				"name": "Desconto por entregar fora do prazo",
+				"next": "FINISH - entregue fora do prazo",
+				"lane_id": "pizzaria",
 				"type": "SystemTask",
-				"category": "http",
-				"parameters":  {
-				  "input": {},
-				  "request": {
-					"url": "url",
-					"verb": "GET,POST,PUT,PATCH,DELETE",
-					"headers": {}
+				"category": "setToBag",
+				"parameters": {
+				  "input": {
+					"$ref": "bag.pizza.cupom"
 				  }
-					},
-					"result_schema": {}			  
+				}		  
 			},
 			{
 				"id": "FINISH - entregue fora do prazo",
