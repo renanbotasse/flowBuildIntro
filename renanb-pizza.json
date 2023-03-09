@@ -275,8 +275,8 @@
 				"name":"Pizzaria vai aceitar o pedido?",
 				"lane_id":"pizzaria",
 				"next":{
-				   "default":"FAZER A PIZZA",
-				   "true":"FAZER A PIZZA",
+				   "default":"MONITORAMENTO DA PIZZARIA",
+				   "true":"MONITORAMENTO DA PIZZARIA",
 				   "false":"REEMBOLSO - pizzaria cancelou"
 				},
 				"parameters":{
@@ -288,11 +288,11 @@
 			 {
 				"id": "FAZER A PIZZA",
 				"name": "PIZZARIA FAZ A PIZZA",
-				"next": "MONITORAMENTO DA PIZZARIA",
+				"next": "CONSEGUE FINALIZAR PIZZA?",
 				"lane_id": "pizzaria",
 				"type": "UserTask",
 				"parameters": {
-				  "action": "PAGAR",
+				  "action": "FAZER",
 				  "input": {
 					"pedido": { "$ref": "bag.pedido" }
 						}
@@ -301,7 +301,7 @@
 			{
 				"id": "MONITORAMENTO DA PIZZARIA",
 				"name": "Verifica se tem algum problema, falta de luz, ingrediente, entregador",
-				"next": "CONSEGUE FINALIZAR PIZZA?",
+				"next": "FAZER A PIZZA?",
 				"lane_id": "pizzaria",
 				"type": "SystemTask",
 				"category": "setToBag",
