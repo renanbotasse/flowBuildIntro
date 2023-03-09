@@ -232,7 +232,8 @@ Uma userTask pode receber até 6 parâmetros:
 O systemTaskNode espera um atributo adicional que descreve a categoria da tarefa a ser realizada, entre elas:
 
 * HTTP
-````{
+```
+{
   "id": "any_string (system friendly recommended)",
   "name": "any string",
   "next": "other_node_id",
