@@ -130,14 +130,14 @@ O que é necessário para a existência dos nodes:
 
 ```
 {
-    "id":"0",
-    "name":"Start Hello",
-    "lane_id":"1",
-    "next":"1",
-    "type":"Start",
+    "id": "string",
+    "name": "string",
+    "next": "string",
+    "type": "start",
+    "lane_id": "string",
     "parameters": {
         "input_schema": {},
-        "timeout": 10
+        "timeout": 100
     }
 }
 ```
@@ -152,16 +152,11 @@ Caso o processo seja evocado como um subProcesso, os result do finishNode será 
 
 ```
 {
-    "id": "12",
-    "type": "Finish",
-    "name": "Término Hello",
-    "lane_id": "1",
-    "next": null,
-    "parameters": {
-        "input": {
-            "field": { "$ref": "bag.someField" }
-        }
-    }
+  "id": "any_string (system friendly recommended)",
+  "name": "any string",
+  "type": "Finish",
+  "lane_id": "any_lane_id",
+  "next": null
 }
 ```
 
@@ -181,22 +176,19 @@ Este objeto deve ser um conjunto de atributos que serão avaliados contra o valo
 
 ```
 {
-   "id":"9",
-   "type":"Flow",
-   "name":"Is User Registered?",
-   "lane_id":"1",
-   "next":{
-      "default":"10",
-      "201":"11",
-      "206":"11"
-   },
-   "parameters":{
-      "input":{
-         "decision":{
-            "$ref":"bag.registerUserResponse.status"
-         }
-      }
-   }
+  "id": "any_string ",
+  "name": "any string",
+  "next": {
+    "string": "other_node_id",
+    "default": "other_node_id"
+  },
+  "type": "flow",
+  "lane_id": "any_lane_id",
+  "parameters": {
+    "input": {
+      "key": "string"
+    }
+  }
 }
 ```
 
@@ -224,29 +216,19 @@ Uma userTask pode receber até 6 parâmetros:
 
 ```
 {
-   "id":"2",
-   "name":"Fill application form",
-   "lane_id":"1",
-   "next":"3",
-   "type":"UserTask",
-   "parameters":{
-      "input":{
-         "cities":{ "$ref":"bag.cities" },
-         "reasons":{ "$ref":"bag.reasons" }
-      },
-      "action":"FILL_FORM_SELECTS",
-      "activity_manager": "commit",
-      "timeout": 600,
-      "activity_schema": {
-          "type": "object",
-          "properties": {
-              "nome": { "type": "string" },
-              "dataNascimento": { "type" "string", "format": "date" },
-              "city": { "type": "string" },
-              "reason": { "type": "string" }
-          }
-      }
-   }
+  "id": "any_string (system friendly recommended)",
+  "name": "any string",
+  "next": "other_node_id",
+  "lane_id": "any_lane_id",
+  "type": "UserTask",
+  "parameters": {
+    "action": "ANY_STRING_HERE",
+    "input": {},
+    "activity_manager": "commit or notify",
+    "activity_schema": {"$ref": "activity_schema"},
+    "timeout": 60
+  },
+  "result_schema": {}
 }
 ```
 
@@ -254,8 +236,39 @@ Uma userTask pode receber até 6 parâmetros:
 O systemTaskNode espera um atributo adicional que descreve a categoria da tarefa a ser realizada, entre elas:
 
 * HTTP
+````{
+  "id": "any_string (system friendly recommended)",
+  "name": "any string",
+  "next": "other_node_id",
+  "lane_id": "one_lane_id",
+  "type": "SystemTask",
+  "category": "http",
+  "parameters":  {
+    "input": {},
+    "request": {
+      "url": "url",
+      "verb": "GET,POST,PUT,PATCH,DELETE",
+      "headers": {}
+    }
+  },
+  "result_schema": {}
+}
+```
+
 * SetToBag
-* Timer
+```
+{
+  "id": "any_string (system friendly recommended)",
+  "name": "any string",
+  "next": "other_node_id",
+  "lane_id": "one_lane_id",
+  "type": "SystemTask",
+  "category": "setToBag",
+  "parameters": {
+    "input": {}
+  }
+}
+```
 
 ### subprocessNode
 Este nó pode receber 4 parâmetros:
@@ -270,19 +283,17 @@ Este nó pode receber 4 parâmetros:
 
 ```
 {
-    "id": "3-X",
-    "name": "Calcular orçamento",
-    "type": "SubProcess",
-    "next": "3-XB",
-    "lane_id": "vendedor",
-    "parameters": {
-        "workflow_name": "calcularOrcamento",
-        "actor_data": { "$ref": "actor_data" },
-        "valid_response": "finished",
-        "input": {
-            "orcamento_id": { "$ref": "bag.orcamento_id" },
-        },
-    },
+  "id": "any_string (system friendly recommended)",
+  "name": "any string",
+  "type": "SubProcess",
+  "lane_id": "any_lane_id",
+  "next": "other_node_id"
+  "parameters":{
+     "workflow_name": "string",
+     "actor_data": {"$ref": "actor_data"},
+     "valid_response":{},
+     "input":{}
+  }
 }
 ```
 
