@@ -2,7 +2,7 @@
 
 1. [BASE](#base)
 2. [SOLUÇÃO](#solucao) 
- 	- 2.1. [Permitir edição e comentário pelo Cliente](#edicao) 
+ 	- 2.1. [Permitir edição e comentário no pedido pelo Cliente](#edicao) 
 	- 2.2. [Permitir cancelamento pela Pizzaria](#cancelamento) 
  	- 2.3. [Evitar erros pela Pizzaria](#erros) 
  	- 2.4. [Evitar impressão negativa - Cupom de desconto](#cupom)  
@@ -19,34 +19,52 @@
 
 ## 1. BASE <a name="base"></a>
 
-O Desafio consiste em propor um processo de entrega de pedido de pizza a ser implementado por uma empresa de delivery de pizza. Sendo entregue o diagrama abaixo para ser melhorado.
+O Desafio consiste em fazer um processo de entrega de pedido de pizza a ser implementado por uma empresa de delivery de pizza. Foi fornecido pela fundação o diagrama abaixo para ser melhorado.
 
-<img width="100%" alt="Screenshot 2023-03-09 at 12 16 47" src="https://user-images.githubusercontent.com/101360239/224020626-eb0871f5-a338-4eb8-b44c-5150f8e02697.png">
+<img width="100%" alt="Diagrama da Fundação" src="https://user-images.githubusercontent.com/101360239/224020626-eb0871f5-a338-4eb8-b44c-5150f8e02697.png">
+
+Não foi fornecido a blueprint desse diagrama, porém na documentação indicada para estudo haviam alguns exemplos, além dos próprios schema dos nós.
 
 ## 2. SOLUÇÃO <a name="solucao"></a>
 
-A minha solução para o Desafio é a seguinte:
+O Diagrama da minha solução do Desafio é o seguinte:
 
 ![renanb (6)](https://user-images.githubusercontent.com/101360239/224022944-102ba1fa-7e37-4156-afad-09aac2a2d527.png)
 
-### 2.1. Permitir edição e comentário pelo Cliente <a name="edicao"></a>
+Para chegar a essa solução, estudei alguns aplicativos como: [iFood](https://www.ifood.com.br/?toHome=true), [PlusDelivery](https://www.plusdelivery.com.br/), [telepizza](https://www.telepizza.pt/) e [Domino's](https://www.dominospizza.pt/). E também dei ênfase na minha experiência como usuário e discussões que já tive com amigos sobre o que os aplicativos deveriam aprimorar. 
+
+Os principais pontos que quis implementar no projeto base estão em azul, podendo serem listados na seguinte ordem: Permitir edição e comentário pelo Cliente, Permitir cancelamento pela Pizzaria, Evitar erros pela Pizzaria, Evitar impressão negativa - Cupom de desconto e Evitar prejuízo (Cliente não encontrado). 
+
+A seguir temos uma explicação detalhada da implementação de cada um desses aspectos.
+
+### 2.1. Permitir edição e comentário no pedido pelo Cliente <a name="edicao"></a>
+
+Permitir que o cliente edite o pedido, alterando os ingredientes e fazendo comentários. 
+
+É muito comum pessoas gostarem de determinado pizza mas não gostarem de um item em específico, ou terem alergia a ele, um exemplo seria uma pizza dentre seus inúmeros ingredientes, contenha pimentão e o usuário não gosta. Ele pode pedir para retirar o ingrediente e conseguimos garantir uma compra a mais. 
+
+Outro ponto é o comentário, durante a pandemia, muitas pessoas faziam uma compra por aplicativos de delivery e nos comentários diziam que o pedido deveria ser dado ao entregador, ou transformado em gorjeta para ele. Permitir que o cliente faça um comentário deixa mais fácil a personalização do pedido, sem causar maiores transtornos, por exemplo, o cliente pode informar que ele gosta muito de um ingrediente específico da pizza e pede para a pizzaria "caprichar" se puder. 
+
+Possibilitar o comentário, junto com a edição de ingredientes, torna o pedido personalizavel, o que torna mais próximo com a realidade, já que é comum esse tipo de ferramenta.
 
 <div align="center">
 	
-<img width="450" height="300" align="center" alt="Screenshot 2023-03-09 at 12 26 03" src="https://user-images.githubusercontent.com/101360239/224022618-a40cd5b2-3d7b-4239-bbbc-75291766a725.png">
+<img width="450" height="300" align="center" alt="edição e comentário no pedido" src="https://user-images.githubusercontent.com/101360239/224022618-a40cd5b2-3d7b-4239-bbbc-75291766a725.png">
 
 </div>
 
 	
 ### 2.2. Permitir cancelamento pela Pizzaria <a name="cancelamento"></a>
 
+Possibilitar que a Pizzaria cancele o pedido ajuda a não "quebrar" o processo. Se o cliente mora muito longe e faz o pedido? Se o cliente faz o pedido mas a cozinha da pizzaria já fechou? Existem várias situações que a pizzaria pode não querer atender determinado pedido. 
 
-+ reembolso
-+ aviso ao cliente
+Ou se a pizzaria tiver algum problema durante a confecção da pizza, tornando impossível sua conclusão, deve ser possível cancelar o pedido.
+
+O cancelamento do pedido pela pizzaria leva a duas situações, fazer o reembolso do que foi pago pelo usuário e avisar ao usuário desse reembolso/cancelamento.
 
 <div align="center">
 
-<img width="219" alt="Screenshot 2023-03-09 at 12 27 35" src="https://user-images.githubusercontent.com/101360239/224023061-78cca8d6-786f-4b13-afcd-f806bed5dcfd.png">
+<img width="626" alt="cancelamento pela Pizzaria" src="https://user-images.githubusercontent.com/101360239/224136316-58e5132b-6e05-46db-8513-a583da790ad9.png">
 
 </div>	
 	
