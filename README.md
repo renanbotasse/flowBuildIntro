@@ -304,19 +304,19 @@ Para o desafio ele não é tão interessante pois precisa de um conhecimento um 
 
 1. [BASE](#base)
 2. [SOLUÇÃO](#solucao) 
- - 2.1 [Permitir edição e comentário pelo Cliente](#edicao) 
+ 	- 2.1 [Permitir edição e comentário pelo Cliente](#edicao) 
 	- 2.2 [Permitir cancelamento pela Pizzaria](#cancelamento) 
- - 2.3 [Evitar errors pela Pizzaria](#erros) 
-	- 2.4 [Evitar impressão negativa - Cupom de desconto](#cupom)  
- - 2.5 [Evitar prejuízo (Cliente não encontrado)](#prejuizo) 
+ 	- 2.3 [Evitar errors pela Pizzaria](#erros) 
+ 	- 2.4 [Evitar impressão negativa - Cupom de desconto](#cupom)  
+ 	- 2.5 [Evitar prejuízo (Cliente não encontrado)](#prejuizo) 
 3. [IDEIAS NÃO APLICADAS E DIFICULDADES](#dificuldades)
 	- 3.1. [Cliente ter atualização do status do pedido](#status) 
 	- 3.2. [Cancelamento pelo Cliente](#cancelamentoc) 
 	- 3.3. [Otimizador de Entrega (SubProcesso)](#otimizador)  
- - 3.4. [Retirada do Elogio/Reclamação](#elogio_reclamação)
+	- 3.4. [Retirada do Elogio/Reclamação](#elogio_reclamação)
 	- 3.5. [Conectar Diagrama com JSON](#json) 
- - 3.6. [Inputs e SystemNode (HTTPS)](#https) 
- - 3.7. [Envitar confusão no processo](#confusao) 
+	- 3.6. [Inputs e SystemNode (HTTPS)](#https) 
+	- 3.7. [Envitar confusão no processo](#confusao) 
 4. [CONCLUSÃO](#conclusao)
 
 ## 1. BASE <a name="base"></a>
@@ -381,7 +381,7 @@ A minha solução para o Desafio é a seguinte:
 + 
 <img width="670" alt="Screenshot 2023-03-09 at 12 31 22" src="https://user-images.githubusercontent.com/101360239/224023868-09308dd0-7a01-4182-afae-56b1d66f7b1c.png">
 
-### 3. IDEIAS NÃO APLICADAS E DIFICULDADES <a name="dificuldade"></a>
+### 3. IDEIAS NÃO APLICADAS E DIFICULDADES <a name="dificuldades"></a>
 
 3.1. Cliente ter atualização do status do pedido<a name="status"></a>
  
