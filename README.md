@@ -311,10 +311,12 @@ Para o desafio ele não é tão interessante pois precisa de um conhecimento um 
 2.1.1. PERMITIR EDIÇÃO E COMENTÁRIO PELO CLIENTE
 
 2.1.2. PERMITIR CANCELAMENTO PELA PIZZARIA 
+
 + reembolso
 + aviso ao cliente
 
 2.1.3. EVITAR ERROS PELA PIZZARIA
+
 + Cliente revisa
 + Recebe pedido com tempo real e dilatado
 + Pode não aceitar
@@ -325,6 +327,7 @@ Para o desafio ele não é tão interessante pois precisa de um conhecimento um 
 + Atraso gera desconto futuro
 
 2.1.4. EVITAR IMPRESSÃO NEGATIVA COM CUPOM DE DESCONTO
+
 + Tempo dilatado
 + Tempo Real
 + Horário de Chegada (entrega)
@@ -334,6 +337,7 @@ Para o desafio ele não é tão interessante pois precisa de um conhecimento um 
 + Antes de pagar pode usar cupom
 
 2.1.5 EVITAR PREJUÍZO (CLIENTE NÃO ENCONTRADO)
+
 + Pedido feito após o pagamento
 + Comprovante de pagamento
 + Cliente dá dados e revisa
@@ -344,16 +348,21 @@ Para o desafio ele não é tão interessante pois precisa de um conhecimento um 
 ### 2.2 IDEIAS NÃO APLICADAS E DIFICULDADES
 
 2.2.1. CLIENTE TER ATUALIZAÇÃO DO STATUS DO PEDIDO
+
 Loop
+
 Paralelismo/Serialismo
 
 2.2.2. CANCELAMENTO PELO CLIENTE
+
 Paralelismo/Serialismo
 
 2.2.3. OTIMIZAÇÃO DE ROTAS DE ENTREGA (SUBPROCESSO)
+
 Mais que um pedido, inúmeros nós ao final. Ficaria complexo demais para o que foi proposto.
 
 2.2.4. RETIREI - ELOGIO/RECLAMAÇÃO
+
 Substitui pelo Cupom - Acho mais efetivo
 
 2.2.5. CONECTAR DIAGRAMA E JSON
@@ -366,8 +375,3 @@ Substitui pelo Cupom - Acho mais efetivo
 Diagramas e Nós são boas formas de organizar
 Lanes e permissões dão segurança
 Gateways dão opções e evita problemas já que é serialismo.
-
-
-### RETIREI
-
-## FIM FETAURES QUE PODERIAM TER (NÃO IMPLEMENTEI PQ IRIA FICAR GRANDE DEMAIS E NÃO SERIA TÃO ÚTIL QUANTO AS OTURAS QUE JÁ ADICIONEI)
