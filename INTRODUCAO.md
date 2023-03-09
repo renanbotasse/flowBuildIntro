@@ -1,159 +1,297 @@
-# FlowBuild
+# PROCESSO SELETIVO FDTE
 
-Introdução a utilização do [FlowBuild](https://flow-build.github.io)
+## INTRODUÇÃO
 
-TAREFA - TRAINEE 
-VERTICAL DE WORKFLOW (TREINAMENTO EM UMA DAS ÁREAS DE ATUAÇÃO DA FUNDAÇÃO - DESENVOLVIMENTO DE SOFTWARE ATRAVÉS DE PROCESSOS)
--> FLOWBUILD
+O processo seletivo da Fundação para o Desenvolvimento Tecnológico da Engenharia (FDTE) para a vaga Treainee (na vertical de workflow) é composto por um desafio a ser realizado no em 7 (sete) dias, devendo ser entregue: Diagrama, BluePrint e Apresentação.
 
-BPMN (DEFINIÇÕES E ELEMENTOS)
+O desafio será avaliado pelo time que trabalha diretamente com o workflow.
 
-CLIENTE - UMA SOLUÇÃO ESPECÍFICA - IDEIA DE FAZER 
+## DESAFIO
 
-> IR E DESONVOLVER UMA SOLUÇÃO PARA O CLIENTE <
+O Desafio consiste em propor um processo de entrega de pedido de pizza a ser implementado por uma empresa de delivery de pizza.
 
-CONSTRUIR UMA BIBLIOTECA E CRIAR UMA SOLUÇÃO ATRAVÉS DESSA BIBLIOTECA
+Como é um processo de pedido de pizza, não é necessário literalmente projetar o aplicativo e sim fazer o diagrama e a bluprient.
 
-ESSA BIBLIOTECA É OS > FLOWBUILD (UM EXECUTOR DE BPMN)
+O blueprint é basicamente um arquivo JSON que respeita a formatação do flowBuild.
 
-CRIOU UMA FORMA DE TRABALHO DIFERENTE ATRAVÉS DO FLOWBUILD "UM FRAMEWORK NÃO FUNCIONAL". 
+O blueprint deve ser executável dentro do servidor disponibilizado pela Fundação, até mesmo para facilitar a compreensão dos avaliadores do que foi produzido.
 
+A explicação não deve se limitar a explicar o fluxo e o código, deve incluir as ponderações sobre o que mais gostou, menos gostou, quais foram as decisões que precisou tomar e porque tomou essas decisões, quais foram as soluções adotadas e sua motivação.
 
-FLOWBUILD É UM EXECUTOR DE BPMN
+## MATÉRIA BASE
 
-Processo é uma sequencia de atividades em uma organização com o objetivo de realizar um trabalho
+A Fundação disponibiliza um bom material base para a realização do projeto.
 
-no ambiente web processos pode ser defenido como a orquestração de serviços
+- 1 - Canal no Slack para tirar dúvidas;
 
-processo é o a ordem definida de tareffas realizads em um espaço de tempo com começo, fim, entradas e saidas bem definidas
+- 2 - Servidor próprio para testar o projeto;
 
+- 3 - Indicação de ferramenta para criar o [Diagrama](www.cawemo.com);
 
-#microserviços - orquestração de serviços
-#Alguem para orquestrar, organizar os serviços -> precisa criar um processo -> pq não desenvolver totalmente em baseado em sistema de orquestração (flowbuild)
+- 4 - Documentação do [FlowBuild](https://flow-build.github.io/) com vários detalhes sobre formatação e exemplos;
 
-BPMN (BUSINESS PROCESS MODEL AND NOTATION)
-Uma forma de escrever processos (uma anotação para descrever processos)
-[bolinhas quadradinhos losangolos]
-portras tinha um XML que descrevia essas bolinhas quadrados e losangolos
+- 5 - Projeto Base a ser melhorado:
+![image](https://user-images.githubusercontent.com/101360239/223406220-017fd98d-35f3-4448-a9bd-de3cb0b3fbff.png)
 
-A ideia seria pegar algo que traduz o XML pela máquina
+- 6 - Slides com a descrição dos Elementos;
 
+## INSPIRAÇÕES
 
-tentativa de fazer algo grafico e visual para facilitar a compreensão do processo
+Para aprimorar o projeto base, consultei alguns aplicativos de delivery como: [iFood](https://www.ifood.com.br/?toHome=true), [PlusDelivery](https://www.plusdelivery.com.br/), [telepizza](https://www.telepizza.pt/) e [Domino's](https://www.dominospizza.pt/).
 
-QUADRADO - TERMO GENERICO PARA UM TRABALHO QUE É EXECUTADO EM UM PROCESSO (UMA TAREFA QUE TEM QUE SER EXECUTADA) - INTEGRAÇÃO COM PARCEIRO - CHAMADA DE API - UMA FUNÇÃO QUE TEM QUE SER EXECUTADA-
+Junto com a análise crítica desses aplicatívos, dei ênfase na minha experiência como usuário e discussões que já tive com amigos sobre o que os aplicativos deveriam aprimorar. 
 
-BOLINHAS (EVENTOS) - COISAS QUE ACONTECEM DURANTE O PROCESSO - INICIAR O PROCESSO PODE SER UM EVENTO, TERMINAR TAMBÉM, 
-BOLINHA MAIS FINA - INICIO
-UMA BOLINHA DENTRO DA OUTRA - INTERMEDIÁRIO
-UMA BOLINHA COM BORDA GROSSA - TERMINO
+## FLOWBUILD
 
-LOSANGOLO (DIVISÃO DOS PROCESSOS) - PROCESSOS PONTO DE DECISÃO, EM FRENTE (PORTAIS - GATEWAYS)
+Antes de propriamente iniciar a explicação da resolução para o desafio, é necessário falar sobre a ferramente a ser utilizada, o FlowBuild.
 
-SWIMINLANE - QUEM EXECUTA ESSE PROCESSO
+De forma extremamente básica, o FlowBuild pode ser compreendido como "uma biblioteca utilizada para criar soluções", uma plataforma para criar processos.
 
+Falando de forma mais técnica, o FlowBuild não é executor de BPMN (Business Process Model and Notation) mas é inspirado nele como executor de processos.
 
-FLOWBUILD não é um executor de BPMN puro
-O formato não é o mesmo, usa JSON ao invés de XML (em vez, não)
-XML é mais travado - JSON é mais flexivel e fácil de ler (mais leve para transportar)
-BPMN TEM MAIS DE 100 PROCESSOS DISTINTOS
-FLOWBUILD USA:
-EVENTS: START FINISH TIMER
-GATEWAY: FLOW (SEMPREFAZ UM)
-TASK: SYSTEMTASK (TAREFA DE SISTEMA, SISTEMA QUE FAZ, UMA FUNÇÃO, API ALGO ASSIM) USERTASK (USUÁRIO - ENCAMINHADA PARA UMA FRONTEND PARA SER EXECUTADA) SUBPROCESSO (EXECUTADO PELO PRÓPRIO FLOWBUILD - EX: UM PROCESSO GRANDE DEMAIS, DIVIDE ELE E SAO CHAMADOS)
-LANE: QUEM PODE FAZER O QUE
+Já os processos, são considerados como "uma sequencia de atividades de uma organização com o objetivo de realizar um trabalho", sendo possível linkar diretamente o processo com o desenvolvimento de software, porque esses processos são basicamente uma forma de orquestrar serviços.
 
-Os outros 92 são ignorados, pq o que pode ser feito com 8 tipos de elementos, dá pra cobrir 90, 95% dos Elementes (não consigo fazer paralesismo, mas dá para resolver sem isso)
+O FlowBuild se propoem a possibilitar o desenvolvimento de microserviços através de uma plataforma padrão que saiba lidar com processos, vez que, por mais complexo que sejam, processos serão sempre processos, limitado a tarefas, tempo de começo, fim, entradas e saídas. 
 
-uma versão mais simples e mais fácil
+E por qual motivo o FlowBuild é uma ferramenta que facilita a orquestração de serviços? Primeiramente porque seu objetivo é literamente facilitar a compreensão do projeto para todos os envolvidos, das mais diferentes àreas, facilitando a visualização do desenvolvimento do processo.
+
+Por ser composto por elemento visuais e de texto, além do código em si, permite que todos os setores envolvidos no desenvolvimento do produto consigam entender o que o produto precisa para ser implementado e facilita a divisão de tarefas na construção do mesmo, sendo útil até mesmo na manutenção do produto.
 
 
+- OBS: O FlowBuild não pode ser considerado um executor puro do BPMN, pois o BPM possui mais de 100 Elementos gráficos, já o FlowBuild possui "apenas" 8. A questão é que com "apenas" 8, é possível cobrir quase 95% das utilidades do BPMN, assim, diminuir em 92% as possibilidades de elementos torna muitíssimo mais fácil a compreensão do projeto, sem quase nenhuma perda de qualidade por isso. Além disso, em vez de utilizar XML, utiliza JSON, tornando mais flexível, fácil de ler e mais leve de transportar. Em resumo, pode ser considerado uma versão mais simples, mais fácil de utilizar, portanto, mais efetiva. 
 
-#DESAFIO - PIZZA
-propor um processo de pedido de pizza online (uma aplicação para atender uma empresa de delivery de pizza)
+### REPRESENTAÇÃO GRÁFICA NO FLOWBUILD (QUATRO ELEMENTOS)
 
+1. EVENTS:
+  * START: Inicio do processo.
+  * FINISH: O processo foi encerrado. Informar em qual momento houve o encerramento.
 
-![Screenshot 2023-03-06 at 21 29 09](https://user-images.githubusercontent.com/101360239/223235015-8684efb6-81f1-4f2c-bff9-0d877521cc90.png)
+2. TASKS:
+  * USERTASK: Tarefas que precisam de interação com o usuário. Lembrar que o input são como os parametros que devem ser recebidos pelo usuário para poder realizar.
+  * SYSTEMTASK: São as tarefas do sistema, não precisa do usuário para ser realizada. Não há problema em ser um pouco mais verboso no name (!id). As tarefas do sistema podem ter várias categorias, as mais utilizadas são o HTTP (POST, GET, PUT, PATCH, DELETE e HEAD). 
+ * SUBPROCESS: Quando um processo fica grande demais, ele pode ser dividido em subprocessos e utilizar os próprios subprocessos.
 
+3. GATEWAY: Envia o processo para outra etapa. Precisa de ter mais de um NEXT (OK e NOT OK), qual o DEFAULT também. 
 
-Anyone | start . inicia o processo > 1 interação com usuário (orderpizza)
-Restaurante | Take order > prepare > update order >
-Customer | Receive order > GATE (VERIFICAÇÃO SE O PEDIDO ESTA OK OU NÃO) > SE ESTÁ OK - PODE SER ELOGIADO - TERMINA
-SE NÃO ESTÁ - RECLAMAÇÃO - TERMINA
-
-NEM UM TIPO DE ATOR, INVADE AS ATRIBUIÇÕES DO OUTRO
-
-5 TIPOS DE TAREFAS COM CORES DIFERENTES . CADA NÓ (TAREFA) TEM UM TÍPO ESPECÍFICO
-
-![Screenshot 2023-03-06 at 21 32 01](https://user-images.githubusercontent.com/101360239/223235570-c2f3f0bf-74db-4146-9794-6dc009e546ce.png)
+4. LANE: É o controle de acesso a um conjunto de nós. Feito para separar a responsabilidades de cada tarefa. 
+ * SWIMLANE: Dividir as linhas de interação entre as pessoas que tem acesso ao sistema, até onde o usuário-cliente pode interagir ou onde cliente-pizzaria pode agir. Esse é um dos principais pontos, vez que se pessoas não autorizadas terem acesso a funcionalidades que não são de seu grupo, pode comprometer o projeto.
  
-PRECISA DE ALGUNS ESQUEMAS PARA TER OS DADOS CORRETOS
-ID - NOME DO EVENTO
-TYPO - START (FORMATO)
-NAME - NÃO PRECISA SER O IS MAS AJUDA A COMPLEMENTAR
-PARAMENTOS > INPUT_SCHEMA
-NEXT - QUAL O PRÓXIMO PASSO
-LANE_ID - QUAL LANE QUE ELE PARTICIPA
-
-![Screenshot 2023-03-06 at 21 33 23](https://user-images.githubusercontent.com/101360239/223235806-7f8937f4-3618-428c-91e1-e5bf51d059a2.png)
-
-ID / NAME / NAME / TYPO : USERTASK (PRECISA DE UMA INTERAÇÃO COM O USUÁRIO) / LANE ID (QUALL LINHA) / PARAMETROS > ACTION (PEDIR PIZZA) INPUT > MENU > REFERENCIA DO MENU
-
-![Screenshot 2023-03-06 at 21 34 28](https://user-images.githubusercontent.com/101360239/223236013-2e2879f6-2fab-4c0e-92f5-94a44375e036.png)
-
-TAFERA DE SISTEMA, UMA ETAPA QUE NÃO PRECISA DO USUÁRIO PARA SER REALIZADA. 
-NAME PODE SER UM POUCO MAIS VERBOSO PRA EXPLICAR MELHOR
-
-CATEGORIA_ TAREFAS DO SISTEMA PODEM SER VÁRIAS CATEGORIAS_ UMA DAS MAIS UTILZIADAS É HTTP (QUANDO PRECISA USAR API, GET, POST)
-PARAMENTERS > INPUT / REQUEST > UTL (O QUE PRECISA SER ACESSADO PARA FAZER O PEDIDO / VERB (GET) / HEADERS / CONTENTETYPE (JSON)
-
-![Screenshot 2023-03-06 at 21 36 41](https://user-images.githubusercontent.com/101360239/223236449-98d45a65-439a-40dd-be00-e4797ebf09bd.png)
-
-GATE COMO ELE ENVIA O PROCESSO PARA OUTRA ETAPA, TEM QUE TER MAIS DE UM NEXT >OK OR NOT OK  > QUAL O DEFAULT (PRAISE)
-TYPO FLOW
-LANE ID
-PARAMETERS > DECISÃO > REF (RESULT)
+ * ATORES: É importante deixar claro quem é que vai realizar cada tarefa, se será o usuário (no nosso caso: cliente da pizzaria ou a própria pizzaria) ou o próprio sistema. 
 
 
-![Screenshot 2023-03-06 at 21 38 14](https://user-images.githubusercontent.com/101360239/223236758-4937c832-5f54-48bb-940a-accb212d34a3.png)
+## JSON
+Blueprint é um item que descreve o processo para a interpretação do Flowbuild. É um JSON passível de interpretação pelo FlowBuild.
+
+Para armazenar uma blueprint são necessárias três informações:
+
+* name: Nome da blueprint (evitar o uso de espaços e caracteres especiais).
+
+* description: Descrição da blueprint.
+
+* blueprint_spec: Esquema de execução que será utilizado pelo FlowBuild.
+
+### A blueprint é definida por um Objeto com 6 atributos:
+
+* prepare: Lista de funções que devem ser executadas antes da inicialização do processo.
+
+* requirements: Lista de packages que devem ser importados.
+
+* enviroment: Deve trazer para a blueprint as variáveis de ambiente da aplicação (EX: Atribui o valor da env API_KEY com o nome X-API-KEY).
+
+* parameters: Um Objeto onde são definidas as constantes aplicadas naquela determinada blueprint.
+
+* lanes: É o controle de acesso a um conjunto de nós. Define quais regras devem ser atendidas para que um usuário tenha acesso a um determinado nó.
+
+* nodes: Um nó é a menor unidade do processo, é uma tarefa que deve ser executada.
+
+### NODES
+
+O que é necessário para a existência dos nodes:
+
+* id: Definido como uma string, é o identificador do nó e deve ser único no contexto da blueprint;
+
+* name: Nome do nó, tem uma função descritiva para o usuário que lê a blueprint.
+
+* lane_id: Uma string que faz referência ao id de umas das lanes da blueprint.
+
+* next: Indica qual o próximo nó será executado após a execução do nó atual.
+
+* type: Define o tipo de tarefa que deverá ser realizada.
+
+* category: Atributo exclusivo para systemTaskNodes.
+
+* parameters: É definido por um objeto com os parâmetros de execução do nó e dados de input.
 
 
-ID
-NAME
-NEXT NULL (PROCESSO ENCARRO)
-TYPE FINISH
-LANE QUAL ETAPA TERMINOU
+### startNode
 
+* input_schema: Um objeto JSON usando para carregar informações que serão usadas durante o processo.
+* timeout: prazo para expiração do processo. 
 
+```
+{
+    "id": "string",
+    "name": "string",
+    "next": "string",
+    "type": "start",
+    "lane_id": "string",
+    "parameters": {
+        "input_schema": {},
+        "timeout": 100
+    }
+}
+```
 
-UMA NOVA VERSÃO DESSE PROCESSO DE PIZZA
+### finishNode
 
+* next: deve ser null. Também pode receber parâmetros opcionais.
+* parâmetros do finishNode transferem os dados para o campo result no final do processo.
 
-3 PARTES DO PROJETO
+Se estiver dentro de um subProcesso, os result do finishNode será transmitido para o processo-pai.
 
-DIAGRAMA (IMAGEM PNG) DO DIAGRAMA BPMN PROPOSTO
+Como o FlowBuild é baseado em serialismo (um sentido só), mesmo dentro de subProcessos, eles devem ser concluído para o processo principal continuar. FlowBuild não aceita paralelismo.
 
-BLUEPRINT (JSON)
+```
+{
+  "id": "any_string (system friendly recommended)",
+  "name": "any string",
+  "type": "Finish",
+  "lane_id": "any_lane_id",
+  "next": null
+}
+```
 
-APRESENTAÇÃO (PUBLICAR NO SERVIDOR DO FLOWBUILD) - EMQUALQUER FORMATO MAIS A EXPLCIAÇÃO - O QUE GOSTARAM - TOMADAS DE DECISÕES - PQ TOMARAM ESSAS SOLUÇÕES
+### flowNode
 
-![Screenshot 2023-03-06 at 21 42 34](https://user-images.githubusercontent.com/101360239/223238993-ff2c28e9-6a25-4efd-a76d-0706fbcf7ca0.png)
+Em seus parâmentros um único atributo será utilizado para direcionar o processo.
 
+O valor atribuído será convertido em texto e comparado com as opções descritas no objeto next (True ou False. Default no True).
 
-SLACK
-FLOWBUILD.IO
-https://forms.gle/dNXU1j5L7ExYevng7
-servidor para utilizar
-inputes não tem um padrão / quais são os dados necessáriso para que aquela tarefa seja feita (o inpute são os patametros que devem. eu quero que o usuário escolha a pizza, o que ele precisa para fazer isso? do menu)
+Diferente dos demais nós do flowBuild, o atributo next de um flowNode é representado por um objeto e não por uma string.
 
-anotar o pedido, eu preciso fazer uma chamada para um endpoint - o sabor da pizza o que? quantidade e etc
+Este objeto deve ser um conjunto de atributos que serão avaliados contra o valor do parâmetro especificado.
 
-mandar por email (segunda-feira que vem) amanha ou segunda-feira - 
+```
+{
+  "id": "any_string ",
+  "name": "any string",
+  "next": {
+    "string": "other_node_id",
+    "default": "other_node_id"
+  },
+  "type": "flow",
+  "lane_id": "any_lane_id",
+  "parameters": {
+    "input": {
+      "key": "string"
+    }
+  }
+}
+```
 
-cada um tem o próprio servidor (eu publiquei lá com sese nome - nomde da blueprint)
-audio
-gravar o video**
-100% vai ter um feedback
-cawemo.com para desenhar
+### userTaskNode
 
-resultado na quarta ou quinta
+Este tipo de nó descreve uma interação, normalmente com um humano.
+
+O processo ao atingir um nó de userTask, realiza uma pré-execução, que avaliará os parâmetros de entrada da tarefa e enviará tais parâmetros para o gerenciador de atividades (Activity Manager).
+
+Uma userTask pode receber até 6 parâmetros:
+
+* action (obrigatório)
+
+* input (obrigatório)
+
+* timeout
+
+* activity_schema
+
+* activity_manager
+
+* result_schema
+
+```
+{
+  "id": "any_string (system friendly recommended)",
+  "name": "any string",
+  "next": "other_node_id",
+  "lane_id": "any_lane_id",
+  "type": "UserTask",
+  "parameters": {
+    "action": "ANY_STRING_HERE",
+    "input": {},
+    "activity_manager": "commit or notify",
+    "activity_schema": {"$ref": "activity_schema"},
+    "timeout": 60
+  },
+  "result_schema": {}
+}
+```
+
+### systemTaskNode
+
+O systemTaskNode espera um atributo adicional que descreve a categoria da tarefa a ser realizada, entre elas:
+
+* HTTP
+```
+{
+  "id": "any_string (system friendly recommended)",
+  "name": "any string",
+  "next": "other_node_id",
+  "lane_id": "one_lane_id",
+  "type": "SystemTask",
+  "category": "http",
+  "parameters":  {
+    "input": {},
+    "request": {
+      "url": "url",
+      "verb": "GET,POST,PUT,PATCH,DELETE",
+      "headers": {}
+    }
+  },
+  "result_schema": {}
+}
+```
+
+* SetToBag
+```
+{
+  "id": "any_string (system friendly recommended)",
+  "name": "any string",
+  "next": "other_node_id",
+  "lane_id": "one_lane_id",
+  "type": "SystemTask",
+  "category": "setToBag",
+  "parameters": {
+    "input": {}
+  }
+}
+```
+
+### subprocessNode
+Este nó pode receber 4 parâmetros:
+
+* workflow_name (obrigatório)
+
+* actor_data (obrigatório)
+
+* input
+
+* valid_response
+
+Para o desafio ele não é tão interessante pois precisa de um conhecimento um pouco mais aprofundado e mais prática com o FlowBuild para utilizar sem nenhum tipo de erro.
+
+```
+{
+  "id": "any_string (system friendly recommended)",
+  "name": "any string",
+  "type": "SubProcess",
+  "lane_id": "any_lane_id",
+  "next": "other_node_id"
+  "parameters":{
+     "workflow_name": "string",
+     "actor_data": {"$ref": "actor_data"},
+     "valid_response":{},
+     "input":{}
+  }
+}
+```
