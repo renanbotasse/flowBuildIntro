@@ -1,12 +1,10 @@
 # APRESENTAÇÃO
 
-***
-
 1. [BASE](#base)
 2. [SOLUÇÃO](#solucao) 
  	- 2.1. [Permitir edição e comentário pelo Cliente](#edicao) 
 	- 2.2. [Permitir cancelamento pela Pizzaria](#cancelamento) 
- 	- 2.3. [Evitar errors pela Pizzaria](#erros) 
+ 	- 2.3. [Evitar erros pela Pizzaria](#erros) 
  	- 2.4. [Evitar impressão negativa - Cupom de desconto](#cupom)  
  	- 2.5. [Evitar prejuízo (Cliente não encontrado)](#prejuizo) 
 3. [DIFICULDADES E IDEIAS NÃO APLICADAS](#dificuldades)
@@ -31,7 +29,7 @@ A minha solução para o Desafio é a seguinte:
 
 ![renanb (6)](https://user-images.githubusercontent.com/101360239/224022944-102ba1fa-7e37-4156-afad-09aac2a2d527.png)
 
-2.1. Permitir edição e comentário pelo Cliente <a name="edicao"></a>
+### 2.1. Permitir edição e comentário pelo Cliente <a name="edicao"></a>
 
 <div align="center">
 	
@@ -40,7 +38,7 @@ A minha solução para o Desafio é a seguinte:
 </div>
 
 	
-2.2. Permitir cancelamento pela Pizzaria <a name="cancelamento"></a>
+### 2.2. Permitir cancelamento pela Pizzaria <a name="cancelamento"></a>
 
 
 + reembolso
@@ -52,7 +50,7 @@ A minha solução para o Desafio é a seguinte:
 
 </div>	
 	
-2.3. Evitar errors pela Pizzaria <a name="erros"></a>
+### 2.3. Evitar erros pela Pizzaria <a name="erros"></a>
 
 <div align="center">
 
@@ -75,7 +73,7 @@ A minha solução para o Desafio é a seguinte:
 
 </div>
 	
-2.4. Evitar impressão negativa - Cupom de desconto <a name="cupom"></a>
+### 2.4. Evitar impressão negativa - Cupom de desconto <a name="cupom"></a>
 
 + Tempo dilatado
 + Tempo Real
@@ -92,7 +90,7 @@ A minha solução para o Desafio é a seguinte:
 
 </div>
 	
-2.5 Evitar prejuízo (Cliente não encontrado) <a name="prejuizo"></a>
+### 2.5 Evitar prejuízo (Cliente não encontrado) <a name="prejuizo"></a>
 
 + Pedido feito após o pagamento
 + Comprovante de pagamento
@@ -109,9 +107,9 @@ A minha solução para o Desafio é a seguinte:
 
 </div>
 	
-### 3. DIFICULDADES E IDEIAS NÃO APLICADAS  <a name="dificuldades"></a>
+## 3. DIFICULDADES E IDEIAS NÃO APLICADAS  <a name="dificuldades"></a>
 
-3.1. Cliente ter atualização do status do pedido<a name="status"></a>
+### 3.1. Cliente ter atualização do status do pedido<a name="status"></a>
 
 <div align="center">
 
@@ -123,11 +121,11 @@ Loop
 
 Paralelismo/Serialismo
 
-3.2. Cancelamento pelo Cliente <a name="cancelamentoc"></a>
+### 3.2. Cancelamento pelo Cliente <a name="cancelamentoc"></a>
 
 Paralelismo/Serialismo
 
-3.3. Otimizador de Entrega (SubProcesso)<a name="otimizador"></a>
+### 3.3. Otimizador de Entrega (SubProcesso)<a name="otimizador"></a>
 
 Mais que um pedido, inúmeros nós ao final. Ficaria complexo demais para o que foi proposto.
 
@@ -143,13 +141,13 @@ Mais que um pedido, inúmeros nós ao final. Ficaria complexo demais para o que 
 
 </div>
 	
-3.4. Retirada do Elogio/Reclamação <a name="elogio_reclamação"></a>
+### 3.4. Retirada do Elogio/Reclamação <a name="elogio_reclamação"></a>
 
 Substitui pelo Cupom - Acho mais efetivo
 
-3.5. Conectar Diagrama com JSON <a name="json"></a>
+### 3.5. Conectar Diagrama com JSON <a name="json"></a>
 
-3.6. Inputs e SystemNode (HTTPS)<a name="https"></a>
+### 3.6. Inputs e SystemNode (HTTPS)<a name="https"></a>
 
 <div align="center">
 
@@ -162,11 +160,8 @@ Substitui pelo Cupom - Acho mais efetivo
 <img width="430" alt="Screenshot 2023-03-09 at 14 25 19" src="https://user-images.githubusercontent.com/101360239/224054622-e865b3b6-3f48-4950-bcf0-432b791d2b70.png">
 
 </div>
-	
-	
-	
-	
-3.7 Envitar confusão no processo<a name="confusao"></a>
+		
+### 3.7 Envitar confusão no processo<a name="confusao"></a>
 
 <div align="center">
 
