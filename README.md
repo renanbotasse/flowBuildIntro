@@ -453,9 +453,18 @@ Substitui pelo Cupom - Acho mais efetivo
 
 <div align="center">
 
-<img width="50%" alt="Screenshot 2023-03-09 at 14 12 23" src="https://user-images.githubusercontent.com/101360239/224051237-7d81d7ef-d1ec-4acc-b041-ba964982dc6c.png">
+<img width="621" alt="Screenshot 2023-03-09 at 14 27 28" src="https://user-images.githubusercontent.com/101360239/224055074-94824a85-e237-4b26-ac6f-c277559436c9.png">
 
 </div>
+
+<div align="center">
+
+<img width="430" alt="Screenshot 2023-03-09 at 14 25 19" src="https://user-images.githubusercontent.com/101360239/224054622-e865b3b6-3f48-4950-bcf0-432b791d2b70.png">
+
+</div>
+	
+	
+	
 	
 3.7 Envitar confusão no processo<a name="confusao"></a>
 
