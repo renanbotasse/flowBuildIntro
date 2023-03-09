@@ -70,12 +70,6 @@ O cancelamento do pedido pela pizzaria leva a duas situações, fazer o reembols
 	
 ### 2.3. Evitar erros pela Pizzaria <a name="erros"></a>
 
-<div align="center">
-
-<img width="870" alt="Screenshot 2023-03-09 at 12 28 12" src="https://user-images.githubusercontent.com/101360239/224023218-7573f4c0-c043-4fdf-a78c-2207779de122.png">
-
-</div>
-
 + Cliente revisa
 + Recebe pedido com tempo real e dilatado
 + Pode não aceitar
@@ -86,8 +80,13 @@ O cancelamento do pedido pela pizzaria leva a duas situações, fazer o reembols
 + Atraso gera desconto futuro
 
 <div align="center">
+<img width="264" alt="cliente revisa pedido" src="https://user-images.githubusercontent.com/101360239/224141427-4bbdfa3b-5bc6-4285-b31c-f420de443d2d.png">
 
-<img width="870" alt="Screenshot 2023-03-09 at 12 28 12" src="https://user-images.githubusercontent.com/101360239/224023218-7573f4c0-c043-4fdf-a78c-2207779de122.png">
+<img width="870" alt="pizzaria revisa pedido e pizza" src="https://user-images.githubusercontent.com/101360239/224023218-7573f4c0-c043-4fdf-a78c-2207779de122.png">
+	
+<img width="195" alt="cliente revisa pizza" src="https://user-images.githubusercontent.com/101360239/224142384-0e08e4f9-e090-4dd4-9f6c-2c0d817e2403.png">
+
+<img width="563" alt="cupom pelo atraso" src="https://user-images.githubusercontent.com/101360239/224142017-53b656cb-e849-48c9-9c00-a0a02192e351.png">
 
 </div>
 	
