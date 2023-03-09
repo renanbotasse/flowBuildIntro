@@ -8,13 +8,13 @@ O desafio será avaliado pelo time que trabalha diretamente com o workflow.
 
 ## DESAFIO
 
-O Desafio consiste em propor um processo de pedido de pizza, como se estivesse atendendo uma empresa de delivery de pizza.
+O Desafio consiste em propor um processo de pedido de pizza a ser implementado por uma empresa de delivery de pizza.
 
-Como é um processo de pedido de pizza, não é necessário literalmente projetar o aplicativo e sim fazer o workflow (Diagrama) do funcionamento do aplicativo.
+Como é um processo de pedido de pizza, não é necessário literalmente projetar o aplicativo e sim fazer o diagrama e a bluprient.
 
-Outro ponto a ser salientado é a necessidade da utilização do BluePrint, um arquivo JSON, que respeita a formatação do flowBuild.
+O blueprint é basicamente um arquivo JSON que respeita a formatação do flowBuild.
 
-O BluePrint deve ser executável dentro do servidor disponibilizado pela Fundação, até mesmo para facilitar a compreensão dos avaliadores do que foi produzido.
+O blueprint deve ser executável dentro do servidor disponibilizado pela Fundação, até mesmo para facilitar a compreensão dos avaliadores do que foi produzido.
 
 A explicação não deve se limitar a explicar o fluxo e o código, deve incluir as ponderações sobre o que mais gostou, menos gostou, quais foram as decisões que precisou tomar e porque tomou essas decisões, quais foram as soluções adotadas e sua motivação.
 
@@ -37,38 +37,38 @@ A Fundação disponibiliza um bom material base para a realização do projeto.
 
 ## INSPIRAÇÕES
 
-Para aprimorar o projeto base, consultei alguns aplicativos de delivery de comida como: [iFood](https://www.ifood.com.br/?toHome=true), [PlusDelivery](https://www.plusdelivery.com.br/), [telepizza](https://www.telepizza.pt/) e [Domino's](https://www.dominospizza.pt/).
+Para aprimorar o projeto base, consultei alguns aplicativos de delivery como: [iFood](https://www.ifood.com.br/?toHome=true), [PlusDelivery](https://www.plusdelivery.com.br/), [telepizza](https://www.telepizza.pt/) e [Domino's](https://www.dominospizza.pt/).
 
-Junto com a análise crítica desses aplicatívos, dei enfase na minha experiência como usuário e discussões que já tive com amigos sobre o que os aplicativos poderiam aprimorar ou quais são os pontos mais fortes deles. 
+Junto com a análise crítica desses aplicatívos, dei ênfase na minha experiência como usuário e discussões que já tive com amigos sobre o que os aplicativos deveriam aprimorar. 
 
 ## FLOWBUILD
 
-Antes de propriamente iniciar a explicação da minha resolução para o desafio, é necessário falar sobre a ferramente a ser utilizada, o FlowBuild.
+Antes de propriamente iniciar a explicação da resolução para o desafio, é necessário falar sobre a ferramente a ser utilizada, o FlowBuild.
 
-De forma extremamente básica, o FlowBuild pode ser compreendido como "uma biblioteca em que soluções são criadas através dela", uma plataforma para criar processos.
+De forma extremamente básica, o FlowBuild pode ser compreendido como "uma biblioteca utilizada para criar soluções", uma plataforma para criar processos.
 
 Falando de forma mais técnica, o FlowBuild não é executor de BPMN (Business Process Model and Notation) mas é inspirado nele como executor de processos.
 
-Já os processos, são considerados como "uma sequencia de atividades de uma organização com o objetivo de realizar um trabalho", sendo possível linkar diretamente o processo com o desenvolvimento de software, porque esses processos são basicamente uma forma de orquestrar serviços, e a orquestração de serviços, é comumente conhecida como "microserviços".
+Já os processos, são considerados como "uma sequencia de atividades de uma organização com o objetivo de realizar um trabalho", sendo possível linkar diretamente o processo com o desenvolvimento de software, porque esses processos são basicamente uma forma de orquestrar serviços.
 
-O flowBuild se propoem a possibilitar o desenvolvimento de microserviços através de uma plataforma padrão que saiba lidar com processos, vez que, por mais complexo que sejam, processos serão sempre processos, limitado a tarefas, tempo de começo, fim, entradas e saídas. 
+O FlowBuild se propoem a possibilitar o desenvolvimento de microserviços através de uma plataforma padrão que saiba lidar com processos, vez que, por mais complexo que sejam, processos serão sempre processos, limitado a tarefas, tempo de começo, fim, entradas e saídas. 
 
-E por qual motivo o flowBuild é uma ferramenta que facilita a orquestração de serviços? Primeiramente porque seu objetivo é literamente facilitar a compreensão do projeto para todos os envolvidos, das mais difernetes àreas, facilitando a visualização do desenvolvimento do processo.
+E por qual motivo o FlowBuild é uma ferramenta que facilita a orquestração de serviços? Primeiramente porque seu objetivo é literamente facilitar a compreensão do projeto para todos os envolvidos, das mais diferentes àreas, facilitando a visualização do desenvolvimento do processo.
 
-Por ser composto por elemento visuais e texto (Diagrama), além de código em si, permite que tanto a equipe de marketing consiga entender o que é necessário ser feito, quanto a equipe do RH e os programadores. 
+Por ser composto por elemento visuais e de texto, além do código em si, permite que todos os setores envolvidos no desenvolvimento do produto consigam entender o que o produto precisa para ser implementado e facilita a divisão de tarefas na construção do mesmo, sendo útil até mesmo na manutenção do produto.
 
 
-- OBS: Não pode ser considerado um executor puro do BPMN, pois o BPM possui mais de 100 Elementos gráficos, já o FlowBuild possui "apenas" 8. A questão é que com "apenas" 8, é possível cobrir quase 95% das utilidades do BPMN, assim, diminuir em 92% as possibilidades de Elementos torna muitíssimo mais fácil a compreensão do projeto, sem quase nenhuma perda de qualidade por isso. Além disso, em vez de utilizar XML, utilizamos JSON, tornando mais flexível, fácil de ler e mais leve de transportar. Em resumo, pode ser considerado uma versão mais simples, mais fácil de utilizar, portanto, mais efetiva. 
+- OBS: O FlowBuild não pode ser considerado um executor puro do BPMN, pois o BPM possui mais de 100 Elementos gráficos, já o FlowBuild possui "apenas" 8. A questão é que com "apenas" 8, é possível cobrir quase 95% das utilidades do BPMN, assim, diminuir em 92% as possibilidades de elementos torna muitíssimo mais fácil a compreensão do projeto, sem quase nenhuma perda de qualidade por isso. Além disso, em vez de utilizar XML, utiliza JSON, tornando mais flexível, fácil de ler e mais leve de transportar. Em resumo, pode ser considerado uma versão mais simples, mais fácil de utilizar, portanto, mais efetiva. 
 
-### REPRESENTAÇÃO GRÁFICA NO FLOWBUILD (QUATRO TIPOS DE NÓS)
+### REPRESENTAÇÃO GRÁFICA NO FLOWBUILD (QUATRO ELEMENTOS)
 
-1. EVENTS (Timer):
+1. EVENTS:
   * START: Inicio do processo.
   * FINISH: O processo foi encerrado. Informar em qual momento houve o encerramento.
 
 2. TASKS:
   * USERTASK: Tarefas que precisam de interação com o usuário. Lembrar que o input são como os parametros que devem ser recebidos pelo usuário para poder realizar.
-  * SYSTEMTASK: São as tarefas do sistema, não precisa do usuário para ser realizada. Não há problema em ser um pouco mais verboso no name (!id). As tarefas do sistema podem ter várias categorias, as mais utilizadas são o HTTP (API: GET, POST, e etc). 
+  * SYSTEMTASK: São as tarefas do sistema, não precisa do usuário para ser realizada. Não há problema em ser um pouco mais verboso no name (!id). As tarefas do sistema podem ter várias categorias, as mais utilizadas são o HTTP (POST, GET, PUT, PATCH, DELETE e HEAD). 
  * SUBPROCESS: Quando um processo fica grande demais, ele pode ser dividido em subprocessos e utilizar os próprios subprocessos.
 
 3. GATEWAY: Envia o processo para outra etapa. Precisa de ter mais de um NEXT (OK e NOT OK), qual o DEFAULT também. 
@@ -110,23 +110,23 @@ O que é necessário para a existência dos nodes:
 
 * id: Definido como uma string, é o identificador do nó e deve ser único no contexto da blueprint;
 
-* name: Nome do nó, tem uma função descritiva para o usuário que lê a blueprint. Não afeta a execução do processo, porém detém muito valor para análise futura e rastreamento;
+* name: Nome do nó, tem uma função descritiva para o usuário que lê a blueprint.
 
-* lane_id: Uma string que faz referência ao id de umas das lanes da blueprint. Uma falha na referência impede a blueprint de ser publicada.
+* lane_id: Uma string que faz referência ao id de umas das lanes da blueprint.
 
-* next: Indica qual o próximo nó será executado após a execução do nó atual. Deve fazer referência a um nó da própria blueprint. A inexistência de referência impede a blueprint de ser publicada.
+* next: Indica qual o próximo nó será executado após a execução do nó atual.
 
-* type: Define o tipo de tarefa que deverá ser realizada. Veja a seção de nodeTypes para mais detalhes.
+* type: Define o tipo de tarefa que deverá ser realizada.
 
 * category: Atributo exclusivo para systemTaskNodes.
 
-* parameters: É definido por um objeto com os parâmetros de execução do nó e dados de input (quando aplicável).
+* parameters: É definido por um objeto com os parâmetros de execução do nó e dados de input.
 
 
 ### startNode
 
-* input_schema: Um objeto representando o JSON Schema do payload de inicio do processo.
-* timeout: Um número inteiro que representa o prazo (em segundos) para expiração do processo. 
+* input_schema: Um objeto JSON usando para carregar informações que serão usadas durante o processo.
+* timeout: prazo para expiração do processo. 
 
 ```
 {
@@ -145,10 +145,11 @@ O que é necessário para a existência dos nodes:
 ### finishNode
 
 * next: deve ser null. Também pode receber parâmetros opcionais.
-
 * parâmetros do finishNode transferem os dados para o campo result no final do processo.
 
-Caso o processo seja evocado como um subProcesso, os result do finishNode será transmitido para o processo-pai.
+Se estiver dentro de um subProcesso, os result do finishNode será transmitido para o processo-pai.
+
+Como o FlowBuild é baseado em serialismo (um sentido só), mesmo dentro de subProcessos, eles devem ser concluído para o processo principal continuar. FlowBuild não aceita paralelismo.
 
 ```
 {
@@ -164,15 +165,11 @@ Caso o processo seja evocado como um subProcesso, os result do finishNode será 
 
 Em seus parâmentros um único atributo será utilizado para direcionar o processo.
 
-O valor atribuído será convertido em texto e comparado com as opções descritas no objeto next descrito no especificação do nó.
-
-Caso o atributo especificado nos parameters não esteja definido, o flowNode gerará o texto undefined para comparação.
+O valor atribuído será convertido em texto e comparado com as opções descritas no objeto next (True ou False. Default no True).
 
 Diferente dos demais nós do flowBuild, o atributo next de um flowNode é representado por um objeto e não por uma string.
 
 Este objeto deve ser um conjunto de atributos que serão avaliados contra o valor do parâmetro especificado.
-
-É obrigatório que um dos atributos do objeto next do flowNode seja default, que será utilizado caso nenhum resultado seja identificado.
 
 ```
 {
@@ -197,8 +194,6 @@ Este objeto deve ser um conjunto de atributos que serão avaliados contra o valo
 Este tipo de nó descreve uma interação, normalmente com um humano.
 
 O processo ao atingir um nó de userTask, realiza uma pré-execução, que avaliará os parâmetros de entrada da tarefa e enviará tais parâmetros para o gerenciador de atividades (Activity Manager).
-
-Diferente das tarefas de sistema, um userTask gera uma interrupção do processo, que entra em um estado de espera WAITING até que receba uma confirmação do Activity Manager de que a tarefa foi concluída. Dessa forma, assim como o startNode, uma userTask gera 2 estados no processo.
 
 Uma userTask pode receber até 6 parâmetros:
 
@@ -233,6 +228,7 @@ Uma userTask pode receber até 6 parâmetros:
 ```
 
 ### systemTaskNode
+
 O systemTaskNode espera um atributo adicional que descreve a categoria da tarefa a ser realizada, entre elas:
 
 * HTTP
@@ -280,6 +276,8 @@ Este nó pode receber 4 parâmetros:
 * input
 
 * valid_response
+
+Para o desafio ele não é tão interessante pois precisa de um conhecimento um pouco mais aprofundado e mais prática com o FlowBuild para utilizar sem nenhum tipo de erro.
 
 ```
 {
