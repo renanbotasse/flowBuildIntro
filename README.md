@@ -436,9 +436,13 @@ Mais que um pedido, inúmeros nós ao final. Ficaria complexo demais para o que 
 <img width="623" alt="Screenshot 2023-03-09 at 12 47 36" src="https://user-images.githubusercontent.com/101360239/224027491-d7244102-903e-456e-a934-dba4686350fb.png">
 
 </div>
-	
-[FAZER]
 
+<div align="center">
+
+<img width="1087" alt="Screenshot 2023-03-09 at 14 23 24" src="https://user-images.githubusercontent.com/101360239/224054051-aeff82a6-da8a-4780-bc22-aa22c2502f38.png">
+
+</div>
+	
 3.4. Retirada do Elogio/Reclamação <a name="elogio_reclamação"></a>
 
 Substitui pelo Cupom - Acho mais efetivo
@@ -449,7 +453,7 @@ Substitui pelo Cupom - Acho mais efetivo
 
 <div align="center">
 
-<img width="50%" alt="Screenshot 2023-03-09 at 12 43 42" src="https://user-images.githubusercontent.com/101360239/224026547-da65885b-722c-4692-9a5b-0eadd5903f40.png">
+<img width="50%" alt="Screenshot 2023-03-09 at 14 12 23" src="https://user-images.githubusercontent.com/101360239/224051237-7d81d7ef-d1ec-4acc-b041-ba964982dc6c.png">
 
 </div>
 	
