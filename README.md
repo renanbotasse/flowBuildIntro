@@ -296,14 +296,77 @@ Para o desafio ele não é tão interessante pois precisa de um conhecimento um 
 }
 ```
 
+****
 
-## RESOLUÇÃO
+# APRESENTAÇÃO
 
-## FEATURES (O QUE ACHO IMPORTANTE TER)
+## 1. BASE
 
-### ESSENCIAIS
 
-### IMPORTANTES
+## 2. SOLUÇÃO
+
+
+### 2.1 IDEIAS APLICADAS
+
+2.1.1. PERMITIR EDIÇÃO E COMENTÁRIO PELO CLIENTE
+
+2.1.2. PERMITIR CANCELAMENTO PELA PIZZARIA 
++ reembolso
++ aviso ao cliente
+
+2.1.3. EVITAR ERROS PELA PIZZARIA
++ Cliente revisa
++ Recebe pedido com tempo real e dilatado
++ Pode não aceitar
++ Monitoramento da pizzaria (acidente, luz, ingredientes)
++ Cancelar
++ Revisar pedido na pizzaria
++ Cliente revisa na entrega
++ Atraso gera desconto futuro
+
+2.1.4. EVITAR IMPRESSÃO NEGATIVA COM CUPOM DE DESCONTO
++ Tempo dilatado
++ Tempo Real
++ Horário de Chegada (entrega)
++ Verifica tempo
++ gera cupom
++ Comunica cupom
++ Antes de pagar pode usar cupom
+
+2.1.5 EVITAR PREJUÍZO (CLIENTE NÃO ENCONTRADO)
++ Pedido feito após o pagamento
++ Comprovante de pagamento
++ Cliente dá dados e revisa
++ Entregador tenta contato 2 vezes, prazo de 5 min
++ Registra tentativa
++ Volta a pizzaria
+
+### 2.2 IDEIAS NÃO APLICADAS E DIFICULDADES
+
+2.2.1. CLIENTE TER ATUALIZAÇÃO DO STATUS DO PEDIDO
+Loop
+Paralelismo/Serialismo
+
+2.2.2. CANCELAMENTO PELO CLIENTE
+Paralelismo/Serialismo
+
+2.2.3. OTIMIZAÇÃO DE ROTAS DE ENTREGA (SUBPROCESSO)
+Mais que um pedido, inúmeros nós ao final. Ficaria complexo demais para o que foi proposto.
+
+2.2.4. RETIREI - ELOGIO/RECLAMAÇÃO
+Substitui pelo Cupom - Acho mais efetivo
+
+2.2.5. CONECTAR DIAGRAMA E JSON
+
+2.2.6. INPUTS E SYSTEMNODE (HTTPS)
+
+2.2.7 EVITAR CONFUSÃO
+
+## 3. CONCLUSÃO
+Diagramas e Nós são boas formas de organizar
+Lanes e permissões dão segurança
+Gateways dão opções e evita problemas já que é serialismo.
+
 
 ### RETIREI
 
