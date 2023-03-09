@@ -8,7 +8,7 @@ O desafio será avaliado pelo time que trabalha diretamente com o workflow.
 
 ## DESAFIO
 
-O Desafio consiste em propor um processo de pedido de pizza a ser implementado por uma empresa de delivery de pizza.
+O Desafio consiste em propor um processo de entrega de pedido de pizza a ser implementado por uma empresa de delivery de pizza.
 
 Como é um processo de pedido de pizza, não é necessário literalmente projetar o aplicativo e sim fazer o diagrama e a bluprient.
 
@@ -302,20 +302,34 @@ Para o desafio ele não é tão interessante pois precisa de um conhecimento um 
 
 ## 1. BASE
 
+O Desafio consiste em propor um processo de entrega de pedido de pizza a ser implementado por uma empresa de delivery de pizza. Sendo entregue o diagrama abaixo para ser melhorado.
+
+<img width="911" alt="Screenshot 2023-03-09 at 12 16 47" src="https://user-images.githubusercontent.com/101360239/224020626-eb0871f5-a338-4eb8-b44c-5150f8e02697.png">
 
 ## 2. SOLUÇÃO
+
+A minha solução para o Desafio é a seguinte:
+
+![renanb (6)](https://user-images.githubusercontent.com/101360239/224022944-102ba1fa-7e37-4156-afad-09aac2a2d527.png)
 
 
 ### 2.1 IDEIAS APLICADAS
 
 2.1.1. PERMITIR EDIÇÃO E COMENTÁRIO PELO CLIENTE
 
+<img width="414" alt="Screenshot 2023-03-09 at 12 26 03" src="https://user-images.githubusercontent.com/101360239/224022618-a40cd5b2-3d7b-4239-bbbc-75291766a725.png">
+
 2.1.2. PERMITIR CANCELAMENTO PELA PIZZARIA 
+
 
 + reembolso
 + aviso ao cliente
 
+<img width="219" alt="Screenshot 2023-03-09 at 12 27 35" src="https://user-images.githubusercontent.com/101360239/224023061-78cca8d6-786f-4b13-afcd-f806bed5dcfd.png">
+
 2.1.3. EVITAR ERROS PELA PIZZARIA
+
+<img width="870" alt="Screenshot 2023-03-09 at 12 28 12" src="https://user-images.githubusercontent.com/101360239/224023218-7573f4c0-c043-4fdf-a78c-2207779de122.png">
 
 + Cliente revisa
 + Recebe pedido com tempo real e dilatado
@@ -325,6 +339,8 @@ Para o desafio ele não é tão interessante pois precisa de um conhecimento um 
 + Revisar pedido na pizzaria
 + Cliente revisa na entrega
 + Atraso gera desconto futuro
+
+<img width="870" alt="Screenshot 2023-03-09 at 12 28 12" src="https://user-images.githubusercontent.com/101360239/224023218-7573f4c0-c043-4fdf-a78c-2207779de122.png">
 
 2.1.4. EVITAR IMPRESSÃO NEGATIVA COM CUPOM DE DESCONTO
 
@@ -336,6 +352,8 @@ Para o desafio ele não é tão interessante pois precisa de um conhecimento um 
 + Comunica cupom
 + Antes de pagar pode usar cupom
 
+<img width="452" alt="Screenshot 2023-03-09 at 12 29 28" src="https://user-images.githubusercontent.com/101360239/224023482-c0cf39e7-87b3-439c-af81-646e07758ec7.png">
+
 2.1.5 EVITAR PREJUÍZO (CLIENTE NÃO ENCONTRADO)
 
 + Pedido feito após o pagamento
@@ -344,10 +362,14 @@ Para o desafio ele não é tão interessante pois precisa de um conhecimento um 
 + Entregador tenta contato 2 vezes, prazo de 5 min
 + Registra tentativa
 + Volta a pizzaria
++ 
+<img width="670" alt="Screenshot 2023-03-09 at 12 31 22" src="https://user-images.githubusercontent.com/101360239/224023868-09308dd0-7a01-4182-afae-56b1d66f7b1c.png">
 
 ### 2.2 IDEIAS NÃO APLICADAS E DIFICULDADES
 
 2.2.1. CLIENTE TER ATUALIZAÇÃO DO STATUS DO PEDIDO
+
+<img width="613" alt="Screenshot 2023-03-09 at 12 34 30" src="https://user-images.githubusercontent.com/101360239/224024629-ebbe0973-5881-4560-98f5-b144ab4c45d4.png">
 
 Loop
 
@@ -361,6 +383,10 @@ Paralelismo/Serialismo
 
 Mais que um pedido, inúmeros nós ao final. Ficaria complexo demais para o que foi proposto.
 
+<img width="623" alt="Screenshot 2023-03-09 at 12 47 36" src="https://user-images.githubusercontent.com/101360239/224027491-d7244102-903e-456e-a934-dba4686350fb.png">
+
+[FAZER]
+
 2.2.4. RETIREI - ELOGIO/RECLAMAÇÃO
 
 Substitui pelo Cupom - Acho mais efetivo
@@ -369,7 +395,11 @@ Substitui pelo Cupom - Acho mais efetivo
 
 2.2.6. INPUTS E SYSTEMNODE (HTTPS)
 
+<img width="608" alt="Screenshot 2023-03-09 at 12 43 42" src="https://user-images.githubusercontent.com/101360239/224026547-da65885b-722c-4692-9a5b-0eadd5903f40.png">
+
 2.2.7 EVITAR CONFUSÃO
+
+<img width="424" alt="Screenshot 2023-03-09 at 12 45 10" src="https://user-images.githubusercontent.com/101360239/224026856-6856f2c7-04f0-487c-9831-c868209a1155.png">
 
 ## 3. CONCLUSÃO
 Diagramas e Nós são boas formas de organizar
