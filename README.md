@@ -309,7 +309,7 @@ Para o desafio ele não é tão interessante pois precisa de um conhecimento um 
  	- 2.3 [Evitar errors pela Pizzaria](#erros) 
  	- 2.4 [Evitar impressão negativa - Cupom de desconto](#cupom)  
  	- 2.5 [Evitar prejuízo (Cliente não encontrado)](#prejuizo) 
-3. [IDEIAS NÃO APLICADAS E DIFICULDADES](#dificuldades)
+3. [DIFICULDADES E IDEIAS NÃO APLICADAS](#dificuldades)
 	- 3.1. [Cliente ter atualização do status do pedido](#status) 
 	- 3.2. [Cancelamento pelo Cliente](#cancelamentoc) 
 	- 3.3. [Otimizador de Entrega (SubProcesso)](#otimizador)  
@@ -323,7 +323,7 @@ Para o desafio ele não é tão interessante pois precisa de um conhecimento um 
 
 O Desafio consiste em propor um processo de entrega de pedido de pizza a ser implementado por uma empresa de delivery de pizza. Sendo entregue o diagrama abaixo para ser melhorado.
 
-<img width="911" alt="Screenshot 2023-03-09 at 12 16 47" src="https://user-images.githubusercontent.com/101360239/224020626-eb0871f5-a338-4eb8-b44c-5150f8e02697.png">
+<img width="100%" alt="Screenshot 2023-03-09 at 12 16 47" src="https://user-images.githubusercontent.com/101360239/224020626-eb0871f5-a338-4eb8-b44c-5150f8e02697.png">
 
 ## 2. SOLUÇÃO <a name="solucao"></a>
 
@@ -333,19 +333,32 @@ A minha solução para o Desafio é a seguinte:
 
 2.1. Permitir edição e comentário pelo Cliente <a name="edicao"></a>
 
-<img width="414" alt="Screenshot 2023-03-09 at 12 26 03" src="https://user-images.githubusercontent.com/101360239/224022618-a40cd5b2-3d7b-4239-bbbc-75291766a725.png">
+<div align="center">
+	
+<img width="450" height="300" align="center" alt="Screenshot 2023-03-09 at 12 26 03" src="https://user-images.githubusercontent.com/101360239/224022618-a40cd5b2-3d7b-4239-bbbc-75291766a725.png">
 
+</div>
+
+	
 2.2. Permitir cancelamento pela Pizzaria <a name="cancelamento"></a>
 
 
 + reembolso
 + aviso ao cliente
 
+<div align="center">
+
 <img width="219" alt="Screenshot 2023-03-09 at 12 27 35" src="https://user-images.githubusercontent.com/101360239/224023061-78cca8d6-786f-4b13-afcd-f806bed5dcfd.png">
 
+</div>	
+	
 2.3. Evitar errors pela Pizzaria <a name="erros"></a>
 
+<div align="center">
+
 <img width="870" alt="Screenshot 2023-03-09 at 12 28 12" src="https://user-images.githubusercontent.com/101360239/224023218-7573f4c0-c043-4fdf-a78c-2207779de122.png">
+
+</div>
 
 + Cliente revisa
 + Recebe pedido com tempo real e dilatado
@@ -356,8 +369,12 @@ A minha solução para o Desafio é a seguinte:
 + Cliente revisa na entrega
 + Atraso gera desconto futuro
 
+<div align="center">
+
 <img width="870" alt="Screenshot 2023-03-09 at 12 28 12" src="https://user-images.githubusercontent.com/101360239/224023218-7573f4c0-c043-4fdf-a78c-2207779de122.png">
 
+</div>
+	
 2.4. Evitar impressão negativa - Cupom de desconto <a name="cupom"></a>
 
 + Tempo dilatado
@@ -368,8 +385,13 @@ A minha solução para o Desafio é a seguinte:
 + Comunica cupom
 + Antes de pagar pode usar cupom
 
+
+<div align="center">
+
 <img width="452" alt="Screenshot 2023-03-09 at 12 29 28" src="https://user-images.githubusercontent.com/101360239/224023482-c0cf39e7-87b3-439c-af81-646e07758ec7.png">
 
+</div>
+	
 2.5 Evitar prejuízo (Cliente não encontrado) <a name="prejuizo"></a>
 
 + Pedido feito após o pagamento
@@ -379,14 +401,24 @@ A minha solução para o Desafio é a seguinte:
 + Registra tentativa
 + Volta a pizzaria
 + 
+
+	
+<div align="center">
+
 <img width="670" alt="Screenshot 2023-03-09 at 12 31 22" src="https://user-images.githubusercontent.com/101360239/224023868-09308dd0-7a01-4182-afae-56b1d66f7b1c.png">
 
-### 3. IDEIAS NÃO APLICADAS E DIFICULDADES <a name="dificuldades"></a>
+</div>
+	
+### 3. DIFICULDADES E IDEIAS NÃO APLICADAS  <a name="dificuldades"></a>
 
 3.1. Cliente ter atualização do status do pedido<a name="status"></a>
- 
+
+<div align="center">
+
 <img width="613" alt="Screenshot 2023-03-09 at 12 34 30" src="https://user-images.githubusercontent.com/101360239/224024629-ebbe0973-5881-4560-98f5-b144ab4c45d4.png">
 
+</div>
+	
 Loop
 
 Paralelismo/Serialismo
@@ -399,8 +431,12 @@ Paralelismo/Serialismo
 
 Mais que um pedido, inúmeros nós ao final. Ficaria complexo demais para o que foi proposto.
 
+<div align="center">
+
 <img width="623" alt="Screenshot 2023-03-09 at 12 47 36" src="https://user-images.githubusercontent.com/101360239/224027491-d7244102-903e-456e-a934-dba4686350fb.png">
 
+</div>
+	
 [FAZER]
 
 3.4. Retirada do Elogio/Reclamação <a name="elogio_reclamação"></a>
@@ -411,12 +447,20 @@ Substitui pelo Cupom - Acho mais efetivo
 
 3.6. Inputs e SystemNode (HTTPS)<a name="https"></a>
 
-<img width="608" alt="Screenshot 2023-03-09 at 12 43 42" src="https://user-images.githubusercontent.com/101360239/224026547-da65885b-722c-4692-9a5b-0eadd5903f40.png">
+<div align="center">
 
+<img width="50%" alt="Screenshot 2023-03-09 at 12 43 42" src="https://user-images.githubusercontent.com/101360239/224026547-da65885b-722c-4692-9a5b-0eadd5903f40.png">
+
+</div>
+	
 3.7 Envitar confusão no processo<a name="confusao"></a>
 
-<img width="424" alt="Screenshot 2023-03-09 at 12 45 10" src="https://user-images.githubusercontent.com/101360239/224026856-6856f2c7-04f0-487c-9831-c868209a1155.png">
+<div align="center">
 
+<img width="50%" alt="Screenshot 2023-03-09 at 12 45 10" src="https://user-images.githubusercontent.com/101360239/224026856-6856f2c7-04f0-487c-9831-c868209a1155.png">
+
+</div>
+	
 ## 4. CONCLUSÃO <a name="conclusao"></a>
 
 Diagramas e Nós são boas formas de organizar
