@@ -33,7 +33,7 @@ O diagrama da minha solução para o desafio é o seguinte:
 
 ![renanb (6)](https://user-images.githubusercontent.com/101360239/224022944-102ba1fa-7e37-4156-afad-09aac2a2d527.png)
 
-Para chegar a essa solução, estudei alguns aplicativos como: iFood, PlusDelivery, telepizza e Domino's. Além do estudo dos aplicativos, dei destaque a minha experiência como usuário e discussões que já tive com amigos sobre como esse aplicativos poderiam ser aprimorados.
+Para chegar a essa solução, estudei alguns aplicativos como: iFood, PlusDelivery, telepizza e Domino's. Além do estudo dos aplicativos, dei destaque a minha experiência como usuário e discussões que já tive com amigos sobre como esses aplicativos poderiam ser aprimorados.
 
 Os pontos mais importantes das melhorias implementadas estão em azul. Elas não representam tudo o que foi adicionado, mas são representação das ideias que tive para melhorar o projeto, podendo serem listadas na seguinte ordem: 
 Permitir a edição e comentário do pedido pelo Cliente; 
@@ -54,7 +54,7 @@ A ideia é permitir que o cliente possa editar o pedido, alterando os ingredient
 	
 </div>
 
-É muito comum que os clientes tenham preferencia por um ou outro ingrediente, ou até mesmo sejam alergicos a algum deles, possibilitando a edição do pedido, o cliente pode retirar o ingrediente e efetivar uma compra. Ou seja, alguém que não iria querer comprar determinada pizza por causa de um único ingrediente, agora pode fazer a compra, já que pode excluir tal ingrediente. 
+É muito comum que os clientes tenham preferência por um ou outro ingrediente, ou até mesmo sejam alérgicos a algum deles, possibilitando a edição do pedido, o cliente pode retirar o ingrediente e efetivar uma compra. Ou seja, alguém que não iria querer comprar determinada pizza por causa de um único ingrediente, agora pode fazer a compra, já que pode excluir tal ingrediente. 
 
 Outro ponto é poder fazer um comentário, durante a pandemia, muitas pessoas faziam compra por aplicativos de delivery e no comentário diziam que o pedido deveria ser dado ao entregador, ou transformado em gorjeta para ele. Permitir que o cliente possa comentar deixa mais fácil a personalização do pedido, sem causar maiores transtornos, por exemplo, o cliente pode informar que ele gosta muito de um ingrediente específico da pizza e pede para a pizzaria "caprichar" se puder.
 
@@ -62,7 +62,7 @@ Possibilitar o comentário, junto com a edição de ingredientes, torna o pedido
 
 ### 2.2. Permitir o cancelamento do pedido pela Pizzaria <a name="cancelamento"></a>
 
-Possibilitar que a Pizzaria cancele o pedido ajuda a não "quebrar" o processo. Existem situações em que não será interessante para a pizzaria atender ao pedido, como a distancia para realizar a entrega, o pedido foi feito poucos minutos antes da cozinha fechar, entre outras situações. 
+Possibilitar que a Pizzaria cancele o pedido ajuda a não "quebrar" o processo. Existem situações em que não será interessante para a pizzaria atender ao pedido, como a distância para realizar a entrega, o pedido foi feito poucos minutos antes da cozinha fechar, entre outras situações. 
 
 <div align="center">
 	
@@ -86,7 +86,7 @@ Portanto, para evitar que o cliente tenha certeza do que está pedindo, ele deve
 
 </div>
 
-Quando a pizzaria recebe o pedido para ser aceito ou não, o cliente já aceitou fazer o pedido sabendo o tempo que ele deve demorar para ser entregue, a pizzaria também recebe o pedido para ser aceito com o prazo para entrega informado ao cliente (tempo dilatado), bem como com o tempo que ela provavelmente vai conseguir entregar (tempo real). Com isso já prevenimos que o cliente tenha uma espectativa irreal sobre o tempo de entrega e que a pizzaria erre, entregando a pizza fora do prazo. 
+Quando a pizzaria recebe o pedido para ser aceito ou não, o cliente já aceitou fazer o pedido sabendo o tempo que ele deve demorar para ser entregue, a pizzaria também recebe o pedido para ser aceito com o prazo para entrega informado ao cliente (tempo dilatado), bem como com o tempo que ela provavelmente vai conseguir entregar (tempo real). Com isso já prevenimos que o cliente tenha uma expectativa irreal sobre o tempo de entrega e que a pizzaria erre, entregando a pizza fora do prazo. 
 
 <div align="center">
 	
@@ -146,7 +146,7 @@ Para que o cliente ganhe o cupom alguns nós foram criados, primeiro o nó de te
 
 </div>
 
-Se foi entregue dentro do tempo fornecido ao cliente, o processo de entrega é finalizado, se tiver ultraprassado o prazo, o cupom é gerado, enviado ao cliente e só aí que o processo é finalizado. 
+Se foi entregue dentro do tempo fornecido ao cliente, o processo de entrega é finalizado, se tiver ultrapassado o prazo, o cupom é gerado, enviado ao cliente e só aí que o processo é finalizado. 
 
 E como houve a criação do cupom de desconto, também foi necessário criar o nó para o cliente poder usar o cupom antes de efetuar o pagamento.
 
@@ -176,7 +176,7 @@ A partir disso, resolvi reestruturar o pagamento, para limitar o pagamento atrav
 
 </div>
 
-Apesar de retirar a possibildiade do cliente somente pagar quando for entregue o pedido, deixei bem sólida a tentativa de entrega, caso o cliente não seja encontrado, o entregador deve tentar entrar em contato com ele duas vezes, no espaço de 5 (cinco) minutos, caso não consiga contato, é registrada as tentativas e a pizza é devolvida a pizzaria.
+Apesar de retirar a possibilidade do cliente somente pagar quando for entregue o pedido, deixei bem sólida a tentativa de entrega, caso o cliente não seja encontrado, o entregador deve tentar entrar em contato com ele duas vezes, no espaço de 5 (cinco) minutos, caso não consiga contato, é registrada as tentativas e a pizza é devolvida a pizzaria.
 
 <div align="center">
 	
@@ -228,7 +228,7 @@ No momento em que estava passando o diagrama para a primeira versão do blueprin
 
 Verifiquei junto aos exemplos de blueprint da documentação do flowBuild e percebi que todos tinham uma única direção, o fluxo não pode ser dividido em mais caminhos.
 
-Antes de verificar essa impossibilidade eu tinha até mesmo pensando em colocar a verificação do status como um subprocesso, se ele fosse executável de forma assincrona. 
+Antes de verificar essa impossibilidade eu tinha até mesmo pensando em colocar a verificação do status como um subprocesso, se ele fosse executável de forma assíncrona. 
 
 Não foi possível incluir a atualização do status do pedido, mas com a estimativa de tempo de entrega e a comunicação do cancelamento do pedido/reembolso, achei que seria o suficiente de informação a ser enviada ao cliente. 
 
@@ -255,7 +255,7 @@ Também havia criado um “otimizador de entregas”, como um subprocesso, respe
 
 Ele juntava os pedidos que seriam entregues em um bloco, extraia os endereços, organizava as entregas da mais próxima para a mais distante, verificava se havia entregador disponível, enviava a rota sugerida para o entregador e finalizava o subprocesso.
 
-O problema aqui não foi com a otimização das rotas mas sim com a conclusão do processo se houvessem mais pizzas a serem entregues.
+O problema aqui não foi com a otimização das rotas mas sim com a conclusão do processo se houvesse mais pizzas a serem entregues.
 
 Pensando no que foi proposto como desafio, seria necessário incluir várias ramificações ao fim do processo, se era a última pizza, se alguma pizza ficou faltando ser entregue, isso deixaria a solução complexa/confusa demais para o que foi proposto.
 
@@ -283,7 +283,7 @@ Na documentação do flowBuild consta:
 
 É importante que o input contenha o mínimo de informações requeridas para que o canal possa executar a tarefa junto ao usuário. Evite enviar informações não essenciais para execução da tarefa.
 
-Portanto, selecionar o mínimo de informação a ser fornecido é algo que precisa de muita reflexão sobre o que é essencial ou não. E mais, enviar informação desnecessária causa outros problemas como facilitar vazamento de informação, além de tornar mais demorado e custoso todo o processo. 
+Portanto, selecionar o mínimo de informação a ser fornecido é algo que precisa de muita reflexão sobre o que é essencial ou não. E mais, enviar informação desnecessária causa outros problemas como facilitar vazamento de informação, além de tornar o processo mais demorado e custoso.
 
 Além disso, também organizei os objetos dentro da bag, para ter um catálogo do que poderia usar e onde poderia armazenar a informação.
 
@@ -303,9 +303,9 @@ Outro ponto que tive dificuldade foi a utilização do systemNode (HTTPS), por v
 
 ### 3.7 Evitar confusão no processo <a name="confusao"></a>
 
-Outro desafio é evitar confusão no processo, deixar o Diagrama limpo e claro é uma tarefa que só se resolvo com a criaçando de rascunho e/ou apagar todo o processo e reiniciar todo o processo com mais experiência. 
+Outro desafio é evitar confusão no processo, deixar o Diagrama limpo e claro é uma tarefa que só se resolve com a confecção do rascunho e/ou apagar todo o processo e reiniciar já tendo mais bem definido o objetivo e os meios para chegar até ele. 
 
-Comparadando a minha solução definitiva com os meus processos iniciais, fica evidente como ficou mais limpo, mesmo tendo mais ferramentas. 
+Comparando a minha solução definitiva com os meus processos iniciais, fica evidente como ficou mais limpo, mesmo tendo mais ferramentas. 
 
 <div align="center">
 	
