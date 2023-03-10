@@ -2,10 +2,10 @@
 
 1. [BASE](#base)
 2. [SOLUÇÃO](#solucao) 
- 	- 2.1. [Permitir edição e comentário no pedido pelo Cliente](#edicao) 
-	- 2.2. [Permitir cancelamento pela Pizzaria](#cancelamento) 
+ 	- 2.1. [Permitir a edição e comentário no pedido pelo Cliente](#edicao) 
+	- 2.2. [Permitir o cancelamento pela Pizzaria](#cancelamento) 
  	- 2.3. [Evitar erros pela Pizzaria](#erros) 
- 	- 2.4. [Evitar impressão negativa - Cupom de desconto](#cupom)  
+ 	- 2.4. [Evitar opinião negativa (cupom)](#cupom)  
  	- 2.5. [Evitar prejuízo (Cliente não encontrado)](#prejuizo) 
 3. [DIFICULDADES E IDEIAS NÃO APLICADAS](#dificuldades)
 	- 3.1. [Cliente ter atualização do status do pedido](#status) 
@@ -17,7 +17,7 @@
 	- 3.7. [Envitar confusão no processo](#confusao) 
 4. [CONCLUSÃO](#conclusao)
 
-## 1. BASE
+## 1. BASE <a name="base"></a>
 
 O Desafio consiste em melhorar um processo de entrega de pedido de pizza que será implementado por uma empresa de delivery de pizza. O diagrama base foi o seguinte:
 
@@ -25,7 +25,7 @@ O Desafio consiste em melhorar um processo de entrega de pedido de pizza que ser
 
 Não foi fornecido o blueprint desse diagrama, porém na documentação indicada para estudo haviam alguns exemplos e schema dos nós.
 
-## 2. SOLUÇÃO
+## 2. SOLUÇÃO <a name="solucao"></a>
 
 O diagrama da minha solução para o desafio é o seguinte:
 
@@ -42,7 +42,7 @@ Evitar prejuízo (cliente não encontrado).
 
 A seguir temos uma explicação detalhada da implementação de cada um dessas ideias.
 
-### 2.1. Permitir a edição e comentário do pedido pelo Cliente
+### 2.1. Permitir a edição e comentário do pedido pelo Cliente <a name="edicao"></a>
 
 A ideia é permitir que o cliente possa editar o pedido, alterando os ingredientes, e incluindo um comentário.
 
@@ -55,7 +55,7 @@ Outro ponto é poder fazer um comentário, durante a pandemia, muitas pessoas fa
 
 Possibilitar o comentário, junto com a edição de ingredientes, torna o pedido personalizável, o que é uma forma de conseguir vender mais pizza, quanto mais personalizável, mais atraente ao cliente é.
 
-### 2.2. Permitir o cancelamento do pedido pela Pizzaria
+### 2.2. Permitir o cancelamento do pedido pela Pizzaria <a name="cancelamento"></a>
 
 Possibilitar que a Pizzaria cancele o pedido ajuda a não "quebrar" o processo. Existem situações em que não será interessante para a pizzaria atender ao pedido, como a distancia para realizar a entrega, o pedido foi feito poucos minutos antes da cozinha fechar, entre outras situações. 
 
@@ -66,7 +66,7 @@ E mais, durante o processo de produção da pizza, pode ser que ocorra algum pro
 
 Possibilitar que a pizzaria cancele o pedido, levou a criação de dois outros nós, um para realizar o reembolso do cliente e o outro para comunicar ao cliente que o pedido foi cancelado e já foi realizado o reembolso.
 
-### 2.3. Evitar erros pela Pizzaria
+### 2.3. Evitar erros pela Pizzaria <a name="erros"></a>
 
 Evitar que a pizzaria cometa erros foi a maior preocupação dessa solução, vez que uma pizza entregue errada, fora do tempo esperado, ou recebida em erro pelo cliente, pode manchar a reputação da pizzaria e gera prejuízo. 
 
@@ -105,7 +105,8 @@ Por fim, ocorre uma última verificação do pedido, mas por parte do cliente, e
 
 Esses são os principais nós criados para evitar que ocorra algum erro que possa gerar prejuízo ou manchar a reputação da pizzaria.
 
-### 2.4. Evitar opinião negativa (cupom)
+### 2.4. Evitar opinião negativa (cupom) <a name="cupom"></a>
+
 Como foi fornecido ao cliente um tempo esperado de entrega para alinhar a expectativa dele com o que será entregue, lembrando que é fornecido um tempo dilatado para que a pizzaria tenha uma margem de atraso, deve haver alguma recompensa caso o prazo para entrega seja extrapolado. 
 
 ![Screenshot 2023-03-10 at 12 55 55](https://user-images.githubusercontent.com/101360239/224321505-741fef7b-50ca-4d7c-91f2-fcdcecf48376.png)
@@ -126,7 +127,7 @@ E como houve a criação do cupom de desconto, também foi necessário criar o n
 
 
 
-### 2.5 Evitar prejuízo (Cliente não encontrado)
+### 2.5 Evitar prejuízo (Cliente não encontrado) <a name="prejuizo"></a>
 
 Essa ideia também está relacionada a evitar erro/prejuízo, entretanto, nesse ponto focamos mais em evitar que a pizzaria sofra prejuízo por culpa do cliente. 
 
@@ -157,9 +158,9 @@ E para evitar um “desencontro” o cliente fornece os dados de quem vai recebe
 
 Essas foram ideias aplicadas para melhorar o projeto base, tornando o processo de entrega de pizza muito mais seguro tanto para a pizzaria quanto para o cliente.
 
-## 3. DIFICULDADES E IDEIAS NÃO APLICADAS
+## 3. DIFICULDADES E IDEIAS NÃO APLICADAS <a name="dificuldades"></a>
 
-### 3.1. Cliente ter atualização do status do pedido
+### 3.1. Cliente ter atualização do status do pedido <a name="status"></a>
 
 Tentei implementar uma forma do cliente conseguir ver o status do pedido e ele ser atualizado em vários pontos (algo parecido com o que a Domino’s faz). 
 
@@ -187,13 +188,13 @@ Antes de verificar essa impossibilidade eu tinha até mesmo pensando em colocar 
 
 Não foi possível incluir a atualização do status do pedido, mas com a estimativa de tempo de entrega e a comunicação do cancelamento do pedido/reembolso, achei que seria o suficiente de informação a ser enviada ao cliente. 
 
-### 3.2. Cancelamento pelo Cliente
+### 3.2. Cancelamento pelo Cliente <a name="cancelamentoc"></a>
 
 Da mesma forma que o status do pedido, havia incluído a possibilidade do cliente cancelar antes da pizzaria aceitar o pedido. Porém, pelo mesmo motivo da impossibilidade de manter dois caminhos ativos, resolvi retirar esse poder e manter só com a pizzaria.
 
 Esse também foi um dos motivos do cliente ter que revisar o pedido antes de efetuar o pagamento, ter noção do tempo de entrega, ocorrer as duas tentativas de contato quando entregador chega ao local e ele verificar se o pedido está correto no momento da entrega. 
 
-### 3.3. Otimizador de Entrega (SubProcesso)
+### 3.3. Otimizador de Entrega (SubProcesso) <a name="otimizador"></a>
 Também havia criado um “otimizador de entregas”, como um subprocesso, respeitando o fluxo do processo. 
 
 <img width="407" alt="Screenshot 2023-03-10 at 12 51 50" src="https://user-images.githubusercontent.com/101360239/224320713-80522bb4-7770-40f2-ace2-f0f656a6643f.png">
@@ -211,13 +212,13 @@ Pensando no que foi proposto como desafio, seria necessário incluir várias ram
 
 Portanto, retirei essa ferramenta por não achar que era adequado para a solução como um todo.
 
-### 3.4. Retirada do Elogio/Reclamação
+### 3.4. Retirada do Elogio/Reclamação <a name="elogio_reclamação"></a>
 
 Pelo mesmo motivo do otimizador de entrega, achei que manter sempre duas opções de ao fim de todos os encerramentos de processo deixaria a solução poluída.
 
 Também fiquei mais seguro de retirar já que implementei a possibilidade de reembolso e cupom de desconto, caso ocorra atraso.
 
-### 3.5. Conectar Diagrama com JSON
+### 3.5. Conectar Diagrama com JSON <a name="json"></a>
 
 Como eu nunca tinha tido contato com o flowBuild, tive um pouco de dificuldade em fazer as primeiras conversões dos diagramas para o blueprint. 
 
@@ -227,7 +228,7 @@ Mas após finalizar o primeiro rascunho da solução, diagrama e json prontos, c
  
 Fazer o código foi a melhor forma de revisar meu diagrama e gerar novas soluções, apesar de ser a parte mais difícil também é a que gera mais frutos. 
 
-### 3.6. Inputs e SystemNode (HTTPS)
+### 3.6. Inputs e SystemNode (HTTPS) <a name="https"></a>
 
 Na documentação do flowBuild consta: 
 
@@ -244,7 +245,7 @@ Outro ponto que tive dificuldade foi a utilização do systemNode (HTTPS), por v
 
 <img width="431" alt="Screenshot 2023-03-10 at 12 51 07" src="https://user-images.githubusercontent.com/101360239/224320573-e20f0925-6941-4d39-a62f-3b84481be9ff.png">
 
-### 3.7 Evitar confusão no processo
+### 3.7 Evitar confusão no processo <a name="confusao"></a>
 
 Outro desafio é evitar confusão no processo, deixar o Diagrama limpo e claro é uma tarefa que só se resolvo com a criaçando de rascunho e/ou apagar todo o processo e reiniciar todo o processo com mais experiência. 
 
@@ -255,7 +256,7 @@ Comparadando a minha solução definitiva com os meus processos iniciais, fica e
 
 Depois que você consegue compreender melhor o funcionamento do flowBuild fica mais fácil de organizar os nós e pensar em complementos para a solução do problema.
 
-## 4. CONCLUSÃO
+## 4. CONCLUSÃO <a name="conclusao"></a>
 
 A minha solução teve como foco principal a pizzaria, proteger a pizzaria de ter prejuízo e manter sua reputação. 
 
