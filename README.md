@@ -17,6 +17,11 @@
 	- 3.7. [Envitar confusão no processo](#confusao) 
 4. [CONCLUSÃO](#conclusao)
 
+Caso prefira ver minha apresentação em vídeo, é só clickar na imagem abaixo:
+
+[![IMG YOUTUBE](https://user-images.githubusercontent.com/101360239/224400626-7d5811fc-1105-4c26-8f29-b58baea6b8fe.png)](https://www.youtube.com/watch?v=ItjwcNUJy9U&ab_channel=RenanB.)
+
+
 ## 1. BASE <a name="base"></a>
 
 O Desafio consiste em melhorar um processo de entrega de pedido de pizza que será implementado por uma empresa de delivery de pizza. O diagrama base foi o seguinte:
