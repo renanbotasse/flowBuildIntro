@@ -277,7 +277,7 @@ Mas após finalizar o primeiro rascunho da solução, diagrama e json prontos, c
  
 Fazer o código foi a melhor forma de revisar meu diagrama e gerar novas soluções, apesar de ser a parte mais difícil também é a que gera mais frutos. 
 
-### 3.6. Inputs e SystemNode (HTTPS) <a name="https"></a>
+### 3.6. Inputs e SystemNode (HTTP) <a name="https"></a>
 
 Na documentação do flowBuild consta: 
 

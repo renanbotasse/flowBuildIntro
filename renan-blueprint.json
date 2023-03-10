@@ -41,7 +41,7 @@
 			},
 			{
 				"id": "ESCOLHER PIZZA",
-				"name": "User escolhe sua pizza",
+				"name": "Cliente escolhe sua pizza",
 				"next": "SALVAR BASE PARA O PEDIDO",
 				"lane_id": "user",
 				"type": "UserTask",
@@ -56,14 +56,13 @@
 			},
 			{
 				"id": "SALVAR BASE PARA O PEDIDO",
-				"name": "Guardar Rascunho do Pedido",
+				"name": "Guardar rascunho do pedido",
 				"next": "ALTERAR INGREDIENTES?",
 				"lane_id": "user",
 				"type": "SystemTask",
 				"category": "setToBag",
 				"parameters": {
 				  "input": {
-					"menu": { "$ref": "bag.pizzaria.menu"},
 					"pedido": { "$ref": "bag.pedido"}
 				  }
 				}
@@ -80,7 +79,7 @@
 				},
 				"parameters":{
 				   "input":{
-					"$ref": "bag.pedido.pizza.ingredientes"
+					"$ref": "bag.pedido.pizza"
 				   }
 				}
 			 },
@@ -93,7 +92,7 @@
 				"parameters": {
 				  "action": "ALTERAR_INGREDIENTES",
 				  "input": {
-					"ingredientes": { "$ref": "bag.pedido.pizza.ingredientes" }
+					"alterarIngredientes": { "$ref": "bag.pedido.pizza.ingredientes" }
 						}
 			 }
 			},
@@ -165,7 +164,6 @@
 				  "input": {
 					"cliente": { "$ref": "bag.user" },
 					"pedido": { "$ref": "bag.pedido" },
-					"contato": { "$ref": "bag.user.contato" },
 					"tempo": { "$ref": "bag.entrega.prazodilatado" },
 					"custo": { "$ref": "bag.pagamento.custo" }
 						}
@@ -183,7 +181,10 @@
 				},
 				"parameters":{
 				   "input":{
-					"pedido": { "$ref": "bag.pedido" }
+					"cliente": { "$ref": "bag.user" },
+					"pedido": { "$ref": "bag.pedido" },
+					"tempo": { "$ref": "bag.entrega.prazodilatado" },
+					"custo": { "$ref": "bag.pagamento.custo" }
 				   }
 				}
 			 },
@@ -202,7 +203,7 @@
 			},
 			{
 				"id": "PAGAR PELO APP",
-				"name": "User faz o pagamento",
+				"name": "Cliente faz o pagamento",
 				"next": "GRAVAR PEDIDO E EMITIR COMPROVANTE",
 				"lane_id": "user",
 				"type": "UserTask",
@@ -286,7 +287,7 @@
 			 },
 			{
 				"id": "MONITORAMENTO DA PIZZARIA",
-				"name": "Verifica se tem algum problema, falta de luz, ingrediente, entregador",
+				"name": "Verifica se tem algum problema, falta de agua, ingrediente, entregador",
 				"next": "CONSEGUE FINALIZAR PIZZA?",
 				"lane_id": "pizzaria",
 				"type": "SystemTask",
@@ -338,8 +339,7 @@
                     "input": {
 						"user": { "$ref": "bag.user"},
 						"pedidocancelado": { "$ref": "bag.pedido.status"},
-						"reembolso": { "$ref": "bag.pagamento.ressarcimento"},
-						"mensagem": { "$ref": "bag.user.msg"}
+						"reembolso": { "$ref": "bag.pagamento.ressarcimento"}
                     },
                     "request": {
                         "url": "status",
@@ -386,7 +386,7 @@
 			{
 				"id":"PIZZARIA ERROU?",
 				"type":"Flow",
-				"name":"Algo deu errado, pizzaria precisa refazer o pedido",
+				"name":"Algo deu errado? Pizzaria precisa refazer o pedido?",
 				"lane_id":"pizzaria",
 				"next":{
 				   "default":"DISPONIBILIZAR PARA ENTREGA",
@@ -408,7 +408,8 @@
 				"parameters": {
 				  "action": "DISPONIBILIZAR",
 				  "input": {
-					"pedido": { "$ref": "bag.pedido.pizza" }
+					"id": { "$ref": "bag.pedido.id" },
+					"cliente": { "$ref": "bag.user" }
 						}
 			 }
 			},
@@ -421,7 +422,7 @@
 				"parameters": {
 				  "action": "RECOLHE",
 				  "input": {
-					"pedido": { "$ref": "bag.pedido.pizza" },
+					"pedido": { "$ref": "bag.pedido.id" },
 					"user": { "$ref": "bag.user" }
 						}
 			 }
@@ -504,7 +505,7 @@
 				"lane_id": "pizzaria",
 				"type": "UserTask",
 				"parameters": {
-				  "action": "CHEGA",
+				  "action": "AGUARDA",
 				  "input": {
 						}
 			 }
@@ -597,7 +598,8 @@
 				"category": "setToBag",
 				"parameters": {
 				  "input": {
-					"dadospagamento": { "$ref": "bag.pagamento"},
+					"dadospagamento": { "$ref": "bag.pagamento.custo"},
+					"pagamento": { "$ref": "bag.pagamento.comprovantepago"},
 					"ressarcimento": { "$ref": "bag.pagamento.ressarcimento"}
 				  }
 				}
@@ -618,7 +620,7 @@
 				"parameters": {
 				  "action": "ENTREGA",
 				  "input": {
-					"pizza": { "$ref": "bag.pedido.pizza"}
+					"pizza": { "$ref": "bag.pedido.id"}
 			 }
 			}
 		},
