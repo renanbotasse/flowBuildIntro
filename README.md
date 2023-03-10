@@ -13,7 +13,7 @@
 	- 3.3. [Otimizador de Entrega (SubProcesso)](#otimizador)  
 	- 3.4. [Retirada do Elogio/Reclamação](#elogio_reclamação)
 	- 3.5. [Conectar Diagrama com JSON](#json) 
-	- 3.6. [Inputs e SystemNode (HTTPS)](#https) 
+	- 3.6. [Inputs e SystemNode (HTTP)](#https) 
 	- 3.7. [Envitar confusão no processo](#confusao) 
 4. [CONCLUSÃO](#conclusao)
 
@@ -293,7 +293,7 @@ Além disso, também organizei os objetos dentro da bag, para ter um catálogo d
 
 </div>
 
-Outro ponto que tive dificuldade foi a utilização do systemNode (HTTPS), por vezes eu não tive certeza se seria melhor usar o setToBag ou HTTPS. Como não ficou tão claro quando deveria utilizar um ou outro, dei preferencia para sempre usar o setToBag e somente quando tinha certeza que seria um HTTPS que fazia uso dele.
+Outro ponto que tive dificuldade foi a utilização do systemNode (HTTP), por vezes eu não tive certeza se seria melhor usar o setToBag ou HTTP. Como não ficou tão claro quando deveria utilizar um ou outro, dei preferencia para sempre usar o setToBag e somente quando tinha certeza que seria um HTTP que fazia uso dele.
 
 <div align="center">
 	
