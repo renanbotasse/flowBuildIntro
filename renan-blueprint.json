@@ -36,8 +36,7 @@
 				"type": "UserTask",
 				"parameters": {
 				  "action": "ABRIR_APP",
-				  "input": {
-				}
+				  "input": {}
 			 }
 			},
 			{
@@ -285,23 +284,10 @@
 				   }
 				}
 			 },
-			 {
-				"id": "FAZER A PIZZA",
-				"name": "PIZZARIA FAZ A PIZZA",
-				"next": "CONSEGUE FINALIZAR PIZZA?",
-				"lane_id": "pizzaria",
-				"type": "UserTask",
-				"parameters": {
-				  "action": "FAZER",
-				  "input": {
-					"pedido": { "$ref": "bag.pedido" }
-						}
-			 }
-			},
 			{
 				"id": "MONITORAMENTO DA PIZZARIA",
 				"name": "Verifica se tem algum problema, falta de luz, ingrediente, entregador",
-				"next": "FAZER A PIZZA?",
+				"next": "CONSEGUE FINALIZAR PIZZA?",
 				"lane_id": "pizzaria",
 				"type": "SystemTask",
 				"category": "setToBag",
@@ -317,8 +303,8 @@
 				"name":"Pizzaria não consegue finalizar o pedido?",
 				"lane_id":"pizzaria",
 				"next":{
-				   "default":"REVISAR O PEDIDO",
-				   "true":"REVISAR O PEDIDO",
+				   "default":"FAZER A PIZZA",
+				   "true":"FAZER A PIZZA",
 				   "false":"REEMBOLSO - pizzaria cancelou"
 				},
 				"parameters":{
@@ -372,6 +358,19 @@
 				"next": null
 			},
 			{
+				"id": "FAZER A PIZZA",
+				"name": "PIZZARIA FAZ A PIZZA",
+				"next": "REVISAR O PEDIDO",
+				"lane_id": "pizzaria",
+				"type": "UserTask",
+				"parameters": {
+				  "action": "FAZER",
+				  "input": {
+					"pedido": { "$ref": "bag.pedido" }
+						}
+			 }
+			},
+			{
 				"id": "REVISAR O PEDIDO",
 				"name": "Revisão do pedido",
 				"next": "PIZZARIA ERROU?",
@@ -392,7 +391,7 @@
 				"next":{
 				   "default":"DISPONIBILIZAR PARA ENTREGA",
 				   "true":"DISPONIBILIZAR PARA ENTREGA",
-				   "false":"FAZER A PIZZA"
+				   "false":"MONITORAMENTO DA PIZZARIA"
 				},
 				"parameters":{
 				   "input":{
