@@ -31,7 +31,7 @@ Não foi fornecido o blueprint desse diagrama, porém na documentação indicada
 
 O diagrama da minha solução para o desafio é o seguinte:
 
-![renanb (6)](https://user-images.githubusercontent.com/101360239/224022944-102ba1fa-7e37-4156-afad-09aac2a2d527.png)
+![image](https://user-images.githubusercontent.com/101360239/224341687-5293c4e6-075f-4544-bd97-809350db3267.png)
 
 Para chegar a essa solução, estudei alguns aplicativos como: iFood, PlusDelivery, telepizza e Domino's. Além do estudo dos aplicativos, dei destaque a minha experiência como usuário e discussões que já tive com amigos sobre como esses aplicativos poderiam ser aprimorados.
 
