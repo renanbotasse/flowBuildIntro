@@ -221,9 +221,9 @@ No momento em que o pedido fosse enviado, além de comunicar a pizzaria, também
 No momento em que estava passando o diagrama para a primeira versão do blueprint (JSON), percebi que dava erro quando o next do systemTask continha dois caminhos. 
 
 <div align="center">
-	
-![Screenshot 2023-03-10 at 12 53 32](https://user-images.githubusercontent.com/101360239/224321025-3b007aaa-d6b1-44c1-bff9-30ad081625db.png)
 
+<img width="384" alt="Screenshot 2023-03-10 at 13 48 11" src="https://user-images.githubusercontent.com/101360239/224332378-50b880ee-dfdc-4d1e-8f80-10c5bed3a87e.png">
+	
 </div>
 
 Verifiquei junto aos exemplos de blueprint da documentação do flowBuild e percebi que todos tinham uma única direção, o fluxo não pode ser dividido em mais caminhos.
