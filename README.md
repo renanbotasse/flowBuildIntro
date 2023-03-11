@@ -1,5 +1,9 @@
 # APRESENTAÇÃO
 
+Caso prefira ver minha apresentação em vídeo, é só clicar na imagem:
+
+[![IMG YOUTUBE](https://user-images.githubusercontent.com/101360239/224400626-7d5811fc-1105-4c26-8f29-b58baea6b8fe.png)](https://www.youtube.com/watch?v=ItjwcNUJy9U&ab_channel=RenanB.)
+
 1. [BASE](#base)
 2. [SOLUÇÃO](#solucao) 
  	- 2.1. [Permitir a edição e comentário no pedido pelo Cliente](#edicao) 
@@ -16,11 +20,6 @@
 	- 3.6. [Inputs e SystemNode (HTTP)](#https) 
 	- 3.7. [Envitar confusão no processo](#confusao) 
 4. [CONCLUSÃO](#conclusao)
-
-Caso prefira ver minha apresentação em vídeo, é só clickar na imagem abaixo:
-
-[![IMG YOUTUBE](https://user-images.githubusercontent.com/101360239/224400626-7d5811fc-1105-4c26-8f29-b58baea6b8fe.png)](https://www.youtube.com/watch?v=ItjwcNUJy9U&ab_channel=RenanB.)
-
 
 ## 1. BASE <a name="base"></a>
 
